@@ -1,5 +1,3 @@
-// TODO - needs work
-
 const API_URL = "http://localhost:3000";
 
 export async function get(endpoint) {
@@ -18,3 +16,5 @@ export async function get(endpoint) {
     throw err;
   }
 }
+
+// Add additional
