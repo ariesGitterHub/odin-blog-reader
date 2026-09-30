@@ -32,11 +32,11 @@ export function renderPosts(posts) {
     }
 
     const commentButton = document.createElement("button");
-    commentButton.classList.add("comment-button");
+    // commentButton.classList.add("comment-button");
     commentButton.textContent = "Comment"
 
     const hrLine = document.createElement("hr");
-    hrLine.classList.add("hr-line");
+    hrLine.classList.add("hr-line1");
 
     const postMessage = document.createElement("p");
     postMessage.classList.add("post-message")
@@ -58,6 +58,9 @@ export function renderPosts(posts) {
       const postCommentAuthor = document.createElement("h3");
       postCommentAuthor.textContent = `${comment.user.firstName} ${comment.user.lastName}`;   
 
+      // const rowContainer = document.createElement("div");
+      // rowContainer.classList.add("row-container");
+
       const postCommentCreatedAt = document.createElement("p");
       postCommentCreatedAt.classList.add("time-stamp"); 
       const postCommentUpdatedAt = document.createElement("p");
@@ -67,16 +70,29 @@ export function renderPosts(posts) {
         postCommentCreatedAt.textContent = `Created: ${formatExactDate(comment.createdAt)}`; 
       } else {
         postCommentUpdatedAt.textContent = `Updated: ${formatExactDate(comment.updatedAt)}`;  
-      }    
+      }   
+      
+      const editCommentButton = document.createElement("button");
+      // editCommentButton.classList.add("edit-comment-button")
+      editCommentButton.textContent = "Edit";   
+      
+      const hrLine = document.createElement("hr");
+      hrLine.classList.add("hr-line2");
 
       const postCommentMessage = document.createElement("p");
       postCommentMessage.classList.add("post-comment-message");
-      postCommentMessage.textContent = comment.commentMessage;   
-      
+      postCommentMessage.textContent = comment.commentMessage;  
+
+      // rowContainer.append(
+
+      // );
+            
       postArticleComment.append(
         postCommentAuthor,
         postCommentCreatedAt,
         postCommentUpdatedAt,
+        editCommentButton,  
+        hrLine,   
         postCommentMessage,
       );
 

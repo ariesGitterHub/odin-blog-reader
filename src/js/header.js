@@ -9,11 +9,11 @@ export function renderHeader() {
 
   const headerButtonLogin = document.createElement("button");
   headerButtonLogin.textContent = "Login";
-  headerButtonLogin.classList.add("header-button");
+  // headerButtonLogin.classList.add("header-button");
 
   const headerButtonProfile = document.createElement("button");
   headerButtonProfile.textContent = "Profile";
-  headerButtonProfile.classList.add("header-button");
+  // headerButtonProfile.classList.add("header-button");
 
   headerButtonContainer.append(headerButtonLogin, headerButtonProfile);
 

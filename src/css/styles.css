@@ -1,3 +1,4 @@
+/* Root */
 :root {
     --text-color: #9ca3af;
     --text-heading-color: #f3f4f6;
@@ -6,13 +7,16 @@
     --background-comment-color: #27242d;
     --border-color: #2e303a;
     --border-post-color: #715252;
-    /* --shadow:
-      #00000066 0 10px 15px -3px, #00000040 0 4px 6px -2px; */
 
-  /* Fonts */
+  /*** Fonts */
   --font-sans: system-ui, 'Segoe UI', Roboto, sans-serif;
   --font-heading: system-ui, 'Segoe UI', Roboto, sans-serif;
   --font-mono: ui-monospace, Consolas, monospace;
+
+  /*** Spacing */
+  --spacer-big: 0.5rem;
+  --space-medium: 0.25rem;
+  --spacer-small: 0.125rem;
 
   font: 16px/145% var(--font-sans);
   letter-spacing: 0.18px;
@@ -29,6 +33,8 @@
     font-size: 16px;
   }
 }
+
+/* Standard HTML tags */
 
 body {
   margin: 0;
@@ -56,6 +62,70 @@ h3 {
   font-size: 1rem;
 }
 
+header {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: var(--spacer-big);
+  margin: var(--spacer-big);
+}
+
+footer {
+  color: var(--text-color);
+  font-family: var(--font-mono);
+  margin: var(--spacer-big);
+  text-align: center;
+  text-transform: uppercase;
+}
+
+/* Buttons */
+button {
+  height: fit-content;
+  width: fit-content;
+  background-color: var(--text-color);
+  border: 2px solid var(--border-post-color);
+  border-radius: var(--spacer-big);
+  font-family: var(--font-mono);
+  font-size: .8rem;
+  letter-spacing: 2px;
+  padding: var(--spacer-small) var(--space-medium);
+  text-transform: uppercase;
+}
+
+button:hover {
+  background-color: var(--text-heading-color);
+  transform: scale(1.1);
+}
+
+/* Containers */
+/*** Basic Containers  */
+.row-container {
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  gap: var(--space-medium);
+}
+
+/*** Specific Containers  */
+.header-button-container {
+  display: flex;
+  gap: var(--spacer-big);
+}
+
+#posts-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacer-big);
+  border: 2px solid var(--border-color);
+  border-radius: var(--spacer-big);
+  margin: var(--spacer-big);
+  padding: var(--spacer-big);
+}
+
+/* Id and Class in Order */
+
 #app {
   width: 1126px;
   max-width: 100%;
@@ -68,38 +138,10 @@ h3 {
   box-sizing: border-box;
 }
 
-header {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  /* border: 2px solid var(--border-color); */
-  border-radius: 0.5rem;
-  margin: 1rem;
-  /* padding: 1rem 0; */
-  /* padding: 1rem; */
-}
-
-.header-button-container {
-  display: flex;
-  /* flex-wrap: wrap; */
-  gap: 0.25rem;
-}
-
-#posts-container {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  border: 2px solid var(--border-color);
-  border-radius: 0.5rem;
-  margin: 1rem;
-  padding: 1rem;
-}
-
 .post-article {
   background-color: var(--background-post-color);
   border: 2px solid var(--border-post-color);
-  border-radius: 0.5rem;
+  border-radius: var(--spacer-big);
   padding: 1rem;
   text-align: left;
   text-wrap: wrap;
@@ -108,9 +150,9 @@ header {
 .post-article-comment {
   background-color: var(--background-comment-color);
   border: 2px solid var(--border-color);
-  border-radius: 0.5rem;
-  margin: 1rem;
-  padding: 1rem;
+  border-radius: var(--spacer-big);
+  margin: var(--spacer-big);
+  padding: var(--spacer-big);
 }
 
 .time-stamp {
@@ -119,41 +161,13 @@ header {
   text-transform: uppercase;
 }
 
-button {
-  height: 1.5rem;
-  width: 5rem;
-  background-color: none;
-  border: 2px solid var(--border-color);
-  border-radius: 1rem;
-  font-family: var(--font-mono);
-  font-size: .8rem;
-  letter-spacing: 2px;
-  /* margin: 0.125rem 0; */
-  padding: 0.125rem 0.25rem;
-  text-transform: uppercase;
-}
 
-button:hover {
-  transform: scale(1.1);
-}
-
-/* .comment-button {
-  background-color: none;
-  border: 2px solid var(--border-color);
-  border-radius: 1rem;
-  font-family: var(--font-mono);
-  letter-spacing: 2px;
-  margin: 0.25rem 0;
-  padding: 0.25rem 0.5rem;
-  text-transform: uppercase;
-} */
-
-/* .comment-button:hover {
-  transform: scale(1.1);
-} */
-
-.hr-line {
+.hr-line1 {
   border-color: var(--border-post-color) ;
+}
+
+.hr-line2 {
+  border-color: var(--border-color) ;
 }
 
 .post-message, .post-comment-message {
@@ -166,12 +180,4 @@ button:hover {
 
 .post-comment-message {
   font-size: 1rem;
-}
-
-footer {
-  color: var(--text-color);
-  font-family: var(--font-mono);
-  margin: 1rem;
-  text-align: center;
-  text-transform: uppercase;
 }
