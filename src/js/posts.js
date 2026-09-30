@@ -28,7 +28,6 @@ export function renderPosts(posts) {
     if (post.createdAt === post.updatedAt) {
       postCreatedAt.textContent = `Created: ${formatExactDate(post.createdAt)}`;
     } else {
-      // postCreatedAt.textContent = `Created: ${formatExactDate(post.createdAt)}`;
       postUpdatedAt.textContent = `Updated: ${formatExactDate(post.updatedAt)}`;
     }
 
@@ -67,7 +66,6 @@ export function renderPosts(posts) {
       if (comment.createdAt === comment.updatedAt) {
         postCommentCreatedAt.textContent = `Created: ${formatExactDate(comment.createdAt)}`; 
       } else {
-        // postCommentCreatedAt.textContent = `Created: ${formatExactDate(comment.createdAt)}`; 
         postCommentUpdatedAt.textContent = `Updated: ${formatExactDate(comment.updatedAt)}`;  
       }    
 
