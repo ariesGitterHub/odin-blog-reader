@@ -1,12 +1,14 @@
 /* Root */
 :root {
-    --text-color: #9ca3af;
-    --text-heading-color: #f3f4f6;
-    --background-color: #16171d;
-    --background-post-color: #08060d;
-    --background-comment-color: #27242d;
-    --border-color: #2e303a;
-    --border-post-color: #715252;
+    --gray: #9c9aa7;
+    --white: #e9e9f1;
+    --blue-dk: #16171d;
+    --black: #111112;
+    --blue-gray: #43434c;
+    --blue: #2e303a;
+    --blue-trans: #2e303aea;
+    --red: #7f3d3d;
+    --red-trans: #7f3d3dea;
 
   /*** Fonts */
   --font-sans: system-ui, 'Segoe UI', Roboto, sans-serif;
@@ -20,8 +22,8 @@
 
   font: 16px/145% var(--font-sans);
   letter-spacing: 0.18px;
-  color: var(--text-color);
-  background: var(--background-color);
+  color: var(--gray);
+  background: var(--blue-dk);
   /* font-synthesis: none; prevents the browser from automatically creating missing font styles (like bold or italic) for a specified font*/
   font-synthesis: none;
   /* text-rendering: optimizeLegibility; enhances the readability of text by enabling features like kerning and ligatures, especially for larger text sizes */
@@ -41,7 +43,7 @@ body {
 }
 
 h1, h2, h3 {
-  color: var(--text-heading-color);
+  color: var(--white);
   font-family: var(--font-heading);
   font-weight: 500;
 }
@@ -72,8 +74,31 @@ header {
   margin: var(--spacer-big);
 }
 
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  color: var(--gray);
+  font-family: var(--font-mono);
+  /* text-align: left; */
+}
+
+input {
+  /* all: unset; */
+  height: 1.25rem;
+  width: 96.25%;
+  background-color: var(--white);
+  border: 2px solid var(--gray);
+  border-radius: var(--spacer-big);
+  /* margin: var(--spacer-big); */
+  margin-bottom: var(--spacer-big);
+  padding-left: var(--space-medium);
+}
+
 footer {
-  color: var(--text-color);
+  color: var(--gray);
   font-family: var(--font-mono);
   margin: var(--spacer-big);
   text-align: center;
@@ -84,9 +109,10 @@ footer {
 button {
   height: fit-content;
   width: fit-content;
-  background-color: var(--text-color);
-  border: 2px solid var(--border-post-color);
+  background-color: var(--gray);
+  border: 2px solid var(--red);
   border-radius: var(--spacer-big);
+  cursor: pointer;
   font-family: var(--font-mono);
   font-size: .8rem;
   letter-spacing: 2px;
@@ -95,17 +121,55 @@ button {
 }
 
 button:hover {
-  background-color: var(--text-heading-color);
-  transform: scale(1.1);
+  background-color: var(--white);
+  transform: scale(1.05);
 }
+
+.close-modal-button {
+  height: 2rem;
+  width: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--red);
+  border: 2px solid var(--gray);
+  border-radius: 100%;
+  color: var(--gray);
+  font-size: 1.5rem;
+  font-weight: 900;
+  letter-spacing: 0;
+  line-height: 0;
+  margin: 0;
+  padding: 0.5rem;
+}
+
+.close-modal-button:hover {
+    background-color: var(--gray);
+  border: 2px solid var(--red);
+  border-radius: 100%;
+  color: var(--red);
+  transform: scale(1.25);
+}
+
+.login-signup-button, .signup-login-button {
+   width: 100%;
+   text-align: left;
+}
+
+/* .login-signup-button:hover, .signup-login-button:hover {
+  transform: none;
+} */
 
 /* Containers */
 /*** Basic Containers  */
 .row-container {
+  height: fit-content;
   display: flex;
   flex-direction: row;
-  align-items: start;
+  align-items: center;
+  justify-content: center;
   gap: var(--space-medium);
+  /* margin: 0 0 var(--spacer-big) 0; */
 }
 
 /*** Specific Containers  */
@@ -118,10 +182,74 @@ button:hover {
   display: flex;
   flex-direction: column;
   gap: var(--spacer-big);
-  border: 2px solid var(--border-color);
+  border: 2px solid var(--blue);
   border-radius: var(--spacer-big);
   margin: var(--spacer-big);
   padding: var(--spacer-big);
+}
+
+#modal-container {
+  /* Hidden by default */
+  display: none; 
+  position: fixed; /* Stay in place */
+
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: #000000; /* Fallback color */
+  background-color: #00000066; /* Black w/ opacity */
+  z-index: 1000;
+}
+
+/* Modal, sans #modal-container */
+.modal-content {
+  max-width: 300px;
+  background-color: var(--blue-trans);
+  border: 2px solid var(--gray);
+  border-radius: var(--spacer-big);
+  /* x% from the top and centered */
+  margin: 20% auto; 
+  padding: 1rem;
+  width: 75%; /* Could be more or less, depending on screen size */
+}
+/*** The Close Button */
+/* .close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+} */
+
+/* .close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+} */
+
+.login-form, .signup-form {
+  /* width: 100%; */
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  /* margin: 0; */
+}
+
+.signup-form {
+  display: none;
+}
+
+.login-form h1, .signup-form h1 {
+  color: var(--white);
+  font-size: 2.25rem;
+  margin-top: 0;
+  /* text-align: left; */
+}
+
+.login-form button, .signup-form button {
+  margin-top: 0.5rem;
 }
 
 /* Id and Class in Order */
@@ -131,7 +259,7 @@ button:hover {
   max-width: 100%;
   margin: 0 auto;
   text-align: center;
-  border-inline: 1px solid var(--border-color);
+  border-inline: 1px solid var(--blue);
   min-height: 100svh;
   display: flex;
   flex-direction: column;
@@ -139,8 +267,8 @@ button:hover {
 }
 
 .post-article {
-  background-color: var(--background-post-color);
-  border: 2px solid var(--border-post-color);
+  background-color: var(--black);
+  border: 2px solid var(--red);
   border-radius: var(--spacer-big);
   padding: 1rem;
   text-align: left;
@@ -148,8 +276,8 @@ button:hover {
 }
 
 .post-article-comment {
-  background-color: var(--background-comment-color);
-  border: 2px solid var(--border-color);
+  background-color: var(--blue-gray);
+  border: 2px solid var(--blue);
   border-radius: var(--spacer-big);
   margin: var(--spacer-big);
   padding: var(--spacer-big);
@@ -163,11 +291,11 @@ button:hover {
 
 
 .hr-line1 {
-  border-color: var(--border-post-color) ;
+  border-color: var(--red) ;
 }
 
 .hr-line2 {
-  border-color: var(--border-color) ;
+  border-color: var(--blue) ;
 }
 
 .post-message, .post-comment-message {
@@ -180,4 +308,26 @@ button:hover {
 
 .post-comment-message {
   font-size: 1rem;
+}
+
+
+/* Misc */
+
+/* .hidden {
+  display: none;
+} */
+
+/* .margin-bottom {
+  margin-bottom: var(--spacer-big);
+} */
+
+.justify-content-end {
+  align-items: center;
+  justify-content: end;
+  /* background-color: red; */
+}
+.justify-content-space-between {
+  align-items: center;
+  justify-content: space-between;
+  /* background-color: red; */
 }
