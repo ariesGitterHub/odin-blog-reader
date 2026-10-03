@@ -1,9 +1,12 @@
 import { login, signup } from "./auth.js";
+import { renderHeader } from "./components/header.js";
+// import { renderPosts } from "./posts.js";
 
 export function showModalViaLoginButton() {
   const loginButton = document.querySelector(".login-button");
   const modalContainer = document.querySelector("#modal-container");
 
+  // Opens the modal
   loginButton.addEventListener("click", () => {
     modalContainer.style.display = "block"
   })
@@ -13,112 +16,16 @@ export function closeModalViaCloseModalButton() {
   const closeModalButton = document.querySelector(".close-modal-button");
   const modalContainer = document.querySelector("#modal-container");
 
+  // Closes the modal
   closeModalButton.addEventListener("click", () => {
     modalContainer.style.display = "none";
   });
 }
 
-// export function renderModal() {
-//   const modalContainer = document.querySelector("#modal-container");
-
-//   const modalContent = document.createElement("div");
-//   modalContent.classList.add("modal-content");
-
-//   // Signup
-//   // const modalSignupForm = document.createElement("form");
-//   // modalSignupForm.classList.add("signup-form");
-
-//   // Other stuff needed for signup
-//   // const labelFirstName = document.createElement("label")
-//   // const inputFirstName = document.createElement("input")
-//   // const labelLastName = document.createElement("label")
-//   // const inputLastName = document.createElement("input")
-//   // const labelReenterPassword = document.createElement("label");
-//   // const inputReenterPassword = document.createElement("input");
-
-//   // Login
-//   const modalLoginForm = document.createElement("form");
-//   modalLoginForm.classList.add("login-form");
-
-//   const loginRowContainer = document.createElement("div");
-//   loginRowContainer.classList.add("row-container", "space-between");
-
-//   const loginTitle = document.createElement("h1");
-//   loginTitle.textContent = "🖳 Login";
-
-//   const closeModalButton = document.createElement("button");
-//   closeModalButton.textContent = "✖";
-//   closeModalButton.classList.add("close-modal-button");
-//   closeModalButton.setAttribute("type", "button");
-
-//   const loginEmailLabel = document.createElement("label");
-//   loginEmailLabel.textContent = "Email";
-//   loginEmailLabel.setAttribute("for", "email-login");
-
-//   const loginEmailInput = document.createElement("input");
-//   loginEmailInput.setAttribute("id", "email-login");
-//   loginEmailInput.setAttribute("type", "email");
-//   loginEmailInput.setAttribute("name", "email");
-//   loginEmailInput.setAttribute("placeholder", "Enter your email");
-//   loginEmailInput.required = true;
-
-//   const loginPasswordLabel = document.createElement("label");
-//   loginPasswordLabel.textContent = "Password";
-//   loginPasswordLabel.setAttribute("for", "password-login");
-
-//   const loginPasswordInput = document.createElement("input");
-//   loginPasswordInput.setAttribute("id", "password-login");
-//   loginPasswordInput.setAttribute("type", "password");
-//   loginPasswordInput.setAttribute("name", "password");
-//   loginPasswordInput.setAttribute("placeholder", "Enter your password");
-//   loginPasswordInput.required = true;
-
-//   const submitButton = document.createElement("button");
-//   submitButton.textContent = "Submit";
-//   submitButton.setAttribute("type", "submit");
-
-//   // Handle form submission
-//   modalLoginForm.addEventListener("submit", async (event) => {
-//     // Reminder - event.preventDefault() stops the browser from performing its normal form submission. That leaves JavaScript in control.
-//     event.preventDefault();
-
-//     const email = loginEmailInput.value;
-//     const password = loginPasswordInput.value;
-
-//     try {
-//       const data = await login(email, password);
-
-//       console.log("Login successful:", data);
-
-//       // I'll eventually update the navbar,
-//       // close the modal, and show the comment form here.
-//     } catch (err) {
-//       console.error("Login failed:", err);
-//     }
-//   });
-
-//     const loginSignupButton = document.createElement("button");
-//     loginSignupButton.textContent = "No account? Sign up here!";
-//     loginSignupButton.classList.add("login-signup-button");
-//     loginSignupButton.setAttribute("type", "button");
-
-//   loginRowContainer.append(loginTitle, closeModalButton);
-
-//   modalLoginForm.append(
-//     loginRowContainer,
-//     loginEmailLabel,
-//     loginEmailInput,
-//     loginPasswordLabel,
-//     loginPasswordInput,
-//     submitButton,
-//     loginSignupButton,
-//   );
-//   modalContent.append(modalLoginForm);
-//   modalContainer.append(modalContent);
-// } 
-
-export function renderModal() {
+export function renderModal(currentUser) {
   const modalContainer = document.querySelector("#modal-container");
+  modalContainer.innerHTML = "";
+
   const modalContent = document.createElement("div");
 
   modalContent.classList.add("modal-content");
@@ -134,7 +41,7 @@ export function renderModal() {
   closeModalButton.classList.add("close-modal-button");
   closeModalButton.setAttribute("type", "button");
 
-  const loginForm = renderLoginForm();
+  const loginForm = renderLoginForm(currentUser);
   const signupForm = renderSignupForm();
 
   // signupForm.style.display = "none";
@@ -149,8 +56,9 @@ export function renderModal() {
   modalContainer.append(modalContent);
 } 
 
-function renderLoginForm() {
+function renderLoginForm(currentUser) {
   const modalLoginForm = document.createElement("form");
+
   modalLoginForm.classList.add("login-form");
 
   const loginTitle = document.createElement("h1");
@@ -192,11 +100,18 @@ function renderLoginForm() {
 
     try {
       const data = await login(email, password);
+      currentUser = data.user;
+      // console.log("Login successful:", data);
+      // renderHeader(currentUser);
+      
 
-      console.log("Login successful:", data);
-
+      // Closes the modal
       const modalContainer = document.querySelector("#modal-container");
       modalContainer.style.display = "none";
+
+      renderHeader(currentUser);
+      console.log("Login successful:", currentUser);
+      // renderPosts(currentUser);
 
       // I'll eventually update the navbar,
       // close the modal, and show the comment form here.
@@ -330,6 +245,7 @@ export function renderSignupForm() {
 
       console.log("Signup successful:", data);
 
+      // Closes the modal
       const modalContainer = document.querySelector("#modal-container");
       modalContainer.style.display = "none";
 

@@ -1,35 +1,31 @@
 import "./css/styles.css";
-import { getPublishedBlogPosts, renderPosts } from "./js/posts.js";
-import { renderHeader } from "./js/header.js";
-import { 
-  showModalViaLoginButton,
-   closeModalViaCloseModalButton,
-    renderModal
-  } from "./js/modal.js";
-import { renderFooter } from "./js/footer.js";
+import { state } from "./js/state.js";
+import { registerEventListeners } from "./js/events.js";
 import { getCurrentUser } from "./js/auth.js";
+import { getPublishedBlogPosts } from "./js/posts.js";
+import { renderHeader } from "./js/components/header.js";
+import { renderPosts } from "./js/components/posts-view.js";
+import { renderFooter } from "./js/components/footer.js";
+import {
+  // showModalViaLoginButton,
+  // closeModalViaCloseModalButton,
+  renderModal,
+} from "./js/components/modal.js";
 
 async function init() {
-  // const userData = await getCurrentUser();
   const userData = await getCurrentUser();
-  console.log("Logged in as: ", userData);
-  
-  const postData = await getPublishedBlogPosts();
+  state.currentUser = userData.user;
 
-  // if (userData.user) {
-  //   renderHeader(userData.user);    
-  // } else {
-  //   renderHeader();
-  // }
-  renderHeader(userData.user);
-  renderPosts(postData.posts);
-  showModalViaLoginButton(); 
-  renderModal();  
-  closeModalViaCloseModalButton();
- 
+  renderHeader(state.currentUser);
+
+  const postData = await getPublishedBlogPosts();
+  renderPosts(postData.posts, state.currentUser);
+
+  renderModal();
+
   renderFooter();
 
-  // console.log(data.posts);
+  registerEventListeners();
 }
 
 init();

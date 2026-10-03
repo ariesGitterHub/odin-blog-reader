@@ -1,7 +1,3 @@
-// signup
-// login
-// logout
-
 import { get, post } from "./api.js";
 
 export async function signup(userData) {
@@ -16,7 +12,7 @@ export async function login(email, password) {
 }
 
 export async function logout() {
-  return post("/api/auth/login");
+  return post("/api/auth/logout");
 }
 
 export async function getCurrentUser() {

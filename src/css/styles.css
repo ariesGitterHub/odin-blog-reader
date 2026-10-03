@@ -66,10 +66,10 @@ h3 {
 
 header {
   display: flex;
-  flex-direction: row;
+  flex-direction: col;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   border-radius: var(--spacer-big);
   margin: var(--spacer-big);
 }
@@ -125,6 +125,18 @@ button:hover {
   transform: scale(1.05);
 }
 
+/* .login-button {
+display: block;
+}
+
+.logout-button {
+  display: none;
+}
+
+.profile-buttom {
+  display: none;
+} */
+
 .close-modal-button {
   height: 2rem;
   width: 2rem;
@@ -164,6 +176,7 @@ button:hover {
 /*** Basic Containers  */
 .row-container {
   height: fit-content;
+  width: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -173,12 +186,12 @@ button:hover {
 }
 
 /*** Specific Containers  */
-.header-button-container {
+.basic-container {
   display: flex;
   gap: var(--spacer-big);
 }
 
-#posts-container {
+#posts {
   display: flex;
   flex-direction: column;
   gap: var(--spacer-big);
@@ -188,11 +201,10 @@ button:hover {
   padding: var(--spacer-big);
 }
 
-#modal-container {
+#modal {
   /* Hidden by default */
   display: none; 
   position: fixed; /* Stay in place */
-
   left: 0;
   top: 0;
   width: 100%; /* Full width */
@@ -231,12 +243,15 @@ button:hover {
 
 .login-form, .signup-form {
   /* width: 100%; */
-  display: flex;
+  /* display: flex; */
   align-items: start;
   justify-content: center;
   /* margin: 0; */
 }
 
+.login-form {
+  display: flex;
+}
 .signup-form {
   display: none;
 }
@@ -290,11 +305,11 @@ button:hover {
 }
 
 
-.hr-line1 {
+.hr-line-post {
   border-color: var(--red) ;
 }
 
-.hr-line2 {
+.hr-line-comment {
   border-color: var(--blue) ;
 }
 
@@ -313,9 +328,9 @@ button:hover {
 
 /* Misc */
 
-/* .hidden {
+.hidden {
   display: none;
-} */
+}
 
 /* .margin-bottom {
   margin-bottom: var(--spacer-big);
@@ -330,4 +345,12 @@ button:hover {
   align-items: center;
   justify-content: space-between;
   /* background-color: red; */
+}
+
+.logged-in {
+  background-color: var(--blue-gray);
+  border: 2px solid var(--blue);
+  border-radius: var(--spacer-big);
+  font-family: var(--font-heading);
+  /* text-transform: lowercase; */
 }

@@ -8,97 +8,109 @@ export async function getPublishedBlogPosts() {
   return get("/api/posts/public");
 }
 
-export function renderPosts(posts) {
-  const postsContainer = document.querySelector("#posts-container");
+// export function renderPosts(posts, currentUser) {
+//   const postsContainer = document.querySelector("#posts-container");
 
-  postsContainer.innerHTML = "";
+//   postsContainer.innerHTML = "";
 
-  posts.forEach((post) => {
-    const postArticle = document.createElement("article");
-    postArticle.classList.add("post-article");
+//   posts.forEach((post) => {
+//     const postArticle = document.createElement("article");
+//     postArticle.classList.add("post-article");
 
-    const postTitle = document.createElement("h2");
-    postTitle.textContent = post.postTitle;
+//     const postTitle = document.createElement("h2");
+//     postTitle.textContent = post.postTitle;
 
-    const postCreatedAt = document.createElement("p"); 
-    postCreatedAt.classList.add("time-stamp") 
-    const postUpdatedAt = document.createElement("p");
-    postUpdatedAt.classList.add("time-stamp"); 
+//     const postCreatedAt = document.createElement("p"); 
+//     postCreatedAt.classList.add("time-stamp") 
+//     const postUpdatedAt = document.createElement("p");
+//     postUpdatedAt.classList.add("time-stamp"); 
 
-    if (post.createdAt === post.updatedAt) {
-      postCreatedAt.textContent = `Created: ${formatExactDate(post.createdAt)}`;
-    } else {
-      postUpdatedAt.textContent = `Updated: ${formatExactDate(post.updatedAt)}`;
-    }
+//     if (post.createdAt === post.updatedAt) {
+//       postCreatedAt.textContent = `Created: ${formatExactDate(post.createdAt)}`;
+//     } else {
+//       postUpdatedAt.textContent = `Updated: ${formatExactDate(post.updatedAt)}`;
+//     }
 
-    const commentButton = document.createElement("button");
-    // commentButton.classList.add("comment-button");
-    commentButton.textContent = "Comment"
+//     postArticle.append(
+//       postTitle,
+//       postCreatedAt,
+//       postUpdatedAt,
+//       // commentButton,
+//       // hrLine,
+//       // postMessage,
+//     ); 
 
-    const hrLine = document.createElement("hr");
-    hrLine.classList.add("hr-line1");
+//     // if (currentUser) {
+//     const commentButton = document.createElement("button");
+//     // commentButton.classList.add("comment-button");
+//     commentButton.textContent = "Comment"  
+//     postArticle.append(commentButton)    ;
+//     // }
 
-    const postMessage = document.createElement("p");
-    postMessage.classList.add("post-message")
-    postMessage.textContent = post.postMessage;
+//     const hrLine = document.createElement("hr");
+//     hrLine.classList.add("hr-line1");
 
-    postArticle.append(
-      postTitle,
-      postCreatedAt,
-      postUpdatedAt,
-      commentButton,
-      hrLine,
-      postMessage,
-    );    
+//     const postMessage = document.createElement("p");
+//     postMessage.classList.add("post-message")
+//     postMessage.textContent = post.postMessage;
 
-    post.comments.forEach((comment) => {
-      const postArticleComment = document.createElement("article");
-      postArticleComment.classList.add("post-article-comment");
+//     postArticle.append(
+//       // postTitle,
+//       // postCreatedAt,
+//       // postUpdatedAt,
+//       // commentButton,
+//       hrLine,
+//       postMessage,
+//     );    
 
-      const postCommentAuthor = document.createElement("h3");
-      postCommentAuthor.textContent = `${comment.user.firstName} ${comment.user.lastName}`;   
+//     post.comments.forEach((comment) => {
+//       const postArticleComment = document.createElement("article");
+//       postArticleComment.classList.add("post-article-comment");
 
-      // const rowContainer = document.createElement("div");
-      // rowContainer.classList.add("row-container");
+//       const postCommentAuthor = document.createElement("h3");
+//       postCommentAuthor.textContent = `${comment.user.firstName} ${comment.user.lastName}`;   
 
-      const postCommentCreatedAt = document.createElement("p");
-      postCommentCreatedAt.classList.add("time-stamp"); 
-      const postCommentUpdatedAt = document.createElement("p");
-      postCommentUpdatedAt.classList.add("time-stamp"); 
+//       // const rowContainer = document.createElement("div");
+//       // rowContainer.classList.add("row-container");
 
-      if (comment.createdAt === comment.updatedAt) {
-        postCommentCreatedAt.textContent = `Created: ${formatExactDate(comment.createdAt)}`; 
-      } else {
-        postCommentUpdatedAt.textContent = `Updated: ${formatExactDate(comment.updatedAt)}`;  
-      }   
+//       const postCommentCreatedAt = document.createElement("p");
+//       postCommentCreatedAt.classList.add("time-stamp"); 
+//       const postCommentUpdatedAt = document.createElement("p");
+//       postCommentUpdatedAt.classList.add("time-stamp"); 
+
+//       if (comment.createdAt === comment.updatedAt) {
+//         postCommentCreatedAt.textContent = `Created: ${formatExactDate(comment.createdAt)}`; 
+//       } else {
+//         postCommentUpdatedAt.textContent = `Updated: ${formatExactDate(comment.updatedAt)}`;  
+//       }   
       
-      const editCommentButton = document.createElement("button");
-      // editCommentButton.classList.add("edit-comment-button")
-      editCommentButton.textContent = "Edit";   
+//       const editCommentButton = document.createElement("button");
+//       // editCommentButton.classList.add("edit-comment-button")
+//       editCommentButton.textContent = "Edit";   
       
-      const hrLine = document.createElement("hr");
-      hrLine.classList.add("hr-line2");
+//       const hrLine = document.createElement("hr");
+//       hrLine.classList.add("hr-line2");
 
-      const postCommentMessage = document.createElement("p");
-      postCommentMessage.classList.add("post-comment-message");
-      postCommentMessage.textContent = comment.commentMessage;  
+//       const postCommentMessage = document.createElement("p");
+//       postCommentMessage.classList.add("post-comment-message");
+//       postCommentMessage.textContent = comment.commentMessage;  
 
-      // rowContainer.append(
+//       // rowContainer.append(
 
-      // );
+//       // );
             
-      postArticleComment.append(
-        postCommentAuthor,
-        postCommentCreatedAt,
-        postCommentUpdatedAt,
-        editCommentButton,  
-        hrLine,   
-        postCommentMessage,
-      );
+//       postArticleComment.append(
+//         postCommentAuthor,
+//         postCommentCreatedAt,
+//         postCommentUpdatedAt,
+//         editCommentButton,  
+//         hrLine,   
+//         postCommentMessage,
+//       );
 
-      postArticle.append(postArticleComment)
-    })
+//       postArticle.append(postArticleComment)
+//     })
 
-    postsContainer.append(postArticle);
-  });
-}
+//     postsContainer.append(postArticle);
+//   });
+// }
