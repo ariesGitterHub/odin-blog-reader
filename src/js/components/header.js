@@ -21,9 +21,9 @@ export function renderHeader(currentUser) {
   const authControls = currentUser
     ? [
         createButton("button", "Logout", "logout", "logout-button"),
-        createButton("button", "Profile", "profile", "profile-button"),
+        createButton("button", "Profile", "open-modal-profile", "profile-button"),
       ]
-    : [createButton("button", "Login", "login", "login-button")];
+    : [createButton("button", "Login", "open-modal-login", "login-button")];
 
   buttonContainer.append(...authControls);
   topRow.append(title, buttonContainer);
@@ -34,7 +34,8 @@ export function renderHeader(currentUser) {
   const loginMessage = createElement(
     "p",
     currentUser
-      ? `Logged in as "${currentUser.email}"`
+      ? // ? `Logged in as "${currentUser.email}"`
+        `Welcome back ${currentUser.firstName} ${currentUser.lastName}!`
       : "Please log in to comment.",
   );
 

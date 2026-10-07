@@ -31,12 +31,9 @@ export function renderModal() {
 
   const loginForm = renderLoginForm();
   const signupForm = renderSignupForm();
+  const profileForm = renderProfileForm();
 
-  modalContent.append(
-    buttonContainer,
-    loginForm,
-    signupForm
-  );
+  modalContent.append(buttonContainer, loginForm, signupForm, profileForm);
   modalContainer.append(modalContent);
 }
 
@@ -44,6 +41,8 @@ function renderLoginForm() {
   const modalLoginForm = createElement("form", "", "login-form");
 
   const title = createElement("h1", "🖳 Login");
+
+  const errorMessage = createElement("div", "", "error-login", "error-message");
 
   const emailLabel = createLabel("email-login", "Email");
   const emailInput = createInput(
@@ -63,21 +62,45 @@ function renderLoginForm() {
     true,
   );
 
-  const submitButton = createButton("submit", "Submit", "submit-login");
+  const buttonRow = createElement(
+    "div",
+    "",
+    "row-container",
+    "full-width",
+    "gap",
+  );
+
+  const submitButton = createButton(
+    "submit",
+    "Submit",
+    // "submit-login",
+    "",
+    "full-width",
+  );
+  const clearButton = createButton(
+    "button",
+    "Clear",
+    "clear-form",
+    "full-width",
+  );
+
+  buttonRow.append(submitButton, clearButton);
+
   const oopsNeedSignupButton = createButton(
     "button",
     "*No account? Click to sign up!",
     "signup-instead",
-    "login-signup-button",
+    "full-width",
   );
 
   modalLoginForm.append(
     title,
+    errorMessage,
     emailLabel,
     emailInput,
     passwordLabel,
     passwordInput,
-    submitButton,
+    buttonRow,
     oopsNeedSignupButton,
   );
 
@@ -88,6 +111,13 @@ function renderSignupForm() {
   const modalSignupForm = createElement("form", "", "signup-form");
 
   const title = createElement("h1", "🖳 Sign Up");
+
+  const errorMessage = createElement(
+    "div",
+    "",
+    "error-signup",
+    "error-message",
+  );
 
   const firstNameLabel = createLabel("first-name-signup", "First Name");
   const firstNameInput = createInput(
@@ -125,27 +155,54 @@ function renderSignupForm() {
     true,
   );
 
-  const confirmPasswordLabel = createLabel("confirm-password-signup", "Password");
+  const confirmPasswordLabel = createLabel(
+    "confirm-password-signup",
+    "Confirm-Password",
+  );
   const confirmPasswordInput = createInput(
-    "password-signup",
+    "confirm-password-signup",
     "password",
     "confirm_password",
     "Re-enter password.",
     true,
   );
 
+  const buttonRow = createElement(
+    "div",
+    "",
+    "row-container",
+    "full-width",
+    "gap",
+  );
+
   // TODO - instead take the user immediately to the login page after signing up!
-  const submitButton = createButton("submit", "Submit", "submit-signup");
+  const submitButton = createButton(
+    "submit",
+    "Submit",
+    // "submit-signup",
+    "",
+    "full-width",
+  );
+
+  const clearButton = createButton(
+    "button",
+    "Clear",
+    "clear-form",
+    "full-width",
+  );
+
+  buttonRow.append(submitButton, clearButton);
 
   const oopsNeedLoginButton = createButton(
     "button",
     "*Already have an account? Please click here to login.",
     "login-instead",
-    "signup-login-button",
+    "full-width",
   );
 
   modalSignupForm.append(
     title,
+    errorMessage,
     firstNameLabel,
     firstNameInput,
     lastNameLabel,
@@ -156,9 +213,121 @@ function renderSignupForm() {
     passwordInput,
     confirmPasswordLabel,
     confirmPasswordInput,
-    submitButton,
+    buttonRow,
     oopsNeedLoginButton,
   );
 
   return modalSignupForm;
+}
+
+function renderProfileForm() {
+  const modalProfileForm = createElement("form", "", "profile-form");
+
+  const title = createElement("h1", "🖳 Edit Profile");
+
+  const errorMessage = createElement(
+    "div",
+    "",
+    "error-profile",
+    "error-message",
+  );
+
+  const firstNameLabel = createLabel("first-name-profile", "First Name");
+  const firstNameInput = createInput(
+    "first-name-profile",
+    "text",
+    "first_name",
+    "",
+    // true,
+  );
+
+  const lastNameLabel = createLabel("last-name-profile", "Last Name");
+  const lastNameInput = createInput(
+    "last-name-profile",
+    "text",
+    "last_name",
+    "",
+    // true,
+  );
+
+  const emailLabel = createLabel("email-profile", "Email");
+  const emailInput = createInput(
+    "email-profile",
+    "email",
+    "email",
+    "",
+    // true,
+  );
+
+  const passwordLabel = createLabel("password-profile", "New Password");
+  const passwordInput = createInput(
+    "password-profile",
+    "password",
+    "password",
+    "",
+    // true,
+  );
+
+  const confirmPasswordLabel = createLabel(
+    "confirm-password-profile",
+    "Confirm New Password",
+  );
+  const confirmPasswordInput = createInput(
+    "confirm-password-profile",
+    "password",
+    "confirm_password",
+    "",
+    // true,
+  );
+
+  const buttonRow = createElement(
+    "div",
+    "",
+    "row-container",
+    "full-width",
+    "gap",
+  );
+
+  const submitButton = createButton( 
+    "submit",
+    "Submit",
+    // "submit-profile",
+    "",
+    "full-width",
+  );
+
+  const clearButton = createButton(
+    "button",
+    "Clear",
+    "clear-form",
+    "full-width",
+  );
+
+  buttonRow.append(submitButton, clearButton);
+
+  // const oopsNeedLoginButton = createButton(
+  //   "button",
+  //   "*Already have an account? Please click here to login.",
+  //   "login-instead",
+  //   "full-width",
+  // );
+
+  modalProfileForm.append(
+    title,
+    errorMessage,
+    firstNameLabel,
+    firstNameInput,
+    lastNameLabel,
+    lastNameInput,
+    emailLabel,
+    emailInput,
+    passwordLabel,
+    passwordInput,
+    confirmPasswordLabel,
+    confirmPasswordInput,
+    buttonRow,
+    // oopsNeedLoginButton,
+  );
+
+  return modalProfileForm;
 }

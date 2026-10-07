@@ -10,16 +10,36 @@ export async function get(endpoint) {
     //   throw new Error(`Request failed: ${response.status}`);
     // }
 
+    // if (!response.ok) {
+    //   const errorData = await response.json();
+
+    //   console.log(errorData);  
+
+    //   throw new Error(
+    //     // NOTE - the optional chaining (?.) prevents an error if the response doesn't contain an error property
+    //     // errorData.error?.message || `Request failed: ${response.status}`,
+    //     errorData?.message || `Request failed: ${response.status}`,
+    //   );
+    // }
+
     if (!response.ok) {
       const errorData = await response.json();
 
+      console.log(errorData);
+
       throw new Error(
         // NOTE - the optional chaining (?.) prevents an error if the response doesn't contain an error property
-        errorData.error?.message || `Request failed: ${response.status}`,
+        // errorData.error?.message || `Request failed: ${response.status}`,
+        // errorData?.message || `Request failed: ${response.status}`,
+        errorData?.message ||
+          errorData.error?.message ||
+          errorData?.errors?.map((err) => err.message).join(", ") || // TODO - Relearn this!!! // Needed for signup validation when passwords are weak
+          `Request failed: ${response.status}`,
       );
     }
 
-    return await response.json();
+    // return await response.json();
+    return response.json();
   } catch (err) {
     console.error(err);
     throw err;
@@ -27,6 +47,8 @@ export async function get(endpoint) {
 }
 
 export async function post(endpoint, data) {
+  console.log("POST data:", data);
+
   try {
     const response = await fetch(`${API_URL}${endpoint}`, {
       method: "POST",
@@ -41,16 +63,24 @@ export async function post(endpoint, data) {
     //   throw new Error(`Request failed: ${response.status}`);
     // }
 
-    if (!response.ok) {
-      const errorData = await response.json();
+  if (!response.ok) {
+    const errorData = await response.json();
 
-      throw new Error(
-        // NOTE - the optional chaining (?.) prevents an error if the response doesn't contain an error property
-        errorData.error?.message || `Request failed: ${response.status}`,
-      );
-    }
+    console.log(errorData);  
 
-    return await response.json();
+    throw new Error(
+      // NOTE - the optional chaining (?.) prevents an error if the response doesn't contain an error property
+      // errorData.error?.message || `Request failed: ${response.status}`,
+      // errorData?.message || `Request failed: ${response.status}`,
+      errorData?.message ||
+        errorData.error?.message ||
+        errorData?.errors?.map((err) => err.message).join(", ") || // TODO - Relearn this!!! // Needed for signup validation when passwords are weak
+        `Request failed: ${response.status}`,
+    );
+  }
+
+    // return await response.json();
+    return response.json();
   } catch (err) {
     console.error(err);
     throw err;
@@ -72,16 +102,36 @@ export async function put(endpoint, data) {
     //   throw new Error(`Request failed: ${response.status}`);
     // }
 
+    // if (!response.ok) {
+    //   const errorData = await response.json();
+
+    //   console.log(errorData);
+
+    //   throw new Error(
+    //     // NOTE - the optional chaining (?.) prevents an error if the response doesn't contain an error property
+    //     // errorData.error?.message || `Request failed: ${response.status}`,
+    //     errorData?.message || `Request failed: ${response.status}`,
+    //   );
+    // }
+
     if (!response.ok) {
       const errorData = await response.json();
 
+      console.log(errorData);
+
       throw new Error(
         // NOTE - the optional chaining (?.) prevents an error if the response doesn't contain an error property
-        errorData.error?.message || `Request failed: ${response.status}`,
+        // errorData.error?.message || `Request failed: ${response.status}`,
+        // errorData?.message || `Request failed: ${response.status}`,
+        errorData?.message ||
+          errorData.error?.message ||
+          errorData?.errors?.map((err) => err.message).join(", ") || // TODO - Relearn this!!! // Needed for signup validation when passwords are weak
+          `Request failed: ${response.status}`,
       );
     }
 
-    return await response.json();
+    // return await response.json();
+    return response.json();
   } catch (err) {
     console.error(err);
     throw err;
@@ -94,21 +144,24 @@ export async function del(endpoint) {
       method: "DELETE",
       credentials: "include",
     });
-
-    // if (!response.ok) {
-    //   throw new Error(`Request failed: ${response.status}`);
-    // }
-
+    
     if (!response.ok) {
       const errorData = await response.json();
-
+      console.log(errorData);
       throw new Error(
-        // NOTE - the optional chaining (?.) prevents an error if the response doesn't contain an error property
-        errorData.error?.message || `Request failed: ${response.status}`,
+        errorData?.message ||
+          errorData.error?.message ||
+          errorData?.errors?.map((err) => err.message).join(", ") ||
+          `Request failed: ${response.status}`,
       );
     }
 
-    return await response.json();
+    // NOTE - a 204 No Content response has no response body, but my del() function does, so it will try to parse an empty response body as JSON and throw an error even though the deletion succeeded.
+    if (response.status === 204) {
+      return;
+    }
+
+    return response.json();
   } catch (err) {
     console.error(err);
     throw err;

@@ -9,6 +9,7 @@
     --blue-trans: #2e303aea;
     --red: #7f3d3d;
     --red-trans: #7f3d3dea;
+    --error-yellow: #dfd810;
 
   /*** Fonts */
   --font-sans: system-ui, 'Segoe UI', Roboto, sans-serif;
@@ -88,7 +89,7 @@ label {
 input {
   /* all: unset; */
   height: 1.25rem;
-  width: 96.25%;
+  width: 96%;
   background-color: var(--white);
   border: 2px solid var(--gray);
   border-radius: var(--spacer-big);
@@ -163,10 +164,10 @@ display: block;
   transform: scale(1.25);
 }
 
-.login-signup-button, .signup-login-button {
+/* .login-signup-button, .signup-login-button {
    width: 100%;
    text-align: left;
-}
+} */
 
 /* .login-signup-button:hover, .signup-login-button:hover {
   transform: none;
@@ -241,7 +242,7 @@ display: block;
   cursor: pointer;
 } */
 
-.login-form, .signup-form {
+.login-form, .signup-form, .profile-form {
   /* width: 100%; */
   /* display: flex; */
   align-items: start;
@@ -252,33 +253,35 @@ display: block;
 .login-form {
   display: flex;
 }
-.signup-form {
+
+.signup-form, .profile-form {
   display: none;
 }
 
-.login-form h1, .signup-form h1 {
+.login-form h1, .signup-form h1, .profile-form h1 {
   color: var(--white);
   font-size: 2.25rem;
   margin-top: 0;
   /* text-align: left; */
 }
 
-.login-form button, .signup-form button {
+.login-form button, .signup-form button, .profile-form button {
   margin-top: 0.5rem;
 }
 
 /* Id and Class in Order */
 
-#app {
+#app {  
+  /* min-height: 100svh; */
+  min-height: 100vh;
   width: 1126px;
   max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--blue);
-  min-height: 100svh;
   display: flex;
   flex-direction: column;
-  box-sizing: border-box;
+   /* box-sizing: border-box; */  
+  border-inline: 1px solid var(--blue);
+  margin: 0 auto;
+  /* text-align: center; */
 }
 
 .post-article {
@@ -328,8 +331,25 @@ display: block;
 
 /* Misc */
 
+.error-message {
+  color: var(--error-yellow);
+  font-family: var(--font-heading);
+  font-size: .9rem;
+  margin-bottom: var(--spacer-big);
+  text-align: left;
+  text-transform: uppercase;
+}
+
 .hidden {
   display: none;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.gap {
+  gap: var(--spacer-big);
 }
 
 /* .margin-bottom {
