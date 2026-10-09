@@ -9,9 +9,8 @@ export function updateProfile(userData) {
   return put("/api/user/profile", userData);
 }
 
-// export async function deleteProfile(userId) {
-export function deleteProfile(userId) {
-  console.log("Deleted user id:", userId);
-
-  return del("api/delete/profile", userId);
+// export async function deleteProfile() {
+// NOTE - userId is not needed here since the backend gets the ID from the authenticated JWT
+export function deleteProfile() {
+  return del("/api/user/profile");
 }

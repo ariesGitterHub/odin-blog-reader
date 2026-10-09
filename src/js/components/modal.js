@@ -3,6 +3,7 @@ import {
   createLabel,
   createInput,
   createElement,
+  createImage,
 } from "../templates.js";
 
 export function renderModal() {
@@ -32,8 +33,15 @@ export function renderModal() {
   const loginForm = renderLoginForm();
   const signupForm = renderSignupForm();
   const profileForm = renderProfileForm();
+  const profileDeleteForm = renderProfileDeleteForm();
 
-  modalContent.append(buttonContainer, loginForm, signupForm, profileForm);
+  modalContent.append(
+    buttonContainer,
+    loginForm,
+    signupForm,
+    profileForm,
+    profileDeleteForm,
+  );
   modalContainer.append(modalContent);
 }
 
@@ -52,14 +60,37 @@ function renderLoginForm() {
     "Enter email address.",
     true,
   );
+  emailInput.setAttribute("autocomplete", "username");
 
   const passwordLabel = createLabel("password-login", "Password");
+
+  const passwordRow = createElement("div", "", "row-container", "password-row");
+
   const passwordInput = createInput(
     "password-login",
     "password",
     "password",
     "Enter password.",
     true,
+  );
+  passwordInput.setAttribute("autocomplete", "current-password");
+
+  const showPasswordButton = createButton(
+    "button",
+    "",
+    "show-password-toggle",
+    "show-password-button",
+  );
+
+  const showPasswordButtonImage = createImage(
+    "src/assets/eye-off.svg",
+    "an eye icon that toggles open and closed",
+    "show-password-button-image",
+  );
+
+  showPasswordButtonImage.setAttribute(
+    "id",
+    "show-password-button-image-login",
   );
 
   const buttonRow = createElement(
@@ -77,12 +108,17 @@ function renderLoginForm() {
     "",
     "full-width",
   );
+
   const clearButton = createButton(
     "button",
     "Clear",
     "clear-form",
     "full-width",
   );
+
+  showPasswordButton.append(showPasswordButtonImage);
+
+  passwordRow.append(passwordInput, showPasswordButton);
 
   buttonRow.append(submitButton, clearButton);
 
@@ -99,7 +135,8 @@ function renderLoginForm() {
     emailLabel,
     emailInput,
     passwordLabel,
-    passwordInput,
+    // passwordInput,
+    passwordRow,
     buttonRow,
     oopsNeedSignupButton,
   );
@@ -145,8 +182,12 @@ function renderSignupForm() {
     "Enter email address.",
     true,
   );
+  emailInput.setAttribute("autocomplete", "username");
 
   const passwordLabel = createLabel("password-signup", "Password");
+
+  const passwordRow = createElement("div", "", "row-container", "password-row");
+
   const passwordInput = createInput(
     "password-signup",
     "password",
@@ -154,18 +195,40 @@ function renderSignupForm() {
     "Enter password.",
     true,
   );
+  passwordInput.setAttribute("autocomplete", "new-password");
 
-  const confirmPasswordLabel = createLabel(
-    "confirm-password-signup",
-    "Confirm-Password",
+  const showPasswordButton = createButton(
+    "button",
+    "",
+    "show-password-toggle",
+    "show-password-button",
   );
-  const confirmPasswordInput = createInput(
-    "confirm-password-signup",
-    "password",
-    "confirm_password",
-    "Re-enter password.",
-    true,
+
+  const showPasswordButtonImage = createImage(
+    "src/assets/eye-off.svg",
+    "an eye icon that toggles open and closed",
+    "show-password-button-image",
   );
+
+  showPasswordButtonImage.setAttribute(
+    "id",
+    "show-password-button-image-signup",
+  );
+
+  // const confirmPasswordLabel = createLabel(
+  //   "confirm-password-signup",
+  //   "Confirm-Password",
+  // );
+
+  // const confirmPasswordInput = createInput(
+  //   "confirm-password-signup",
+  //   "password",
+  //   "confirm_password",
+  //   "Re-enter password.",
+  //   true,
+  // );
+
+  // confirmPasswordInput.setAttribute("autocomplete", "new-password");
 
   const buttonRow = createElement(
     "div",
@@ -191,6 +254,10 @@ function renderSignupForm() {
     "full-width",
   );
 
+  showPasswordButton.append(showPasswordButtonImage);
+
+  passwordRow.append(passwordInput, showPasswordButton);
+
   buttonRow.append(submitButton, clearButton);
 
   const oopsNeedLoginButton = createButton(
@@ -210,9 +277,10 @@ function renderSignupForm() {
     emailLabel,
     emailInput,
     passwordLabel,
-    passwordInput,
-    confirmPasswordLabel,
-    confirmPasswordInput,
+    // passwordInput,
+    passwordRow,
+    // confirmPasswordLabel,
+    // confirmPasswordInput,
     buttonRow,
     oopsNeedLoginButton,
   );
@@ -258,8 +326,12 @@ function renderProfileForm() {
     "",
     // true,
   );
+  emailInput.setAttribute("autocomplete", "username");
 
   const passwordLabel = createLabel("password-profile", "New Password");
+
+  const passwordRow = createElement("div", "", "row-container", "password-row");
+
   const passwordInput = createInput(
     "password-profile",
     "password",
@@ -268,17 +340,40 @@ function renderProfileForm() {
     // true,
   );
 
-  const confirmPasswordLabel = createLabel(
-    "confirm-password-profile",
-    "Confirm New Password",
-  );
-  const confirmPasswordInput = createInput(
-    "confirm-password-profile",
-    "password",
-    "confirm_password",
+  passwordInput.setAttribute("autocomplete", "new-password");
+
+  const showPasswordButton = createButton(
+    "button",
     "",
-    // true,
+    "show-password-toggle",
+    "show-password-button",
   );
+
+  const showPasswordButtonImage = createImage(
+    "src/assets/eye-off.svg",
+    "an eye icon that toggles open and closed",
+    "show-password-button-image",
+  );
+
+  showPasswordButtonImage.setAttribute(
+    "id",
+    "show-password-button-image-profile",
+  );
+
+  // const confirmPasswordLabel = createLabel(
+  //   "confirm-password-profile",
+  //   "Confirm New Password",
+  // );
+
+  // const confirmPasswordInput = createInput(
+  //   "confirm-password-profile",
+  //   "password",
+  //   "confirm_password",
+  //   "",
+  //   // true,
+  // );
+
+  // confirmPasswordInput.setAttribute("autocomplete", "new-password");
 
   const buttonRow = createElement(
     "div",
@@ -288,13 +383,7 @@ function renderProfileForm() {
     "gap",
   );
 
-  const submitButton = createButton( 
-    "submit",
-    "Submit",
-    // "submit-profile",
-    "",
-    "full-width",
-  );
+  const submitButton = createButton("submit", "Submit", "", "full-width");
 
   const clearButton = createButton(
     "button",
@@ -303,7 +392,18 @@ function renderProfileForm() {
     "full-width",
   );
 
-  buttonRow.append(submitButton, clearButton);
+  const deleteProfileButton = createButton(
+    "button",
+    "Delete",
+    "open-profile-delete-confirmation",
+    "full-width",
+  );
+
+  showPasswordButton.append(showPasswordButtonImage);
+
+  passwordRow.append(passwordInput, showPasswordButton);
+
+  buttonRow.append(submitButton, clearButton, deleteProfileButton);
 
   // const oopsNeedLoginButton = createButton(
   //   "button",
@@ -322,12 +422,60 @@ function renderProfileForm() {
     emailLabel,
     emailInput,
     passwordLabel,
-    passwordInput,
-    confirmPasswordLabel,
-    confirmPasswordInput,
+    // passwordInput,
+    passwordRow,
+    // confirmPasswordLabel,
+    // confirmPasswordInput,
     buttonRow,
     // oopsNeedLoginButton,
   );
 
   return modalProfileForm;
+}
+
+function renderProfileDeleteForm() {
+  // NEW FORM! This is hidden until deleteProfileButton is clicked
+  const confirmProfileDeleteForm = createElement(
+    "form",
+    "",
+    "confirm-profile-delete-form",
+  );
+
+  const brSpace = createElement("br", "");
+
+  const deleteProfileMessage = createElement(
+    "p",
+    "Are you sure that you wish to delete your account? This action is permanent.",
+    "error-message",
+  );
+
+  // Submits account profile deletion
+  const confirmProfileDeleteButton = createButton(
+    "submit",
+    "Confirm",
+    "",
+    "full-width",
+  );
+
+  // Cancels account profile deletion
+  const cancelProfileDeleteButton = createButton(
+    "button",
+    "Cancel",
+    "close-profile-delete-confirmation",
+    "full-width",
+  );
+
+  const buttonRow = createElement(
+    "div",
+    "",
+    "row-container",
+    "full-width",
+    "gap",
+  );
+
+  buttonRow.append(confirmProfileDeleteButton, cancelProfileDeleteButton);
+
+  confirmProfileDeleteForm.append(brSpace, deleteProfileMessage, buttonRow);
+
+  return confirmProfileDeleteForm;
 }

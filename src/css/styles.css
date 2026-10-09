@@ -173,6 +173,31 @@ display: block;
   transform: none;
 } */
 
+.show-password-button {
+  display: flex;
+  background-color: var(--white);
+  border: 2px solid var(--gray);
+  border-radius: 50%;
+  /* font-size: .9rem; */
+  margin-top: calc(var(--spacer-big) * -1);
+}
+
+/* TODO - Fix below later */
+.show-password-button-image,
+.show-password-button-image1,
+.show-password-button-image2,
+.show-password-button-image3 {
+ height: 1rem;
+ width: auto;
+}
+
+.password-row {
+  /* align-items: center; */
+  /* justify-content: center; */
+  margin: 0;
+  padding: 0;
+}
+
 /* Containers */
 /*** Basic Containers  */
 .row-container {
@@ -184,6 +209,7 @@ display: block;
   justify-content: center;
   gap: var(--space-medium);
   /* margin: 0 0 var(--spacer-big) 0; */
+  margin-bottom: var(--spacer-big);
 }
 
 /*** Specific Containers  */
@@ -252,6 +278,7 @@ display: block;
 
 .login-form {
   display: flex;
+    gap: var(--spacer-medium);
 }
 
 .signup-form, .profile-form {
@@ -259,15 +286,24 @@ display: block;
 }
 
 .login-form h1, .signup-form h1, .profile-form h1 {
+
   color: var(--white);
   font-size: 2.25rem;
   margin-top: 0;
   /* text-align: left; */
 }
 
-.login-form button, .signup-form button, .profile-form button {
-  margin-top: 0.5rem;
+/* .login-form button, .signup-form button, .profile-form button {
 }
+
+.login-form button .show-password-button{
+  margin-top: -0.5rem;
+} */
+
+.confirm-profile-delete-form {
+  display: none;
+}
+
 
 /* Id and Class in Order */
 

@@ -35,7 +35,6 @@ export function createInput(
   ...classes
 ) {
   const input = document.createElement("input");
-
   input.id = id;
   input.type = type;
   input.name = name;
@@ -51,7 +50,6 @@ export function createInput(
 
 export function createElement(tagName, textContent, ...classes) {
   const element = document.createElement(tagName);
-
   element.textContent = textContent;
 
   if (classes.length) {
@@ -60,3 +58,16 @@ export function createElement(tagName, textContent, ...classes) {
 
   return element;
 }
+
+export function createImage(src, alt, ...classes) {
+  const image = document.createElement("img");
+  image.src = src;
+  image.alt = alt;
+
+  if (classes.length) {
+    image.classList.add(...classes);
+  }
+
+  return image;
+}
+
