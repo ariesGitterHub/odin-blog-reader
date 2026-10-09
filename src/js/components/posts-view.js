@@ -1,7 +1,10 @@
 import { createButton, createElement } from "../templates.js";
 import { formatExactDate } from "../../utils/format-date.utils.js";
+// import { state } from "../state.js";
 
 export function renderPosts(posts, currentUser) {
+  console.log("currentUser ==> ", currentUser);
+
   const postsContainer = document.querySelector("#posts");
 
   postsContainer.replaceChildren();
@@ -26,6 +29,14 @@ function renderPost(post, currentUser) {
   postArticle.append(postTitle, postTimestamp, hrLine, postMessage);
 
   if (currentUser) {
+    const commentButtonRow = createElement(
+      "div",
+      "",
+      "row-container",
+      "justify-content-start",
+      "margin-post-button-rows",
+    );
+
     const commentButton = createButton(
       "button",
       "Comment",
@@ -36,7 +47,8 @@ function renderPost(post, currentUser) {
     // Identify which post the button belongs to.
     commentButton.dataset.postId = post.id;
 
-    postArticle.append(commentButton);
+    commentButtonRow.append(commentButton)
+    postArticle.append(commentButtonRow);
   }
 
   post.comments.forEach((comment) => {
@@ -51,6 +63,7 @@ function renderComment(comment, currentUser) {
   const commentArticle = createElement("article", "", "post-article-comment");
 
   const authorName = `${comment.user.firstName} ${comment.user.lastName}`;
+  console.log("Comment shape ==>", comment);
 
   const commentAuthor = createElement("h3", authorName);
 
@@ -76,6 +89,35 @@ function renderComment(comment, currentUser) {
 
   // Ownership information can be used here to conditionally
   // render the Edit button once the current-user comparison is defined.
+
+    if (currentUser !== null && currentUser.id === comment.user.id) {
+      const editButtonRow = createElement(
+        "div",
+        "",
+        "row-container",
+        "justify-content-end",
+        "margin-post-button-rows",
+      );
+
+      const editCommentButton = createButton(
+        "button",
+        "Edit",
+        "edit-comment",
+        "edit-comment-button",
+      );
+
+      const deleteCommentButton = createButton(
+        "button",
+        "Delete",
+        "delete-comment",
+        "delete-comment-button",
+      );
+
+      // Identify which post the button belongs to.
+      // commentButton.dataset.postId = post.id;
+      editButtonRow.append(editCommentButton, deleteCommentButton);
+      commentArticle.append(editButtonRow);
+    }
 
   return commentArticle;
 }

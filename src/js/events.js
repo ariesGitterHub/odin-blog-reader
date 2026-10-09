@@ -166,6 +166,10 @@ export function registerEventListeners() {
           state.currentUser = null;
           loginForm.reset();
           renderHeader(state.currentUser);
+
+          // TODO - TESTING
+          location.reload();
+          
           console.log("✋Logged out, goodbye!");
         } catch (err) {
           console.error("Logout failed:", err);
@@ -200,6 +204,8 @@ export function registerEventListeners() {
         renderHeader(state.currentUser);
 
         modalContainer.style.display = "none";
+        // TODO - TESTING
+        location.reload();
 
         console.log("🎈Login successful:", state.currentUser);
       } catch (err) {

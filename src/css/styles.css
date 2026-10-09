@@ -392,14 +392,26 @@ display: block;
   margin-bottom: var(--spacer-big);
 } */
 
+.margin-post-button-rows {
+  margin-top: var(--spacer-big);
+  margin-bottom: 0;
+}
+
 .justify-content-end {
   align-items: center;
   justify-content: end;
   /* background-color: red; */
 }
+
 .justify-content-space-between {
   align-items: center;
   justify-content: space-between;
+  /* background-color: red; */
+}
+
+.justify-content-start {
+  align-items: center;
+  justify-content: start;
   /* background-color: red; */
 }
 
