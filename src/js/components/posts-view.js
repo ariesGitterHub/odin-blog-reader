@@ -1,9 +1,10 @@
 import { createButton, createElement } from "../templates.js";
 import { formatExactDate } from "../../utils/format-date.utils.js";
+import { renderCommentDraftForm } from "./forms.js";
 // import { state } from "../state.js";
 
 export function renderPosts(posts, currentUser) {
-  console.log("currentUser ==> ", currentUser);
+  // console.log("currentUser ==> ", currentUser);
 
   const postsContainer = document.querySelector("#posts");
 
@@ -17,6 +18,7 @@ export function renderPosts(posts, currentUser) {
 
 function renderPost(post, currentUser) {
   const postArticle = createElement("article", "", "post-article");
+  // postArticle.dataset.postId = post.id;
 
   const postTitle = createElement("h2", post.postTitle);
 
@@ -40,7 +42,7 @@ function renderPost(post, currentUser) {
     const commentButton = createButton(
       "button",
       "Comment",
-      "create-comment",
+      "open-comment-draft-form",
       "comment-button",
     );
 
@@ -50,6 +52,13 @@ function renderPost(post, currentUser) {
     commentButtonRow.append(commentButton)
     postArticle.append(commentButtonRow);
   }
+
+  if (currentUser) {
+// Comment Draft DOM els should go after comment button, and be singular
+  const commentDraft = renderCommentDraftForm(post.id);
+  postArticle.append(commentDraft);    
+  }
+
 
   post.comments.forEach((comment) => {
     const commentElement = renderComment(comment, currentUser);
@@ -63,7 +72,7 @@ function renderComment(comment, currentUser) {
   const commentArticle = createElement("article", "", "post-article-comment");
 
   const authorName = `${comment.user.firstName} ${comment.user.lastName}`;
-  console.log("Comment shape ==>", comment);
+  // console.log("Comment shape ==>", comment);
 
   const commentAuthor = createElement("h3", authorName);
 

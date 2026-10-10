@@ -65,6 +65,7 @@ h3 {
   font-size: 1rem;
 }
 
+
 header {
   display: flex;
   flex-direction: col;
@@ -96,6 +97,14 @@ input {
   /* margin: var(--spacer-big); */
   margin-bottom: var(--spacer-big);
   padding-left: var(--space-medium);
+}
+
+textarea {
+  height: 5rem;
+  width: auto;
+  font-family: var(--font-sans);
+  padding: var(--spacer-big);
+  /* text-wrap: wrap; */
 }
 
 footer {
@@ -182,6 +191,10 @@ display: block;
   margin-top: calc(var(--spacer-big) * -1);
 }
 
+.comment-button {
+  display: block;
+}
+
 /* TODO - Fix below later */
 .show-password-button-image,
 .show-password-button-image1,
@@ -209,7 +222,8 @@ display: block;
   justify-content: center;
   gap: var(--space-medium);
   /* margin: 0 0 var(--spacer-big) 0; */
-  margin-bottom: var(--spacer-big);
+  /* I may undo the below commenting out later */
+  /* margin-bottom: var(--spacer-big); */
 }
 
 /*** Specific Containers  */
@@ -242,7 +256,17 @@ display: block;
   z-index: 1000;
 }
 
-/* Modal, sans #modal-container */
+.comment-draft-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacer-big);
+    border: 2px solid var(--blue);
+  border-radius: var(--spacer-big);
+  margin: var(--spacer-big);
+  padding: var(--spacer-big);
+}
+
+/* Modal, sans #modal */
 .modal-content {
   max-width: 300px;
   background-color: var(--blue-trans);
@@ -291,6 +315,10 @@ display: block;
   font-size: 2.25rem;
   margin-top: 0;
   /* text-align: left; */
+}
+
+.comment-draft-form {
+  display: none;
 }
 
 /* .login-form button, .signup-form button, .profile-form button {
@@ -352,6 +380,10 @@ display: block;
   border-color: var(--blue) ;
 }
 
+.hr-line-warning {
+  border-color: var(--error-yellow) ;
+}
+
 .post-message, .post-comment-message {
   font-family: var(--font-mono);
 }
@@ -366,6 +398,7 @@ display: block;
 
 
 /* Misc */
+
 
 .error-message {
   color: var(--error-yellow);
@@ -388,9 +421,12 @@ display: block;
   gap: var(--spacer-big);
 }
 
-/* .margin-bottom {
-  margin-bottom: var(--spacer-big);
-} */
+.margin-top-bottom {
+  margin: var(--spacer-big) 0;
+}
+.margin-top {
+  margin-top: var(--spacer-big);
+}
 
 .margin-post-button-rows {
   margin-top: var(--spacer-big);

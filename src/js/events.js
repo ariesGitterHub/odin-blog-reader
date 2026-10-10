@@ -2,6 +2,7 @@ import { login, logout, signup } from "./auth.js";
 import { updateProfile, deleteProfile } from "./user.js";
 import { renderHeader } from "./components/header.js";
 import { state } from "./state.js";
+// import { nextDay } from "date-fns"; Typo???
 
 export function registerEventListeners() {
   const app = document.querySelector("#app");
@@ -14,6 +15,7 @@ export function registerEventListeners() {
   const confirmProfileDeleteForm = document.querySelector(
     ".confirm-profile-delete-form",
   );
+  const commentDraftForm = document.querySelector(".comment-draft-form");
 
   const errorMessageLogin = document.querySelector(".error-login");
   const errorMessageSignup = document.querySelector(".error-signup");
@@ -24,7 +26,9 @@ export function registerEventListeners() {
   const passwordSignup = document.querySelector("#password-signup");
   const passwordProfile = document.querySelector("#password-profile");
 
-  const showPasswordButtonImageLogin = document.querySelector("#show-password-button-image-login");
+  const showPasswordButtonImageLogin = document.querySelector(
+    "#show-password-button-image-login",
+  );
   const showPasswordButtonImageSignup = document.querySelector(
     "#show-password-button-image-signup",
   );
@@ -45,8 +49,6 @@ export function registerEventListeners() {
 
   // Helper function for showing password in login, signup, and profile update forms; allows me to delete confirm password fields and reduce coding baggage
   function togglePasswordVisibility(passwordInput, eyeImage) {
-    console.log("Password input field -->", passwordInput);
-    console.log("Show Password Image --> ", eyeImage);
     if (passwordInput.type === "password") {
       passwordInput.type = "text";
       // eyeImage.setAttribute("src", "src/assets/eye.svg");
@@ -138,15 +140,21 @@ export function registerEventListeners() {
 
       case "show-password-toggle":
         if (loginForm.style.display === "flex") {
-        togglePasswordVisibility(passwordLogin, showPasswordButtonImageLogin);
+          togglePasswordVisibility(passwordLogin, showPasswordButtonImageLogin);
         }
 
         if (signupForm.style.display === "flex") {
-        togglePasswordVisibility(passwordSignup, showPasswordButtonImageSignup);
+          togglePasswordVisibility(
+            passwordSignup,
+            showPasswordButtonImageSignup,
+          );
         }
 
         if (profileForm.style.display === "flex") {
-        togglePasswordVisibility(passwordProfile, showPasswordButtonImageProfile);
+          togglePasswordVisibility(
+            passwordProfile,
+            showPasswordButtonImageProfile,
+          );
         }
         break;
 
@@ -156,6 +164,25 @@ export function registerEventListeners() {
 
       case "close-profile-delete-confirmation":
         confirmProfileDeleteForm.style.display = "none";
+        break;
+
+      case "open-comment-draft-form":
+        const postId1 = button.dataset.postId;
+        const commentForm1 = document.getElementById(postId1);
+
+        button.style.display = "none";
+        commentForm1.style.display = "block";
+        break;
+
+      case "cancel-comment-draft-form":
+        const postId2 = button.dataset.postId;
+        const commentForm2 = document.getElementById(postId2);
+
+        const articleContainer = button.closest(".post-article");
+        const commentButton = articleContainer.querySelector(".comment-button");
+
+        commentButton.style.display = "block";
+        commentForm2.style.display = "none";
         break;
 
       case "logout":
@@ -169,7 +196,7 @@ export function registerEventListeners() {
 
           // TODO - TESTING
           location.reload();
-          
+
           console.log("✋Logged out, goodbye!");
         } catch (err) {
           console.error("Logout failed:", err);
@@ -180,13 +207,17 @@ export function registerEventListeners() {
 
   app.addEventListener("submit", async (event) => {
     const form = event.target;
-
+    const submitButton = event.submitter
+    console.log("this is top--- ", submitButton);
+    
+  
     // The three forms used in this app
     if (
       form !== loginForm &&
       form !== signupForm &&
       form !== profileForm &&
-      form !== confirmProfileDeleteForm
+      form !== confirmProfileDeleteForm &&
+      form !== commentDraftForm
     )
       return;
 
@@ -236,12 +267,12 @@ export function registerEventListeners() {
       // confirmPasswordSignupInput.setCustomValidity("");
 
       try {
-        console.log("signupData ===", {
-          firstNameSignupInput,
-          lastNameSignupInput,
-          emailSignupInput,
-          passwordSignupInput,
-        });
+        // console.log("signupData ===", {
+        //   firstNameSignupInput,
+        //   lastNameSignupInput,
+        //   emailSignupInput,
+        //   passwordSignupInput,
+        // });
 
         const signupData = await signup(
           firstNameSignupInput,
@@ -291,7 +322,7 @@ export function registerEventListeners() {
 
         // Update the state.currentUser
         state.currentUser = profileData.user;
-        console.log("😇Profile update successful:", state.currentUser);
+        console.log("😀Profile update successful:", state.currentUser);
         renderHeader(state.currentUser);
       } catch (err) {
         console.error("Profile update failed:", err);
@@ -301,7 +332,7 @@ export function registerEventListeners() {
 
     if (form === confirmProfileDeleteForm) {
       try {
-        console.log("Preparing to delete user-->", state.currentUser);
+        // console.log("Preparing to delete user-->", state.currentUser);
 
         const confirmDeletion = await deleteProfile();
 
@@ -323,10 +354,30 @@ export function registerEventListeners() {
         signupForm.reset();
         profileForm.reset();
 
-        console.log("User account deleted");
+        console.log("💀 User account deleted");
       } catch (err) {
         console.error("Profile account deletion failed:", err);
         errorMessageLogin.textContent = err.message;
+      }
+    }
+
+    // if (form.id === submitButton.dataset.postId) {
+    if (form) {
+      // Far above .. this is true: const form = event.target;
+      // console.log(form); // correct comment draft form logs
+      console.log("Form id ---", form.id);
+          
+      // const submitButton = form.closest(".submit-comment-button");
+      // const submitButton = form.closest("button[type='submit']");
+      // console.log("submit button is... ", submitButton);
+
+      const targetCommentDraftForm = submitButton.closest(".comment-draft-form");
+      // targetCommentDraftForm
+       console.log("Form id +++", targetCommentDraftForm.id);
+
+      try {
+      } catch (err) {
+        next(err);
       }
     }
   });
