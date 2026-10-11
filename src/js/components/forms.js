@@ -455,11 +455,11 @@ export function renderConfirmProfileDeleteForm() {
   return confirmProfileDeleteForm;
 }
 
-export function renderCommentDraftForm(postId) {
-  const commentDraftForm = createElement("form", "", "comment-draft-form");
-  commentDraftForm.id = postId;
+export function renderCreateCommentForm(postId) {
+  const createCommentForm = createElement("form", "", "create-comment-form");
+  createCommentForm.id = postId;
 
-  const commentDraftDiv = createElement("div", "", "comment-draft-container");
+  const createCommentDiv = createElement("div", "", "create-comment-container");
 
   const errorMessage = createElement(
     "div",
@@ -485,15 +485,64 @@ export function renderCommentDraftForm(postId) {
       const cancelButton = createButton(
         "button",
         "Cancel",
-        "cancel-comment-draft-form",
+        "cancel-create-comment-form",
         "cancel-comment-button",
       );
 
       cancelButton.dataset.postId = postId;
 
       buttonRow.append(submitButton, cancelButton);
-      commentDraftDiv.append(errorMessage, textArea, buttonRow);
-      commentDraftForm.append(commentDraftDiv);
+      createCommentDiv.append(errorMessage, textArea, buttonRow);
+      createCommentForm.append(createCommentDiv);
 
-      return commentDraftForm;
+      return createCommentForm;
+}
+
+export function renderUpdateCommentForm(commentId, commentMessage) {
+  const updateCommentForm = createElement("form", "", "update-comment-form");
+  updateCommentForm.id = `update-comment-form-${commentId}`;
+
+  const updateCommentDiv = createElement("div", "", "update-comment-container");
+
+  const errorMessage = createElement(
+    "div",
+    "",
+    "error-update-comment",
+    "error-message",
+  );
+
+  const textArea = createElement("textarea", "");
+  textArea.id = `textarea-${commentId}`;
+  textArea.name = "comment_message";
+  textArea.value = commentMessage
+
+  const buttonRow = createElement(
+    "div",
+    "",
+    "row-container",
+    "justify-content-end",
+  );
+
+  const submitButton = createButton(
+    "submit",
+    "Update",
+    "",
+    "update-comment-button",
+  );
+  submitButton.dataset.commentId = commentId;
+
+  const cancelButton = createButton(
+    "button",
+    "Cancel",
+    "cancel-update-comment-form",
+    "cancel-update-comment-button",
+  );
+
+  cancelButton.dataset.commentId = commentId;
+
+  buttonRow.append(submitButton, cancelButton);
+  updateCommentDiv.append(errorMessage, textArea, buttonRow);
+  updateCommentForm.append(updateCommentDiv);
+
+  return updateCommentForm;
 }

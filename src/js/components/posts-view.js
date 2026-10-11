@@ -1,6 +1,6 @@
 import { createButton, createElement } from "../templates.js";
 import { formatExactDate } from "../../utils/format-date.utils.js";
-import { renderCommentDraftForm } from "./forms.js";
+import { renderCreateCommentForm, renderUpdateCommentForm } from "./forms.js";
 // import { state } from "../state.js";
 
 export function renderPosts(posts, currentUser) {
@@ -42,22 +42,23 @@ function renderPost(post, currentUser) {
     const commentButton = createButton(
       "button",
       "Comment",
-      "open-comment-draft-form",
+      "open-create-comment-form",
       "comment-button",
     );
 
     // Identify which post the button belongs to.
     commentButton.dataset.postId = post.id;
     // Comment Draft DOM els should go after comment button, and be singular
-    const commentDraft = renderCommentDraftForm(post.id);
+    const createComment = renderCreateCommentForm(post.id);
 
     commentButtonRow.append(commentButton)
-    postArticle.append(commentButtonRow, commentDraft);
+    postArticle.append(commentButtonRow, createComment);
   }
 
   post.comments.forEach((comment) => {
-    const commentElement = renderComment(comment, currentUser);
-    postArticle.append(commentElement);
+    const renderExistingComment = renderComment(comment, currentUser);
+    const renderUpdateComment = renderUpdateCommentForm(comment.id, comment.commentMessage);
+    postArticle.append(renderExistingComment, renderUpdateComment);
   });
 
   return postArticle;
@@ -65,6 +66,8 @@ function renderPost(post, currentUser) {
 
 function renderComment(comment, currentUser) {
   const commentArticle = createElement("article", "", "post-article-comment");
+  commentArticle.id = comment.id;
+
 
   const authorName = `${comment.user.firstName} ${comment.user.lastName}`;
   // console.log("Comment shape ==>", comment);
@@ -106,9 +109,11 @@ function renderComment(comment, currentUser) {
       const editCommentButton = createButton(
         "button",
         "Edit",
-        "edit-comment",
+        "open-update-comment-form",
         "edit-comment-button",
       );
+
+      editCommentButton.dataset.commentId = comment.id;
 
       const deleteCommentButton = createButton(
         "button",

@@ -191,7 +191,7 @@ display: block;
   margin-top: calc(var(--spacer-big) * -1);
 }
 
-.comment-button {
+.comment-button, .edit-comment-button, .delete-comment-button {
   display: block;
 }
 
@@ -256,7 +256,7 @@ display: block;
   z-index: 1000;
 }
 
-.comment-draft-container {
+.create-comment-container, .update-comment-container {
   display: flex;
   flex-direction: column;
   gap: var(--spacer-big);
@@ -317,7 +317,7 @@ display: block;
   /* text-align: left; */
 }
 
-.comment-draft-form {
+.create-comment-form, .update-comment-form {
   display: none;
 }
 
@@ -358,6 +358,7 @@ display: block;
 }
 
 .post-article-comment {
+  display: block;
   background-color: var(--blue-gray);
   border: 2px solid var(--blue);
   border-radius: var(--spacer-big);
@@ -370,7 +371,6 @@ display: block;
   margin: 0.35rem 0;
   text-transform: uppercase;
 }
-
 
 .hr-line-post {
   border-color: var(--red) ;

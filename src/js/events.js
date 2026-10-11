@@ -17,7 +17,7 @@ export function registerEventListeners() {
   const confirmProfileDeleteForm = document.querySelector(
     ".confirm-profile-delete-form",
   );
-  const commentDraftForm = document.querySelector(".comment-draft-form");
+  const createCommentForm = document.querySelector(".create-comment-form");
 
   const errorMessageLogin = document.querySelector(".error-login");
   const errorMessageSignup = document.querySelector(".error-signup");
@@ -61,6 +61,60 @@ export function registerEventListeners() {
       // eyeImage.setAttribute("src", "src/assets/eye-off.svg");
       eyeImage.src = "src/assets/eye-off.svg";
     }
+  }
+
+  function openCreateCommentForm(button) {
+    const postId = button.dataset.postId;
+    const createCommentForm = document.getElementById(postId);
+
+    button.style.display = "none";
+    createCommentForm.style.display = "block";
+  }
+
+  function closeCreateCommentForm(button) {
+    const postId = button.dataset.postId;
+    const createCommentForm = document.getElementById(postId);
+
+    const articleContainer = button.closest(".post-article");
+    const commentButton = articleContainer.querySelector(".comment-button");
+
+    commentButton.style.display = "block";
+    createCommentForm.style.display = "none";
+  }
+
+  function openUpdateCommentForm(button) {
+    const commentId = button.dataset.commentId;
+    const existingComment = document.getElementById(commentId);
+    const updateCommentForm = document.getElementById(
+      `update-comment-form-${commentId}`,
+    );
+
+    existingComment.style.display = "none";
+    updateCommentForm.style.display = "block";
+  }
+
+  function closeUpdateCommentForm(button) {
+    // const commentId = button.dataset.commentId;
+    // const updateCommentForm = document.getElementById(commentId);
+
+    // const articleContainer = button.closest(".post-article");
+    // const editButton = articleContainer.querySelector(".edit-comment-button");
+    // const deleteButton = articleContainer.querySelector(".delete-comment-button");
+
+    // editButton.style.display = "block";
+    // deleteButton.style.display = "block";
+    // updateCommentForm.style.display = "none";
+
+    const commentId = button.dataset.commentId;
+    console.log("commentId ===", commentId);
+    
+    const existingComment = document.getElementById(commentId);
+    const updateCommentForm = document.getElementById(
+      `update-comment-form-${commentId}`,
+    );
+
+    existingComment.style.display = "block";
+    updateCommentForm.style.display = "none";
   }
 
   app.addEventListener("click", async (event) => {
@@ -169,23 +223,35 @@ export function registerEventListeners() {
         confirmProfileDeleteForm.style.display = "none";
         break;
 
-      case "open-comment-draft-form":
-        const postId1 = button.dataset.postId;
-        const commentForm1 = document.getElementById(postId1);
+      case "open-create-comment-form":
+        // const postId1 = button.dataset.postId;
+        // const commentForm1 = document.getElementById(postId1);
 
-        button.style.display = "none";
-        commentForm1.style.display = "block";
+        // button.style.display = "none";
+        // commentForm1.style.display = "block";
+
+        openCreateCommentForm(button);
         break;
 
-      case "cancel-comment-draft-form":
-        const postId2 = button.dataset.postId;
-        const commentForm2 = document.getElementById(postId2);
+      case "cancel-create-comment-form":
+        // const postId2 = button.dataset.postId;
+        // const commentForm2 = document.getElementById(postId2);
 
-        const articleContainer = button.closest(".post-article");
-        const commentButton = articleContainer.querySelector(".comment-button");
+        // const articleContainer = button.closest(".post-article");
+        // const commentButton = articleContainer.querySelector(".comment-button");
 
-        commentButton.style.display = "block";
-        commentForm2.style.display = "none";
+        // commentButton.style.display = "block";
+        // commentForm2.style.display = "none";
+
+        closeCreateCommentForm(button);
+        break;
+
+      case "open-update-comment-form":
+        openUpdateCommentForm(button);
+        break;
+
+      case "cancel-update-comment-form":
+        closeUpdateCommentForm(button);
         break;
 
       case "logout":
@@ -219,15 +285,15 @@ export function registerEventListeners() {
     
     
   
-    // The three forms used in this app
+    // Multiple forms used in this app
     if (
       form !== loginForm &&
       form !== signupForm &&
       form !== profileForm &&
       form !== confirmProfileDeleteForm &&
-      // form !== commentDraftForm
+      // form !== createCommentForm
       form !== confirmProfileDeleteForm &&
-      !form.matches(".comment-draft-form")
+      !form.matches(".create-comment-form")
     )
       return;
 
@@ -371,20 +437,7 @@ export function registerEventListeners() {
       }
     }
 
-    // if (form === commentDraftForm ) {
-    if (form.matches(".comment-draft-form")) {
-      // const postId3 = submitButton.dataset.postId;
-      // console.log(postId3);
-
-      // console.log("Form Id ==> ", form.id); // ✅
-      // const targetSubmitButton = form.querySelector(".submit-comment-button"); // ✅
-      // console.log(
-      //   "I hope to see the unique submit button that I actually click ... ", // ✅
-      //   targetSubmitButton,
-      // );
-
-      // const userId = "" // Not needed, backend handles this...
-
+    if (form.matches(".create-comment-form")) {
       const postId3 = form.id;
 
       const commentDraftTextArea = document.querySelector(`#textarea-${postId3}`)
@@ -395,7 +448,7 @@ export function registerEventListeners() {
       
       try {
         const commentData = await createNewBlogComment(
-          // userId,
+          // userId, Not needed, backend handles this
           postId3,
           commentDraftMessage,
         );    
