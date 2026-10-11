@@ -94,17 +94,6 @@ export function registerEventListeners() {
   }
 
   function closeUpdateCommentForm(button) {
-    // const commentId = button.dataset.commentId;
-    // const updateCommentForm = document.getElementById(commentId);
-
-    // const articleContainer = button.closest(".post-article");
-    // const editButton = articleContainer.querySelector(".edit-comment-button");
-    // const deleteButton = articleContainer.querySelector(".delete-comment-button");
-
-    // editButton.style.display = "block";
-    // deleteButton.style.display = "block";
-    // updateCommentForm.style.display = "none";
-
     const commentId = button.dataset.commentId;
     console.log("commentId ===", commentId);
     
@@ -224,25 +213,10 @@ export function registerEventListeners() {
         break;
 
       case "open-create-comment-form":
-        // const postId1 = button.dataset.postId;
-        // const commentForm1 = document.getElementById(postId1);
-
-        // button.style.display = "none";
-        // commentForm1.style.display = "block";
-
         openCreateCommentForm(button);
         break;
 
       case "cancel-create-comment-form":
-        // const postId2 = button.dataset.postId;
-        // const commentForm2 = document.getElementById(postId2);
-
-        // const articleContainer = button.closest(".post-article");
-        // const commentButton = articleContainer.querySelector(".comment-button");
-
-        // commentButton.style.display = "block";
-        // commentForm2.style.display = "none";
-
         closeCreateCommentForm(button);
         break;
 
@@ -436,7 +410,7 @@ export function registerEventListeners() {
         errorMessageLogin.textContent = err.message;
       }
     }
-
+    // Create Comment
     if (form.matches(".create-comment-form")) {
       const postId3 = form.id;
 
@@ -451,8 +425,12 @@ export function registerEventListeners() {
           // userId, Not needed, backend handles this
           postId3,
           commentDraftMessage,
-        );    
-      console.log("Comment added", commentData);
+        );
+
+        // TODO - TESTING
+        location.reload();
+        
+        console.log("Comment added", commentData);
       } catch (err) {
         console.error("Comment failed:", err);
         errorMessageComment.textContent = err.message;

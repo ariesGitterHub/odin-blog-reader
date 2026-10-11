@@ -4,7 +4,7 @@ import { renderCreateCommentForm, renderUpdateCommentForm } from "./forms.js";
 // import { state } from "../state.js";
 
 export function renderPosts(posts, currentUser) {
-  // console.log("currentUser ==> ", currentUser);
+  console.log("currentUser ==> ", currentUser);
 
   const postsContainer = document.querySelector("#posts");
 
