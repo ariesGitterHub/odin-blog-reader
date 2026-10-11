@@ -1,7 +1,9 @@
 import { login, logout, signup } from "./auth.js";
 import { updateProfile, deleteProfile } from "./user.js";
+import { createNewBlogComment } from "./comments.js";
 import { renderHeader } from "./components/header.js";
 import { state } from "./state.js";
+// import { nextDay } from "date-fns";
 // import { nextDay } from "date-fns"; Typo???
 
 export function registerEventListeners() {
@@ -20,6 +22,7 @@ export function registerEventListeners() {
   const errorMessageLogin = document.querySelector(".error-login");
   const errorMessageSignup = document.querySelector(".error-signup");
   const errorMessageProfile = document.querySelector(".error-profile");
+  const errorMessageComment = document.querySelector(".error-comment");
 
   // Needed for show-password-button
   const passwordLogin = document.querySelector("#password-login");
@@ -207,8 +210,13 @@ export function registerEventListeners() {
 
   app.addEventListener("submit", async (event) => {
     const form = event.target;
-    const submitButton = event.submitter
-    console.log("this is top--- ", submitButton);
+
+    // const submitButton = event.submitter
+    // console.log("this is submit button --- ", submitButton);
+
+    // const targetSubmitButton = form.querySelector(".submit-comment-button");
+    // console.log("I hope to see the unique submit button that I actually click ... ", targetSubmitButton);
+    
     
   
     // The three forms used in this app
@@ -217,7 +225,9 @@ export function registerEventListeners() {
       form !== signupForm &&
       form !== profileForm &&
       form !== confirmProfileDeleteForm &&
-      form !== commentDraftForm
+      // form !== commentDraftForm
+      form !== confirmProfileDeleteForm &&
+      !form.matches(".comment-draft-form")
     )
       return;
 
@@ -361,23 +371,38 @@ export function registerEventListeners() {
       }
     }
 
-    // if (form.id === submitButton.dataset.postId) {
-    if (form) {
-      // Far above .. this is true: const form = event.target;
-      // console.log(form); // correct comment draft form logs
-      console.log("Form id ---", form.id);
-          
-      // const submitButton = form.closest(".submit-comment-button");
-      // const submitButton = form.closest("button[type='submit']");
-      // console.log("submit button is... ", submitButton);
+    // if (form === commentDraftForm ) {
+    if (form.matches(".comment-draft-form")) {
+      // const postId3 = submitButton.dataset.postId;
+      // console.log(postId3);
 
-      const targetCommentDraftForm = submitButton.closest(".comment-draft-form");
-      // targetCommentDraftForm
-       console.log("Form id +++", targetCommentDraftForm.id);
+      // console.log("Form Id ==> ", form.id); // ✅
+      // const targetSubmitButton = form.querySelector(".submit-comment-button"); // ✅
+      // console.log(
+      //   "I hope to see the unique submit button that I actually click ... ", // ✅
+      //   targetSubmitButton,
+      // );
 
+      // const userId = "" // Not needed, backend handles this...
+
+      const postId3 = form.id;
+
+      const commentDraftTextArea = document.querySelector(`#textarea-${postId3}`)
+      console.log("Text area should read: ", commentDraftTextArea.value); // ✅
+
+      const commentDraftMessage = commentDraftTextArea.value
+      console.log("Better be the same as above log ", commentDraftMessage);
+      
       try {
+        const commentData = await createNewBlogComment(
+          // userId,
+          postId3,
+          commentDraftMessage,
+        );    
+      console.log("Comment added", commentData);
       } catch (err) {
-        next(err);
+        console.error("Comment failed:", err);
+        errorMessageComment.textContent = err.message;
       }
     }
   });

@@ -48,17 +48,12 @@ function renderPost(post, currentUser) {
 
     // Identify which post the button belongs to.
     commentButton.dataset.postId = post.id;
+    // Comment Draft DOM els should go after comment button, and be singular
+    const commentDraft = renderCommentDraftForm(post.id);
 
     commentButtonRow.append(commentButton)
-    postArticle.append(commentButtonRow);
+    postArticle.append(commentButtonRow, commentDraft);
   }
-
-  if (currentUser) {
-// Comment Draft DOM els should go after comment button, and be singular
-  const commentDraft = renderCommentDraftForm(post.id);
-  postArticle.append(commentDraft);    
-  }
-
 
   post.comments.forEach((comment) => {
     const commentElement = renderComment(comment, currentUser);

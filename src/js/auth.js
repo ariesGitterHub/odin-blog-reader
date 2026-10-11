@@ -16,13 +16,6 @@ export async function logout() {
 }
 
 export async function signup(firstName, lastName, email, password) {
-  console.log("signup arguments:", {
-    firstName,
-    lastName,
-    email,
-    password,
-  });
-
   return post("/api/auth/signup", {
     first_name: firstName,
     last_name: lastName,

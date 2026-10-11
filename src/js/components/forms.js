@@ -457,16 +457,20 @@ export function renderConfirmProfileDeleteForm() {
 
 export function renderCommentDraftForm(postId) {
   const commentDraftForm = createElement("form", "", "comment-draft-form");
-  // commentDraftForm.dataset.postId = postId;
-  // commentDraftForm.id = `comment-draft-form-${postId}`;
   commentDraftForm.id = postId;
 
   const commentDraftDiv = createElement("div", "", "comment-draft-container");
 
+  const errorMessage = createElement(
+    "div",
+    "",
+    "error-comment",
+    "error-message",
+  );
+
   const textArea = createElement("textarea", "");
   textArea.id = `textarea-${postId}`;
   textArea.name = "comment_message";
-
 
     const buttonRow = createElement(
       "div",
@@ -488,7 +492,7 @@ export function renderCommentDraftForm(postId) {
       cancelButton.dataset.postId = postId;
 
       buttonRow.append(submitButton, cancelButton);
-      commentDraftDiv.append(textArea, buttonRow);
+      commentDraftDiv.append(errorMessage, textArea, buttonRow);
       commentDraftForm.append(commentDraftDiv);
 
       return commentDraftForm;

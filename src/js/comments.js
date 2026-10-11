@@ -5,8 +5,11 @@
 
 import { post, put, del } from "./api.js";
 
-export async function createNewBlogComment(userId, postId, commentMessage) {
-  return post("/api/post/:postId");
+// export async function createNewBlogComment(userId, postId, commentMessage) {
+export async function createNewBlogComment(postId, commentMessage) { // The backend supplies userId
+  return post(`/api/post/${postId}`, {
+    comment_message: commentMessage,
+  });
 }
 
 export async function editBlogComment(commentId, userId, commentMessage) {
