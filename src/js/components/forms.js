@@ -501,6 +501,8 @@ export function renderCreateCommentForm(postId) {
 export function renderUpdateCommentForm(commentId, commentMessage) {
   const updateCommentForm = createElement("form", "", "update-comment-form");
   updateCommentForm.id = `update-comment-form-${commentId}`;
+  updateCommentForm.dataset.commentId = commentId;
+  // updateCommentForm.id = commentId;
 
   const updateCommentDiv = createElement("div", "", "update-comment-container");
 
@@ -529,6 +531,7 @@ export function renderUpdateCommentForm(commentId, commentMessage) {
     "",
     "update-comment-button",
   );
+
   submitButton.dataset.commentId = commentId;
 
   const cancelButton = createButton(
@@ -545,4 +548,26 @@ export function renderUpdateCommentForm(commentId, commentMessage) {
   updateCommentForm.append(updateCommentDiv);
 
   return updateCommentForm;
+}
+
+export function renderDeleteCommentForm(commentId) {
+  const deleteCommentForm = createElement("form", "", "delete-comment-form");
+  deleteCommentForm.dataset.commentId = commentId;
+  // NOTE - can't use createButton here, as this --> "" , is not working to prevent data-action from filling in the next item into its place
+  // const deleteCommentButton = createButton(
+  //   "button",
+  //   "Delete",
+  //   // "delete-comment",
+  //   "",
+  //   "delete-comment-button",
+  // );
+
+  const deleteCommentButton = document.createElement("button");
+  deleteCommentButton.textContent = "Delete";
+  deleteCommentButton.classList.add("delete-comment-button");
+  deleteCommentButton.dataset.commentId = commentId;
+
+  deleteCommentForm.append(deleteCommentButton);
+
+  return deleteCommentForm;
 }

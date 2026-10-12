@@ -1,6 +1,10 @@
 import { createButton, createElement } from "../templates.js";
 import { formatExactDate } from "../../utils/format-date.utils.js";
-import { renderCreateCommentForm, renderUpdateCommentForm } from "./forms.js";
+import {
+  renderCreateCommentForm,
+  renderUpdateCommentForm,
+  renderDeleteCommentForm,
+} from "./forms.js";
 // import { state } from "../state.js";
 
 export function renderPosts(posts, currentUser) {
@@ -115,12 +119,16 @@ function renderComment(comment, currentUser) {
 
       editCommentButton.dataset.commentId = comment.id;
 
-      const deleteCommentButton = createButton(
-        "button",
-        "Delete",
-        "delete-comment",
-        "delete-comment-button",
-      );
+      // const deleteCommentButton = createButton(
+      //   "button",
+      //   "Delete",
+      //   "delete-comment",
+      //   "delete-comment-button",
+      // );
+
+      // deleteCommentButton.dataset.commentId = comment.id;
+
+      const deleteCommentButton = renderDeleteCommentForm(comment.id);
 
       // Identify which post the button belongs to.
       // commentButton.dataset.postId = post.id;

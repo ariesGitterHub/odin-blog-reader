@@ -12,10 +12,15 @@ export async function createNewBlogComment(postId, commentMessage) { // The back
   });
 }
 
-export async function editBlogComment(commentId, userId, commentMessage) {
-  return put("/api/post/:postId/:commentId");
+// export async function editBlogComment(commentId, userId, commentMessage) {
+export async function editBlogComment(commentId, commentMessage) {
+  // return put("/api/post/:postId/:commentId");
+  return put(`/api/post/${commentId}`, {
+    comment_message: commentMessage,
+  });
 }
 
-export async function deleteBlogComment(commentId, userId) { // Really, userId is needed? More of a check to make sure only the actual comment author can delete this comment?
-  return del("/api/post/:postId/:commentId");
+// export async function deleteBlogComment(commentId, userId) { // Really, userId is needed? More of a check to make sure only the actual comment author can delete this comment?
+export async function deleteBlogComment(commentId) {
+  return del(`/api/post/${commentId}`);
 }

@@ -1,6 +1,6 @@
 import { login, logout, signup } from "./auth.js";
 import { updateProfile, deleteProfile } from "./user.js";
-import { createNewBlogComment } from "./comments.js";
+import { createNewBlogComment, editBlogComment, deleteBlogComment } from "./comments.js";
 import { renderHeader } from "./components/header.js";
 import { state } from "./state.js";
 // import { nextDay } from "date-fns";
@@ -18,11 +18,13 @@ export function registerEventListeners() {
     ".confirm-profile-delete-form",
   );
   const createCommentForm = document.querySelector(".create-comment-form");
+  const updateCommentForm = document.querySelector(".update-comment-form");
+  const deleteCommentForm = document.querySelector(".delete-comment-form");
 
   const errorMessageLogin = document.querySelector(".error-login");
   const errorMessageSignup = document.querySelector(".error-signup");
   const errorMessageProfile = document.querySelector(".error-profile");
-  const errorMessageComment = document.querySelector(".error-comment");
+  const errorMessageComment = document.querySelector(".error-comment"); // TODO - fix this for delete, need a div taht can be seen without a form...
 
   // Needed for show-password-button
   const passwordLogin = document.querySelector("#password-login");
@@ -256,9 +258,7 @@ export function registerEventListeners() {
 
     // const targetSubmitButton = form.querySelector(".submit-comment-button");
     // console.log("I hope to see the unique submit button that I actually click ... ", targetSubmitButton);
-    
-    
-  
+
     // Multiple forms used in this app
     if (
       form !== loginForm &&
@@ -266,8 +266,12 @@ export function registerEventListeners() {
       form !== profileForm &&
       form !== confirmProfileDeleteForm &&
       // form !== createCommentForm
-      form !== confirmProfileDeleteForm &&
-      !form.matches(".create-comment-form")
+      form !== createCommentForm &&
+      !form.matches(".create-comment-form") &&
+      form !== updateCommentForm &&
+      !form.matches(".update-comment-form") &&
+      form !== deleteCommentForm &&
+      !form.matches(".delete-comment-form")
     )
       return;
 
@@ -410,29 +414,86 @@ export function registerEventListeners() {
         errorMessageLogin.textContent = err.message;
       }
     }
+
     // Create Comment
     if (form.matches(".create-comment-form")) {
-      const postId3 = form.id;
+      const postId = form.id;
 
-      const commentDraftTextArea = document.querySelector(`#textarea-${postId3}`)
-      console.log("Text area should read: ", commentDraftTextArea.value); // ✅
+      const commentDraftTextArea = document.querySelector(
+        `#textarea-${postId}`,
+      );
+      // console.log("Text area should read: ", commentDraftTextArea.value); // ✅
 
-      const commentDraftMessage = commentDraftTextArea.value
-      console.log("Better be the same as above log ", commentDraftMessage);
-      
+      const commentDraftMessage = commentDraftTextArea.value;
+      // console.log("Better be the same as above log ", commentDraftMessage);
+
       try {
         const commentData = await createNewBlogComment(
           // userId, Not needed, backend handles this
-          postId3,
+          postId,
           commentDraftMessage,
         );
 
         // TODO - TESTING
         location.reload();
-        
-        console.log("Comment added", commentData);
+
+        console.log("Comment created", commentData);
       } catch (err) {
-        console.error("Comment failed:", err);
+        console.error("Comment creation failed:", err);
+        errorMessageComment.textContent = err.message;
+      }
+    }
+
+    // Update Comment
+    if (form.matches(".update-comment-form")) {
+      const commentId = form.dataset.commentId;
+      console.log("form.dataset.commentId === ", commentId);
+
+      const commentUpdateTextArea = document.getElementById(
+        `textarea-${commentId}`,
+      );
+      console.log("Text area should read: ", commentUpdateTextArea.value); // ✅
+
+      const commentUpdateMessage = commentUpdateTextArea.value;
+      console.log(commentUpdateMessage);
+
+      // console.log("Better be the same as above log ", commentDraftMessage);
+
+      try {
+        const commentUpdateData = await editBlogComment(
+          // userId, Not needed, backend handles this
+          commentId,
+          commentUpdateMessage,
+        );
+
+        console.log("Comment update", commentUpdateData);
+
+        // TODO - TESTING
+        location.reload();
+      } catch (err) {
+        console.error("Comment update failed:", err);
+        errorMessageComment.textContent = err.message;
+      }
+    }
+
+    // Delete Comment
+    // NOTE - these are hard deletes with no warning message
+    if (form.matches(".delete-comment-form")) {
+      const commentId = form.dataset.commentId;
+      console.log("form.dataset.commentId === ", commentId);
+
+      try {
+        const deleteCommentData = await deleteBlogComment(
+          // userId, Not needed, backend handles this
+          commentId,
+        );
+
+        console.log("Comment deleted", deleteCommentData);
+
+        // TODO - TESTING
+        location.reload();
+      } catch (err) {
+        console.error("Comment deletion failed:", err);
         errorMessageComment.textContent = err.message;
       }
     }
