@@ -102,7 +102,9 @@ input {
 textarea {
   height: 5rem;
   width: auto;
-  font-family: var(--font-sans);
+  /* font-family: var(--font-sans); */
+  font-family: var(--font-mono);
+  font-size: 1rem;
   padding: var(--spacer-big);
   /* text-wrap: wrap; */
 }
@@ -396,10 +398,12 @@ display: block;
   font-size: 1rem;
 }
 
+.max-char-limit {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+}
 
 /* Misc */
-
-
 .error-message {
   color: var(--error-yellow);
   font-family: var(--font-heading);

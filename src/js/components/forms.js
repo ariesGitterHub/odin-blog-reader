@@ -13,7 +13,8 @@ export function renderLoginForm() {
 
   const title = createElement("h1", "🖳 Login");
 
-  const errorMessage = createElement("div", "", "error-login", "error-message");
+  // const errorMessage = createElement("div", "", "error-login", "error-message");
+  const errorMessage = createElement("div", "", "error-form", "error-message");
 
   const emailLabel = createLabel("email-login", "Email");
   const emailInput = createInput(
@@ -113,10 +114,16 @@ export function renderSignupForm() {
 
   const title = createElement("h1", "🖳 Sign Up");
 
+  // const errorMessage = createElement(
+  //   "div",
+  //   "",
+  //   "error-signup",
+  //   "error-message",
+  // );
   const errorMessage = createElement(
     "div",
     "",
-    "error-signup",
+    "error-form",
     "error-message",
   );
 
@@ -258,10 +265,16 @@ export function renderProfileForm() {
 
   const title = createElement("h1", "🖳 Edit Profile");
 
+  // const errorMessage = createElement(
+  //   "div",
+  //   "",
+  //   "error-profile",
+  //   "error-message",
+  // );
   const errorMessage = createElement(
     "div",
     "",
-    "error-profile",
+    "error-form",
     "error-message",
   );
 
@@ -413,6 +426,7 @@ export function renderConfirmProfileDeleteForm() {
   const deleteProfileMessage = createElement(
     "p",
     "Are you sure that you wish to delete your account? This action is permanent.",
+    "error-form",
     "error-message",
   );
 
@@ -461,41 +475,67 @@ export function renderCreateCommentForm(postId) {
 
   const createCommentDiv = createElement("div", "", "create-comment-container");
 
-  const errorMessage = createElement(
+  // const errorMessage = createElement(
+  //   "div",
+  //   "",
+  //   "error-update-comment",
+  //   "error-form",
+  //   "error-message",
+  // );
+
+  const messageRow = createElement(
     "div",
     "",
-    "error-comment",
-    "error-message",
+    "row-container",
+    "gap",
+    "justify-content-start",
+    // "user-message-container",
   );
+
+  const maxCharLimitMessage = createElement("p", "255 Character Limit", "max-char-limit");
+  maxCharLimitMessage.id = `max-char-limit-${postId}`;
 
   const textArea = createElement("textarea", "");
   textArea.id = `textarea-${postId}`;
   textArea.name = "comment_message";
+  textArea.maxLength = 255;
 
-    const buttonRow = createElement(
-      "div",
-      "",
-      "row-container",
-      "justify-content-end",
+  const buttonRow = createElement(
+    "div",
+    "",
+    "row-container",
+    "justify-content-end",
+  );
+
+  const submitButton = createButton(
+    "submit",
+    "Submit",
+    "",
+    "submit-comment-button",
+  );
+  submitButton.dataset.postId = postId;
+
+  const cancelButton = createButton(
+    "button",
+    "Cancel",
+    "cancel-create-comment-form",
+    "cancel-comment-button",
+  );
+
+  cancelButton.dataset.postId = postId;
+
+  messageRow.append(maxCharLimitMessage);
+
+  buttonRow.append(submitButton, cancelButton);
+  createCommentDiv.append(
+    // errorMessage,
+    messageRow,
+     textArea,
+      buttonRow
     );
+  createCommentForm.append(createCommentDiv);
 
-      const submitButton = createButton("submit", "Submit", "", "submit-comment-button");
-      submitButton.dataset.postId = postId;
-
-      const cancelButton = createButton(
-        "button",
-        "Cancel",
-        "cancel-create-comment-form",
-        "cancel-comment-button",
-      );
-
-      cancelButton.dataset.postId = postId;
-
-      buttonRow.append(submitButton, cancelButton);
-      createCommentDiv.append(errorMessage, textArea, buttonRow);
-      createCommentForm.append(createCommentDiv);
-
-      return createCommentForm;
+  return createCommentForm;
 }
 
 export function renderUpdateCommentForm(commentId, commentMessage) {
@@ -506,17 +546,31 @@ export function renderUpdateCommentForm(commentId, commentMessage) {
 
   const updateCommentDiv = createElement("div", "", "update-comment-container");
 
-  const errorMessage = createElement(
+  // const errorMessage = createElement(
+  //   "div",
+  //   "",
+  //   "error-update-comment",
+  //   "error-form",
+  //   "error-message",
+  // );
+
+  const messageRow = createElement(
     "div",
     "",
-    "error-update-comment",
-    "error-message",
+    "row-container",
+    "gap",
+    "justify-content-start",
+    // "user-message-container",
   );
+
+  const maxCharLimitMessage = createElement("p", "255 Character Limit", "max-char-limit");
+  maxCharLimitMessage.id = `max-char-limit-${commentId}`;
 
   const textArea = createElement("textarea", "");
   textArea.id = `textarea-${commentId}`;
   textArea.name = "comment_message";
   textArea.value = commentMessage
+  textArea.maxLength = 255;
 
   const buttonRow = createElement(
     "div",
@@ -543,8 +597,16 @@ export function renderUpdateCommentForm(commentId, commentMessage) {
 
   cancelButton.dataset.commentId = commentId;
 
+  messageRow.append(maxCharLimitMessage);
+
   buttonRow.append(submitButton, cancelButton);
-  updateCommentDiv.append(errorMessage, textArea, buttonRow);
+
+  updateCommentDiv.append(
+    // errorMessage,
+    messageRow,
+     textArea,
+      buttonRow
+    );
   updateCommentForm.append(updateCommentDiv);
 
   return updateCommentForm;

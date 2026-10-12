@@ -24,7 +24,7 @@ export function registerEventListeners() {
   const errorMessageLogin = document.querySelector(".error-login");
   const errorMessageSignup = document.querySelector(".error-signup");
   const errorMessageProfile = document.querySelector(".error-profile");
-  const errorMessageComment = document.querySelector(".error-comment"); // TODO - fix this for delete, need a div taht can be seen without a form...
+  const errorMessageComment = document.querySelector(".error-comment"); // TODO - fix this for delete, need a div that can be seen without a form...
 
   // Needed for show-password-button
   const passwordLogin = document.querySelector("#password-login");
@@ -71,6 +71,8 @@ export function registerEventListeners() {
 
     button.style.display = "none";
     createCommentForm.style.display = "block";
+
+    charCount(postId);
   }
 
   function closeCreateCommentForm(button) {
@@ -93,6 +95,8 @@ export function registerEventListeners() {
 
     existingComment.style.display = "none";
     updateCommentForm.style.display = "block";
+
+    charCount(commentId);
   }
 
   function closeUpdateCommentForm(button) {
@@ -106,6 +110,18 @@ export function registerEventListeners() {
 
     existingComment.style.display = "block";
     updateCommentForm.style.display = "none";
+  }
+
+  function charCount(postOrCommentId) {
+    const charCountTargetElement = document.getElementById(`textarea-${postOrCommentId}`);
+    const maxCharLimitMessage = document.getElementById(`max-char-limit-${postOrCommentId}`);
+    
+    charCountTargetElement.addEventListener("input", () => {
+      const charCount = charCountTargetElement.value.length;
+      console.log("Test of charCount...", charCount);
+      
+      maxCharLimitMessage.textContent = `${charCount}/255 Characters`;
+    });
   }
 
   app.addEventListener("click", async (event) => {
@@ -452,10 +468,15 @@ export function registerEventListeners() {
       const commentUpdateTextArea = document.getElementById(
         `textarea-${commentId}`,
       );
-      console.log("Text area should read: ", commentUpdateTextArea.value); // ✅
+      // console.log("Text area should read: ", commentUpdateTextArea.value); // ✅
+
+      // const maxCharLimitMessage = document.getElementById(`max-char-limit-${commentId}`);
 
       const commentUpdateMessage = commentUpdateTextArea.value;
-      console.log(commentUpdateMessage);
+      let commentUpdateMessageCount = commentUpdateMessage.length;
+      console.log(commentUpdateMessageCount);
+      
+      // console.log(commentUpdateMessage);
 
       // console.log("Better be the same as above log ", commentDraftMessage);
 
@@ -470,6 +491,7 @@ export function registerEventListeners() {
 
         // TODO - TESTING
         location.reload();
+
       } catch (err) {
         console.error("Comment update failed:", err);
         errorMessageComment.textContent = err.message;
@@ -492,6 +514,7 @@ export function registerEventListeners() {
 
         // TODO - TESTING
         location.reload();
+
       } catch (err) {
         console.error("Comment deletion failed:", err);
         errorMessageComment.textContent = err.message;
