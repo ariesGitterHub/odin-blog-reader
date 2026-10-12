@@ -392,6 +392,10 @@ export function registerEventListeners() {
 
         // Update the state.currentUser
         state.currentUser = profileData.user;
+
+        // TODO - TESTING
+        location.reload();
+        
         console.log("😀Profile update successful:", state.currentUser);
         renderHeader(state.currentUser);
       } catch (err) {

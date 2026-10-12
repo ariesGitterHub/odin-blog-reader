@@ -13,28 +13,28 @@ export function renderLoginForm() {
 
   const title = createElement("h1", "🖳 Login");
 
-  // const errorMessage = createElement("div", "", "error-login", "error-message");
-  const errorMessage = createElement("div", "", "error-form", "error-message");
+  const errorMessage = createElement("div", "", "error-login", "error-message");
 
   const emailLabel = createLabel("email-login", "Email");
   const emailInput = createInput(
     "email-login",
     "email",
     "email",
-    "Enter email address.",
+    "Enter email address",
     true,
   );
   emailInput.setAttribute("autocomplete", "username");
 
   const passwordLabel = createLabel("password-login", "Password");
 
-  const passwordRow = createElement("div", "", "row-container", "password-row");
+  // const passwordRow = createElement("div", "", "row-container", "password-row");
+  const passwordRow = createElement("div", "", "row-container");
 
   const passwordInput = createInput(
     "password-login",
     "password",
     "password",
-    "Enter password.",
+    "Enter password",
     true,
   );
   passwordInput.setAttribute("autocomplete", "current-password");
@@ -114,16 +114,10 @@ export function renderSignupForm() {
 
   const title = createElement("h1", "🖳 Sign Up");
 
-  // const errorMessage = createElement(
-  //   "div",
-  //   "",
-  //   "error-signup",
-  //   "error-message",
-  // );
   const errorMessage = createElement(
     "div",
     "",
-    "error-form",
+    "error-signup",
     "error-message",
   );
 
@@ -132,7 +126,7 @@ export function renderSignupForm() {
     "first-name-signup",
     "text",
     "first_name",
-    "Enter first name.",
+    "Enter first name",
     true,
   );
 
@@ -141,7 +135,7 @@ export function renderSignupForm() {
     "last-name-signup",
     "text",
     "last_name",
-    "Enter last name.",
+    "Enter last name",
     true,
   );
 
@@ -150,20 +144,21 @@ export function renderSignupForm() {
     "email-signup",
     "email",
     "email",
-    "Enter email address.",
+    "Enter email address",
     true,
   );
   emailInput.setAttribute("autocomplete", "username");
 
   const passwordLabel = createLabel("password-signup", "Password");
 
-  const passwordRow = createElement("div", "", "row-container", "password-row");
+  // const passwordRow = createElement("div", "", "row-container", "password-row");
+  const passwordRow = createElement("div", "", "row-container");
 
   const passwordInput = createInput(
     "password-signup",
     "password",
     "password",
-    "Enter password.",
+    "Enter password",
     true,
   );
   passwordInput.setAttribute("autocomplete", "new-password");
@@ -265,16 +260,10 @@ export function renderProfileForm() {
 
   const title = createElement("h1", "🖳 Edit Profile");
 
-  // const errorMessage = createElement(
-  //   "div",
-  //   "",
-  //   "error-profile",
-  //   "error-message",
-  // );
   const errorMessage = createElement(
     "div",
     "",
-    "error-form",
+    "error-profile",
     "error-message",
   );
 
@@ -308,7 +297,8 @@ export function renderProfileForm() {
 
   const passwordLabel = createLabel("password-profile", "New Password");
 
-  const passwordRow = createElement("div", "", "row-container", "password-row");
+  // const passwordRow = createElement("div", "", "row-container", "password-row");
+  const passwordRow = createElement("div", "", "row-container");
 
   const passwordInput = createInput(
     "password-profile",
@@ -473,7 +463,7 @@ export function renderCreateCommentForm(postId) {
   const createCommentForm = createElement("form", "", "create-comment-form");
   createCommentForm.id = postId;
 
-  const createCommentDiv = createElement("div", "", "create-comment-container");
+  const createCommentDiv = createElement("div", "", "create-comment-div");
 
   // const errorMessage = createElement(
   //   "div",
@@ -544,7 +534,7 @@ export function renderUpdateCommentForm(commentId, commentMessage) {
   updateCommentForm.dataset.commentId = commentId;
   // updateCommentForm.id = commentId;
 
-  const updateCommentDiv = createElement("div", "", "update-comment-container");
+  const updateCommentDiv = createElement("div", "", "update-comment-div");
 
   // const errorMessage = createElement(
   //   "div",

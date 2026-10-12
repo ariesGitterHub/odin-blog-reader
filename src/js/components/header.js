@@ -35,7 +35,7 @@ export function renderHeader(currentUser) {
     "p",
     currentUser
       ? // ? `Logged in as "${currentUser.email}"`
-        `Welcome back ${currentUser.firstName} ${currentUser.lastName}!`
+        `Welcome back ${currentUser.firstName} ${currentUser.lastName}.`
       : "Please log in to comment.",
   );
 
