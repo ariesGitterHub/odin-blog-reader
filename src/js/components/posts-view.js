@@ -5,7 +5,6 @@ import {
   renderUpdateCommentForm,
   renderDeleteCommentForm,
 } from "./forms.js";
-// import { state } from "../state.js";
 
 export function renderPosts(posts, currentUser) {
   console.log("currentUser ==> ", currentUser);
@@ -22,7 +21,6 @@ export function renderPosts(posts, currentUser) {
 
 function renderPost(post, currentUser) {
   const postArticle = createElement("article", "", "post-article");
-  // postArticle.dataset.postId = post.id;
 
   const postTitle = createElement("h2", post.postTitle);
 
@@ -46,12 +44,13 @@ function renderPost(post, currentUser) {
     const commentButton = createButton(
       "button",
       "Comment",
-      "open-create-comment-form",
+      "open-create-comment-form", // This data-action triggers case of the same name in events.js
       "comment-button",
     );
 
     // Identify which post the button belongs to.
     commentButton.dataset.postId = post.id;
+
     // Comment Draft DOM els should go after comment button, and be singular
     const createComment = renderCreateCommentForm(post.id);
 
@@ -72,9 +71,7 @@ function renderComment(comment, currentUser) {
   const commentArticle = createElement("article", "", "post-article-comment");
   commentArticle.id = comment.id;
 
-
   const authorName = `${comment.user.firstName} ${comment.user.lastName}`;
-  // console.log("Comment shape ==>", comment);
 
   const commentAuthor = createElement("h3", authorName);
 
@@ -98,8 +95,7 @@ function renderComment(comment, currentUser) {
     commentMessage,
   );
 
-  // Ownership information can be used here to conditionally
-  // render the Edit button once the current-user comparison is defined.
+  // Ownership information can be used here to conditionally render the edit button once the current-user comparison is defined.
 
     if (currentUser !== null && currentUser.id === comment.user.id) {
       const editButtonRow = createElement(
@@ -113,25 +109,14 @@ function renderComment(comment, currentUser) {
       const editCommentButton = createButton(
         "button",
         "Edit",
-        "open-update-comment-form",
+        "open-update-comment-form", // This data-action triggers case of the same name in events.js
         "edit-comment-button",
       );
 
       editCommentButton.dataset.commentId = comment.id;
 
-      // const deleteCommentButton = createButton(
-      //   "button",
-      //   "Delete",
-      //   "delete-comment",
-      //   "delete-comment-button",
-      // );
-
-      // deleteCommentButton.dataset.commentId = comment.id;
-
       const deleteCommentButton = renderDeleteCommentForm(comment.id);
 
-      // Identify which post the button belongs to.
-      // commentButton.dataset.postId = post.id;
       editButtonRow.append(editCommentButton, deleteCommentButton);
       commentArticle.append(editButtonRow);
     }

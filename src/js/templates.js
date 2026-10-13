@@ -70,4 +70,3 @@ export function createImage(src, alt, ...classes) {
 
   return image;
 }
-

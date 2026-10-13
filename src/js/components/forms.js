@@ -1,4 +1,4 @@
-// Import these render form functions where needed
+// Import these rendering form functions to where they are needed
 
 import {
   createButton,
@@ -11,11 +11,20 @@ import {
 export function renderLoginForm() {
   const loginForm = createElement("form", "", "login-form");
 
-  const title = createElement("h1", "🖳 Login");
+  const titleRow = createElement(
+    "div",
+    "",
+    "row-container",
+    "justify-content-start",
+  );
+  const appLogo = createImage("/favicon.svg", "Quill logo", "app-logo-image");
+
+  const title = createElement("h1", "Login");
 
   const errorMessage = createElement("div", "", "error-login", "error-message");
 
   const emailLabel = createLabel("email-login", "Email");
+
   const emailInput = createInput(
     "email-login",
     "email",
@@ -27,7 +36,6 @@ export function renderLoginForm() {
 
   const passwordLabel = createLabel("password-login", "Password");
 
-  // const passwordRow = createElement("div", "", "row-container", "password-row");
   const passwordRow = createElement("div", "", "row-container");
 
   const passwordInput = createInput(
@@ -42,7 +50,7 @@ export function renderLoginForm() {
   const showPasswordButton = createButton(
     "button",
     "",
-    "show-password-toggle",
+    "show-password-toggle", // This data-action triggers case of the same name in events.js
     "show-password-button",
   );
 
@@ -51,7 +59,6 @@ export function renderLoginForm() {
     "an eye icon that toggles open and closed",
     "show-password-button-image",
   );
-
   showPasswordButtonImage.setAttribute(
     "id",
     "show-password-button-image-login",
@@ -66,20 +73,16 @@ export function renderLoginForm() {
     "margin-top-bottom",
   );
 
-  const submitButton = createButton(
-    "submit",
-    "Submit",
-    // "submit-login",
-    "",
-    "full-width",
-  );
+  const submitButton = createButton("submit", "Submit", "", "full-width");
 
   const clearButton = createButton(
     "button",
     "Clear",
-    "clear-form",
+    "clear-form", // This data-action triggers case of the same name in events.js
     "full-width",
   );
+
+  titleRow.append(appLogo, title);
 
   showPasswordButton.append(showPasswordButtonImage);
 
@@ -90,17 +93,16 @@ export function renderLoginForm() {
   const oopsNeedSignupButton = createButton(
     "button",
     "*No account? Click to sign up!",
-    "signup-instead",
+    "signup-instead", // This data-action triggers case of the same name in events.js
     "full-width",
   );
 
   loginForm.append(
-    title,
+    titleRow,
     errorMessage,
     emailLabel,
     emailInput,
     passwordLabel,
-    // passwordInput,
     passwordRow,
     buttonRow,
     oopsNeedSignupButton,
@@ -112,7 +114,14 @@ export function renderLoginForm() {
 export function renderSignupForm() {
   const signupForm = createElement("form", "", "signup-form");
 
-  const title = createElement("h1", "🖳 Sign Up");
+  const titleRow = createElement(
+    "div",
+    "",
+    "row-container",
+    "justify-content-start",
+  );
+  const appLogo = createImage("/favicon.svg", "Quill logo", "app-logo-image");
+  const title = createElement("h1", "Sign Up");
 
   const errorMessage = createElement(
     "div",
@@ -122,6 +131,7 @@ export function renderSignupForm() {
   );
 
   const firstNameLabel = createLabel("first-name-signup", "First Name");
+
   const firstNameInput = createInput(
     "first-name-signup",
     "text",
@@ -131,6 +141,7 @@ export function renderSignupForm() {
   );
 
   const lastNameLabel = createLabel("last-name-signup", "Last Name");
+
   const lastNameInput = createInput(
     "last-name-signup",
     "text",
@@ -140,6 +151,7 @@ export function renderSignupForm() {
   );
 
   const emailLabel = createLabel("email-signup", "Email");
+
   const emailInput = createInput(
     "email-signup",
     "email",
@@ -151,7 +163,6 @@ export function renderSignupForm() {
 
   const passwordLabel = createLabel("password-signup", "Password");
 
-  // const passwordRow = createElement("div", "", "row-container", "password-row");
   const passwordRow = createElement("div", "", "row-container");
 
   const passwordInput = createInput(
@@ -166,7 +177,7 @@ export function renderSignupForm() {
   const showPasswordButton = createButton(
     "button",
     "",
-    "show-password-toggle",
+    "show-password-toggle", // This data-action triggers case of the same name in events.js
     "show-password-button",
   );
 
@@ -181,21 +192,6 @@ export function renderSignupForm() {
     "show-password-button-image-signup",
   );
 
-  // const confirmPasswordLabel = createLabel(
-  //   "confirm-password-signup",
-  //   "Confirm-Password",
-  // );
-
-  // const confirmPasswordInput = createInput(
-  //   "confirm-password-signup",
-  //   "password",
-  //   "confirm_password",
-  //   "Re-enter password.",
-  //   true,
-  // );
-
-  // confirmPasswordInput.setAttribute("autocomplete", "new-password");
-
   const buttonRow = createElement(
     "div",
     "",
@@ -206,20 +202,16 @@ export function renderSignupForm() {
   );
 
   // TODO - instead take the user immediately to the login page after signing up!
-  const submitButton = createButton(
-    "submit",
-    "Submit",
-    // "submit-signup",
-    "",
-    "full-width",
-  );
+  const submitButton = createButton("submit", "Submit", "", "full-width");
 
   const clearButton = createButton(
     "button",
     "Clear",
-    "clear-form",
+    "clear-form", // This data-action triggers case of the same name in events.js
     "full-width",
   );
+
+  titleRow.append(appLogo, title);
 
   showPasswordButton.append(showPasswordButtonImage);
 
@@ -230,12 +222,12 @@ export function renderSignupForm() {
   const oopsNeedLoginButton = createButton(
     "button",
     "*Already have an account? Please click here to login.",
-    "login-instead",
+    "login-instead", // This data-action triggers case of the same name in events.js
     "full-width",
   );
 
   signupForm.append(
-    title,
+    titleRow,
     errorMessage,
     firstNameLabel,
     firstNameInput,
@@ -244,10 +236,7 @@ export function renderSignupForm() {
     emailLabel,
     emailInput,
     passwordLabel,
-    // passwordInput,
     passwordRow,
-    // confirmPasswordLabel,
-    // confirmPasswordInput,
     buttonRow,
     oopsNeedLoginButton,
   );
@@ -258,7 +247,15 @@ export function renderSignupForm() {
 export function renderProfileForm() {
   const profileForm = createElement("form", "", "profile-form");
 
-  const title = createElement("h1", "🖳 Edit Profile");
+  const titleRow = createElement(
+    "div",
+    "",
+    "row-container",
+    "justify-content-start",
+  );
+  const appLogo = createImage("/favicon.svg", "Quill logo", "app-logo-image");
+
+  const title = createElement("h1", "Edit Profile");
 
   const errorMessage = createElement(
     "div",
@@ -273,7 +270,6 @@ export function renderProfileForm() {
     "text",
     "first_name",
     "",
-    // true,
   );
 
   const lastNameLabel = createLabel("last-name-profile", "Last Name");
@@ -282,22 +278,14 @@ export function renderProfileForm() {
     "text",
     "last_name",
     "",
-    // true,
   );
 
   const emailLabel = createLabel("email-profile", "Email");
-  const emailInput = createInput(
-    "email-profile",
-    "email",
-    "email",
-    "",
-    // true,
-  );
+  const emailInput = createInput("email-profile", "email", "email", "");
   emailInput.setAttribute("autocomplete", "username");
 
   const passwordLabel = createLabel("password-profile", "New Password");
 
-  // const passwordRow = createElement("div", "", "row-container", "password-row");
   const passwordRow = createElement("div", "", "row-container");
 
   const passwordInput = createInput(
@@ -305,7 +293,6 @@ export function renderProfileForm() {
     "password",
     "password",
     "",
-    // true,
   );
 
   passwordInput.setAttribute("autocomplete", "new-password");
@@ -313,7 +300,7 @@ export function renderProfileForm() {
   const showPasswordButton = createButton(
     "button",
     "",
-    "show-password-toggle",
+    "show-password-toggle", // This data-action triggers case of the same name in events.js
     "show-password-button",
   );
 
@@ -328,28 +315,12 @@ export function renderProfileForm() {
     "show-password-button-image-profile",
   );
 
-  // const confirmPasswordLabel = createLabel(
-  //   "confirm-password-profile",
-  //   "Confirm New Password",
-  // );
-
-  // const confirmPasswordInput = createInput(
-  //   "confirm-password-profile",
-  //   "password",
-  //   "confirm_password",
-  //   "",
-  //   // true,
-  // );
-
-  // confirmPasswordInput.setAttribute("autocomplete", "new-password");
-
   const buttonRow = createElement(
     "div",
     "",
     "row-container",
     "full-width",
     "gap",
-    // "margin-top-bottom",
     "margin-top",
   );
 
@@ -358,16 +329,18 @@ export function renderProfileForm() {
   const clearButton = createButton(
     "button",
     "Clear",
-    "clear-form",
+    "clear-form", // This data-action triggers case of the same name in events.js
     "full-width",
   );
 
   const deleteProfileButton = createButton(
     "button",
     "Delete",
-    "open-profile-delete-confirmation",
+    "open-profile-delete-confirmation", // This data-action triggers case of the same name in events.js
     "full-width",
   );
+
+  titleRow.append(appLogo, title);
 
   showPasswordButton.append(showPasswordButtonImage);
 
@@ -375,15 +348,8 @@ export function renderProfileForm() {
 
   buttonRow.append(submitButton, clearButton, deleteProfileButton);
 
-  // const oopsNeedLoginButton = createButton(
-  //   "button",
-  //   "*Already have an account? Please click here to login.",
-  //   "login-instead",
-  //   "full-width",
-  // );
-
   profileForm.append(
-    title,
+    titleRow,
     errorMessage,
     firstNameLabel,
     firstNameInput,
@@ -392,19 +358,15 @@ export function renderProfileForm() {
     emailLabel,
     emailInput,
     passwordLabel,
-    // passwordInput,
     passwordRow,
-    // confirmPasswordLabel,
-    // confirmPasswordInput,
     buttonRow,
-    // oopsNeedLoginButton,
   );
 
   return profileForm;
 }
 
 export function renderConfirmProfileDeleteForm() {
-  // NEW FORM! This is hidden until deleteProfileButton is clicked
+  // NOTE - this is hidden until deleteProfileButton is clicked
   const confirmProfileDeleteForm = createElement(
     "form",
     "",
@@ -422,8 +384,7 @@ export function renderConfirmProfileDeleteForm() {
 
   const hrLineBottom = createElement("hr", "", "hr-line-warning");
 
-
-  // Submits account profile deletion
+  // Submits the actual account profile deletion
   const confirmProfileDeleteButton = createButton(
     "submit",
     "Confirm",
@@ -435,7 +396,7 @@ export function renderConfirmProfileDeleteForm() {
   const cancelProfileDeleteButton = createButton(
     "button",
     "Cancel",
-    "close-profile-delete-confirmation",
+    "close-profile-delete-confirmation", // This data-action triggers case of the same name in events.js
     "full-width",
   );
 
@@ -451,10 +412,10 @@ export function renderConfirmProfileDeleteForm() {
 
   confirmProfileDeleteForm.append(
     hrLineTop,
-     deleteProfileMessage,
-     hrLineBottom,
-      buttonRow
-    );
+    deleteProfileMessage,
+    hrLineBottom,
+    buttonRow,
+  );
 
   return confirmProfileDeleteForm;
 }
@@ -465,24 +426,19 @@ export function renderCreateCommentForm(postId) {
 
   const createCommentDiv = createElement("div", "", "create-comment-div");
 
-  // const errorMessage = createElement(
-  //   "div",
-  //   "",
-  //   "error-update-comment",
-  //   "error-form",
-  //   "error-message",
-  // );
-
   const messageRow = createElement(
     "div",
     "",
     "row-container",
     "gap",
     "justify-content-start",
-    // "user-message-container",
   );
 
-  const maxCharLimitMessage = createElement("p", "255 Character Limit", "max-char-limit");
+  const maxCharLimitMessage = createElement(
+    "p",
+    "255 Character Limit",
+    "max-char-limit",
+  );
   maxCharLimitMessage.id = `max-char-limit-${postId}`;
 
   const textArea = createElement("textarea", "");
@@ -508,7 +464,7 @@ export function renderCreateCommentForm(postId) {
   const cancelButton = createButton(
     "button",
     "Cancel",
-    "cancel-create-comment-form",
+    "cancel-create-comment-form", // This data-action triggers case of the same name in events.js
     "cancel-comment-button",
   );
 
@@ -517,12 +473,7 @@ export function renderCreateCommentForm(postId) {
   messageRow.append(maxCharLimitMessage);
 
   buttonRow.append(submitButton, cancelButton);
-  createCommentDiv.append(
-    // errorMessage,
-    messageRow,
-     textArea,
-      buttonRow
-    );
+  createCommentDiv.append(messageRow, textArea, buttonRow);
   createCommentForm.append(createCommentDiv);
 
   return createCommentForm;
@@ -532,17 +483,8 @@ export function renderUpdateCommentForm(commentId, commentMessage) {
   const updateCommentForm = createElement("form", "", "update-comment-form");
   updateCommentForm.id = `update-comment-form-${commentId}`;
   updateCommentForm.dataset.commentId = commentId;
-  // updateCommentForm.id = commentId;
 
   const updateCommentDiv = createElement("div", "", "update-comment-div");
-
-  // const errorMessage = createElement(
-  //   "div",
-  //   "",
-  //   "error-update-comment",
-  //   "error-form",
-  //   "error-message",
-  // );
 
   const messageRow = createElement(
     "div",
@@ -550,16 +492,19 @@ export function renderUpdateCommentForm(commentId, commentMessage) {
     "row-container",
     "gap",
     "justify-content-start",
-    // "user-message-container",
   );
 
-  const maxCharLimitMessage = createElement("p", "255 Character Limit", "max-char-limit");
+  const maxCharLimitMessage = createElement(
+    "p",
+    "255 Character Limit",
+    "max-char-limit",
+  );
   maxCharLimitMessage.id = `max-char-limit-${commentId}`;
 
   const textArea = createElement("textarea", "");
   textArea.id = `textarea-${commentId}`;
   textArea.name = "comment_message";
-  textArea.value = commentMessage
+  textArea.value = commentMessage;
   textArea.maxLength = 255;
 
   const buttonRow = createElement(
@@ -581,7 +526,7 @@ export function renderUpdateCommentForm(commentId, commentMessage) {
   const cancelButton = createButton(
     "button",
     "Cancel",
-    "cancel-update-comment-form",
+    "cancel-update-comment-form", // This data-action triggers case of the same name in events.js
     "cancel-update-comment-button",
   );
 
@@ -591,12 +536,7 @@ export function renderUpdateCommentForm(commentId, commentMessage) {
 
   buttonRow.append(submitButton, cancelButton);
 
-  updateCommentDiv.append(
-    // errorMessage,
-    messageRow,
-     textArea,
-      buttonRow
-    );
+  updateCommentDiv.append(messageRow, textArea, buttonRow);
   updateCommentForm.append(updateCommentDiv);
 
   return updateCommentForm;
@@ -605,7 +545,7 @@ export function renderUpdateCommentForm(commentId, commentMessage) {
 export function renderDeleteCommentForm(commentId) {
   const deleteCommentForm = createElement("form", "", "delete-comment-form");
   deleteCommentForm.dataset.commentId = commentId;
-  // NOTE - can't use createButton here, as this --> "" , is not working to prevent data-action from filling in the next item into its place
+  // TODO - NOTE - can't use createButton function helper from template.js here, as this --> "" , is not working to prevent data-action from filling in the next item into its place
   // const deleteCommentButton = createButton(
   //   "button",
   //   "Delete",

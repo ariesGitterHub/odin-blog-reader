@@ -6,11 +6,7 @@ import { getPublishedBlogPosts } from "./js/posts.js";
 import { renderHeader } from "./js/components/header.js";
 import { renderPosts } from "./js/components/posts-view.js";
 import { renderFooter } from "./js/components/footer.js";
-import {
-  // showModalViaLoginButton,
-  // closeModalViaCloseModalButton,
-  renderModal,
-} from "./js/components/modal.js";
+import { renderModal } from "./js/components/modal.js";
 
 async function init() {
   const userData = await getCurrentUser();

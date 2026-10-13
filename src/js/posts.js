@@ -1,5 +1,8 @@
 import { get } from "./api.js";
 
-export async function getPublishedBlogPosts() {
+// NOTE - technically async is not needed below since the imported helper functions in api.js are returning the promise!!!
+
+// export async function getPublishedBlogPosts() {
+export function getPublishedBlogPosts() {
   return get("/api/posts/public");
 }

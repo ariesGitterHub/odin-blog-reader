@@ -1,17 +1,17 @@
 /* Root */
 :root {
   /*** Colors */
-  --gray: #9c9aa7;
-  --white: #e9e9f1;
-  --blue-dk: #16171d;
   --black: #111112;
   --black-trans: #100f0fd4;
-  --blue-gray: #43434c;
-  --blue: #2e303a;
-  --blue-trans: #2e303aea;
+  --gray: #9c9aa7;
+  --white: #e9e9f1;
   --red: #7f3d3d;
   --red-trans: #7f3d3dea;
   --yellow: #dfd810;
+  --blue: #2e303a;
+  --blue-trans: #2e303aea;
+  --blue-dk: #16171d;
+  --blue-gray: #43434c;
 
   /*** Fonts */
   --font-sans: system-ui, "Segoe UI", Roboto, sans-serif;
@@ -46,6 +46,10 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* NOTE - I like this new way I am using media queries and and handling transitions between sizings */
+
+  transition: ease all 0.5s;
 
   @media (min-width: 512px) {
     font-size: 20px;
@@ -111,6 +115,19 @@ header {
   justify-content: center;
   border-radius: var(--spacer-big);
   margin: var(--spacer-big);
+}
+
+.app-logo-image {
+  height: var(--font-size-title-1);
+  width: auto;
+}
+
+.logged-in {
+  background-color: var(--blue-gray);
+  border: var(--border-basic);
+  border-color: var(--blue);
+  border-radius: var(--spacer-big);
+  font-family: var(--font-heading);
 }
 
 footer {
@@ -370,10 +387,19 @@ textarea {
   margin-top: 0;
 }
 
+.login-form .app-logo-image,
+.signup-form .app-logo-image,
+.profile-form .app-logo-image {
+  height: var(--font-size-modal-title);
+  width: auto;
+  margin-top: -1.595rem;
+}
+
 .login-form button .show-password-button {
   margin-top: -0.5rem;
 }
-*/ .confirm-profile-delete-form {
+
+.confirm-profile-delete-form {
   display: none;
 }
 
@@ -401,6 +427,7 @@ textarea {
 
 /* Misc */
 
+/*** Error related  */
 .error-message {
   color: var(--yellow);
   font-family: var(--font-heading);
@@ -410,10 +437,7 @@ textarea {
   text-transform: uppercase;
 }
 
-.full-width {
-  width: 100%;
-}
-
+/* *** Flex-box related */
 .gap {
   gap: var(--spacer-big);
 }
@@ -433,12 +457,9 @@ textarea {
   justify-content: start;
 }
 
-.logged-in {
-  background-color: var(--blue-gray);
-  border: var(--border-basic);
-  border-color: var(--blue);
-  border-radius: var(--spacer-big);
-  font-family: var(--font-heading);
+/*** Spacing related  */
+.full-width {
+  width: 100%;
 }
 
 .margin-top-bottom {
