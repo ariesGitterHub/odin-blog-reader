@@ -6,6 +6,7 @@ import {
   renderProfileForm,
   renderConfirmProfileDeleteForm,
 } from "./forms.js";
+import { createDivRow } from "./reusables.js";
 
 export function renderModal() {
   const modalContainer = document.querySelector("#modal");
@@ -15,12 +16,13 @@ export function renderModal() {
 
   const modalContent = createElement("div", "", "modal-content");
 
-  const buttonRow = createElement(
-    "div",
-    "",
-    "row-container",
-    "justify-content-end",
-  );
+  // const buttonRow = createElement(
+  //   "div",
+  //   "",
+  //   "row-container",
+  //   "justify-content-end",
+  // );
+  const buttonRow = createDivRow("justify-content-end");
 
   const closeModalButton = createButton(
     "button",

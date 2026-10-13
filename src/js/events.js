@@ -200,7 +200,7 @@ export function registerEventListeners() {
         errorMessageLogin.textContent = "";
         errorMessageSignup.textContent = "";
         errorMessageProfile.textContent = "";
-        errorMessageComment.textContent = ""; // TODO - check this to make sure it works
+        // errorMessageComment.textContent = ""; // TODO - check this to make sure it works
 
         loginForm.reset();
         signupForm.reset();
@@ -385,7 +385,7 @@ export function registerEventListeners() {
         errorMessageLogin.textContent = "";
         errorMessageSignup.textContent = "";
         errorMessageProfile.textContent = "";
-        errorMessageComment.textContent = ""; // TODO - check this to make sure it works
+        // errorMessageComment.textContent = ""; // TODO - check this to make sure it works
 
         // Reset all forms
         loginForm.reset();

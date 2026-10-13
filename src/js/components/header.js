@@ -1,4 +1,5 @@
 import { createButton, createElement, createImage } from "../templates.js";
+import { createDivRow } from "./reusables.js";
 
 export function renderHeader(currentUser) {
   const headerContainer = document.querySelector("header");
@@ -13,12 +14,13 @@ export function renderHeader(currentUser) {
     "justify-content-space-between",
   );
 
-  const titleRow = createElement(
-    "div",
-    "",
-    "row-container",
-    "justify-content-start",
-  );
+  // const titleRow = createElement(
+  //   "div",
+  //   "",
+  //   "row-container",
+  //   "justify-content-start",
+  // );
+  const titleRow = createDivRow("justify-content-start");
   const appLogo = createImage("/favicon.svg", "Quill logo", "app-logo-image");
   const title = createElement("h1", "Bloggie");
 

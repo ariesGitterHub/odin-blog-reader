@@ -5,6 +5,7 @@ import {
   renderUpdateCommentForm,
   renderDeleteCommentForm,
 } from "./forms.js";
+import { createDivRow } from "./reusables.js";
 
 export function renderPosts(posts, currentUser) {
   console.log("currentUser ==> ", currentUser);
@@ -33,10 +34,14 @@ function renderPost(post, currentUser) {
   postArticle.append(postTitle, postTimestamp, hrLine, postMessage);
 
   if (currentUser) {
-    const commentButtonRow = createElement(
-      "div",
-      "",
-      "row-container",
+    // const commentButtonRow = createElement(
+    //   "div",
+    //   "",
+    //   "row-container",
+    //   "justify-content-start",
+    //   "margin-post-button-rows",
+    // );
+    const commentButtonRow = createDivRow(
       "justify-content-start",
       "margin-post-button-rows",
     );
@@ -98,10 +103,14 @@ function renderComment(comment, currentUser) {
   // Ownership information can be used here to conditionally render the edit button once the current-user comparison is defined.
 
     if (currentUser !== null && currentUser.id === comment.user.id) {
-      const editButtonRow = createElement(
-        "div",
-        "",
-        "row-container",
+      // const editButtonRow = createElement(
+      //   "div",
+      //   "",
+      //   "row-container",
+      //   "justify-content-end",
+      //   "margin-post-button-rows",
+      // );
+      const editButtonRow = createDivRow(
         "justify-content-end",
         "margin-post-button-rows",
       );

@@ -8,15 +8,24 @@ import {
   createImage,
 } from "../templates.js";
 
+import {
+  createClearButton,
+  createShowPasswordButton,
+  createSubmitButton,
+  createDivRow,
+} from "./reusables.js";
+
 export function renderLoginForm() {
   const loginForm = createElement("form", "", "login-form");
 
-  const titleRow = createElement(
-    "div",
-    "",
-    "row-container",
-    "justify-content-start",
-  );
+  // const titleRow = createElement(
+  //   "div",
+  //   "",
+  //   "row-container",
+  //   "justify-content-start",
+  // );
+  const titleRow = createDivRow("justify-content-start");
+
   const appLogo = createImage("/favicon.svg", "Quill logo", "app-logo-image");
 
   const title = createElement("h1", "Login");
@@ -36,7 +45,8 @@ export function renderLoginForm() {
 
   const passwordLabel = createLabel("password-login", "Password");
 
-  const passwordRow = createElement("div", "", "row-container");
+  // const passwordRow = createElement("div", "", "row-container");
+  const passwordRow = createDivRow();
 
   const passwordInput = createInput(
     "password-login",
@@ -47,12 +57,14 @@ export function renderLoginForm() {
   );
   passwordInput.setAttribute("autocomplete", "current-password");
 
-  const showPasswordButton = createButton(
-    "button",
-    "",
-    "show-password-toggle", // This data-action triggers case of the same name in events.js
-    "show-password-button",
-  );
+  // const showPasswordButton = createButton(
+  //   "button",
+  //   "",
+  //   "show-password-toggle", // This data-action triggers case of the same name in events.js
+  //   "show-password-button",
+  // );
+
+  const showPasswordButton = createShowPasswordButton();
 
   const showPasswordButtonImage = createImage(
     "src/assets/eye-off.svg",
@@ -64,23 +76,28 @@ export function renderLoginForm() {
     "show-password-button-image-login",
   );
 
-  const buttonRow = createElement(
-    "div",
-    "",
-    "row-container",
-    "full-width",
-    "gap",
-    "margin-top-bottom",
-  );
+  // const buttonRow = createElement(
+  //   "div",
+  //   "",
+  //   "row-container",
+  //   "full-width",
+  //   "gap",
+  //   "margin-top-bottom",
+  // );
+const buttonRow = createDivRow("full-width", "gap", "margin-top-bottom",)
 
-  const submitButton = createButton("submit", "Submit", "", "full-width");
+  // const submitButton = createButton("submit", "Submit", "", "full-width");
 
-  const clearButton = createButton(
-    "button",
-    "Clear",
-    "clear-form", // This data-action triggers case of the same name in events.js
-    "full-width",
-  );
+  const submitButton = createSubmitButton();
+
+  // const clearButton = createButton(
+  //   "button",
+  //   "Clear",
+  //   "clear-form", // This data-action triggers case of the same name in events.js
+  //   "full-width",
+  // );
+
+  const clearButton = createClearButton();
 
   titleRow.append(appLogo, title);
 
@@ -114,13 +131,16 @@ export function renderLoginForm() {
 export function renderSignupForm() {
   const signupForm = createElement("form", "", "signup-form");
 
-  const titleRow = createElement(
-    "div",
-    "",
-    "row-container",
-    "justify-content-start",
-  );
+  // const titleRow = createElement(
+  //   "div",
+  //   "",
+  //   "row-container",
+  //   "justify-content-start",
+  // );
+  const titleRow = createDivRow("justify-content-start");
+
   const appLogo = createImage("/favicon.svg", "Quill logo", "app-logo-image");
+
   const title = createElement("h1", "Sign Up");
 
   const errorMessage = createElement(
@@ -163,7 +183,8 @@ export function renderSignupForm() {
 
   const passwordLabel = createLabel("password-signup", "Password");
 
-  const passwordRow = createElement("div", "", "row-container");
+  // const passwordRow = createElement("div", "", "row-container");
+  const passwordRow = createDivRow();
 
   const passwordInput = createInput(
     "password-signup",
@@ -174,12 +195,14 @@ export function renderSignupForm() {
   );
   passwordInput.setAttribute("autocomplete", "new-password");
 
-  const showPasswordButton = createButton(
-    "button",
-    "",
-    "show-password-toggle", // This data-action triggers case of the same name in events.js
-    "show-password-button",
-  );
+  // const showPasswordButton = createButton(
+  //   "button",
+  //   "",
+  //   "show-password-toggle", // This data-action triggers case of the same name in events.js
+  //   "show-password-button",
+  // );
+
+  const showPasswordButton = createShowPasswordButton();
 
   const showPasswordButtonImage = createImage(
     "src/assets/eye-off.svg",
@@ -192,24 +215,28 @@ export function renderSignupForm() {
     "show-password-button-image-signup",
   );
 
-  const buttonRow = createElement(
-    "div",
-    "",
-    "row-container",
-    "full-width",
-    "gap",
-    "margin-top-bottom",
-  );
+  // const buttonRow = createElement(
+  //   "div",
+  //   "",
+  //   "row-container",
+  //   "full-width",
+  //   "gap",
+  //   "margin-top-bottom",
+  // );
+  const buttonRow = createDivRow("full-width", "gap", "margin-top-bottom");
 
   // TODO - instead take the user immediately to the login page after signing up!
-  const submitButton = createButton("submit", "Submit", "", "full-width");
+  // const submitButton = createButton("submit", "Submit", "", "full-width");
+  const submitButton = createSubmitButton();
 
-  const clearButton = createButton(
-    "button",
-    "Clear",
-    "clear-form", // This data-action triggers case of the same name in events.js
-    "full-width",
-  );
+  // const clearButton = createButton(
+  //   "button",
+  //   "Clear",
+  //   "clear-form", // This data-action triggers case of the same name in events.js
+  //   "full-width",
+  // );
+
+  const clearButton = createClearButton();
 
   titleRow.append(appLogo, title);
 
@@ -247,12 +274,14 @@ export function renderSignupForm() {
 export function renderProfileForm() {
   const profileForm = createElement("form", "", "profile-form");
 
-  const titleRow = createElement(
-    "div",
-    "",
-    "row-container",
-    "justify-content-start",
-  );
+  // const titleRow = createElement(
+  //   "div",
+  //   "",
+  //   "row-container",
+  //   "justify-content-start",
+  // );
+  const titleRow = createDivRow("justify-content-start");
+
   const appLogo = createImage("/favicon.svg", "Quill logo", "app-logo-image");
 
   const title = createElement("h1", "Edit Profile");
@@ -286,7 +315,8 @@ export function renderProfileForm() {
 
   const passwordLabel = createLabel("password-profile", "New Password");
 
-  const passwordRow = createElement("div", "", "row-container");
+  // const passwordRow = createElement("div", "", "row-container");
+  const passwordRow = createDivRow();
 
   const passwordInput = createInput(
     "password-profile",
@@ -297,12 +327,14 @@ export function renderProfileForm() {
 
   passwordInput.setAttribute("autocomplete", "new-password");
 
-  const showPasswordButton = createButton(
-    "button",
-    "",
-    "show-password-toggle", // This data-action triggers case of the same name in events.js
-    "show-password-button",
-  );
+  // const showPasswordButton = createButton(
+  //   "button",
+  //   "",
+  //   "show-password-toggle", // This data-action triggers case of the same name in events.js
+  //   "show-password-button",
+  // );
+
+  const showPasswordButton = createShowPasswordButton();
 
   const showPasswordButtonImage = createImage(
     "src/assets/eye-off.svg",
@@ -315,23 +347,27 @@ export function renderProfileForm() {
     "show-password-button-image-profile",
   );
 
-  const buttonRow = createElement(
-    "div",
-    "",
-    "row-container",
-    "full-width",
-    "gap",
-    "margin-top",
-  );
+  // const buttonRow = createElement(
+  //   "div",
+  //   "",
+  //   "row-container",
+  //   "full-width",
+  //   "gap",
+  //   "margin-top",
+  // );
+  const buttonRow = createDivRow("full-width", "gap", "margin-top");
 
-  const submitButton = createButton("submit", "Submit", "", "full-width");
+  // const submitButton = createButton("submit", "Submit", "", "full-width");
+  const submitButton = createSubmitButton();
 
-  const clearButton = createButton(
-    "button",
-    "Clear",
-    "clear-form", // This data-action triggers case of the same name in events.js
-    "full-width",
-  );
+  // const clearButton = createButton(
+  //   "button",
+  //   "Clear",
+  //   "clear-form", // This data-action triggers case of the same name in events.js
+  //   "full-width",
+  // );
+
+  const clearButton = createClearButton();
 
   const deleteProfileButton = createButton(
     "button",
@@ -400,13 +436,14 @@ export function renderConfirmProfileDeleteForm() {
     "full-width",
   );
 
-  const buttonRow = createElement(
-    "div",
-    "",
-    "row-container",
-    "full-width",
-    "gap",
-  );
+  // const buttonRow = createElement(
+  //   "div",
+  //   "",
+  //   "row-container",
+  //   "full-width",
+  //   "gap",
+  // );
+  const buttonRow = createDivRow("full-width", "gap");
 
   buttonRow.append(confirmProfileDeleteButton, cancelProfileDeleteButton);
 
@@ -426,13 +463,14 @@ export function renderCreateCommentForm(postId) {
 
   const createCommentDiv = createElement("div", "", "create-comment-div");
 
-  const messageRow = createElement(
-    "div",
-    "",
-    "row-container",
-    "gap",
-    "justify-content-start",
-  );
+  // const messageRow = createElement(
+  //   "div",
+  //   "",
+  //   "row-container",
+  //   "gap",
+  //   "justify-content-start",
+  // );
+const messageRow = createDivRow("gap", "justify-content-start");
 
   const maxCharLimitMessage = createElement(
     "p",
@@ -446,19 +484,22 @@ export function renderCreateCommentForm(postId) {
   textArea.name = "comment_message";
   textArea.maxLength = 255;
 
-  const buttonRow = createElement(
-    "div",
-    "",
-    "row-container",
-    "justify-content-end",
-  );
+  // const buttonRow = createElement(
+  //   "div",
+  //   "",
+  //   "row-container",
+  //   "justify-content-end",
+  // );
+  const buttonRow = createDivRow("justify-content-end");
 
-  const submitButton = createButton(
-    "submit",
-    "Submit",
-    "",
-    "submit-comment-button",
-  );
+  // const submitButton = createButton(
+  //   "submit",
+  //   "Submit",
+  //   "",
+  //   "submit-comment-button",
+  // );
+
+  const submitButton = createSubmitButton();
   submitButton.dataset.postId = postId;
 
   const cancelButton = createButton(
@@ -486,13 +527,14 @@ export function renderUpdateCommentForm(commentId, commentMessage) {
 
   const updateCommentDiv = createElement("div", "", "update-comment-div");
 
-  const messageRow = createElement(
-    "div",
-    "",
-    "row-container",
-    "gap",
-    "justify-content-start",
-  );
+  // const messageRow = createElement(
+  //   "div",
+  //   "",
+  //   "row-container",
+  //   "gap",
+  //   "justify-content-start",
+  // );
+  const messageRow = createDivRow("gap", "justify-content-start");
 
   const maxCharLimitMessage = createElement(
     "p",
@@ -507,20 +549,22 @@ export function renderUpdateCommentForm(commentId, commentMessage) {
   textArea.value = commentMessage;
   textArea.maxLength = 255;
 
-  const buttonRow = createElement(
-    "div",
-    "",
-    "row-container",
-    "justify-content-end",
-  );
+  // const buttonRow = createElement(
+  //   "div",
+  //   "",
+  //   "row-container",
+  //   "justify-content-end",
+  // );
+  const buttonRow = createDivRow("justify-content-end");
 
-  const submitButton = createButton(
-    "submit",
-    "Update",
-    "",
-    "update-comment-button",
-  );
+  // const submitButton = createButton(
+  //   "submit",
+  //   "Update",
+  //   "",
+  //   "update-comment-button",
+  // );
 
+  const submitButton = createSubmitButton();
   submitButton.dataset.commentId = commentId;
 
   const cancelButton = createButton(
