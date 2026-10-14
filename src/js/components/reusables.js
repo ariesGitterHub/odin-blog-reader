@@ -22,7 +22,12 @@ export function createShowPasswordButton() {
 }
 
 export function createSubmitButton() {
-  return createButton("submit", "Submit", "", "full-width");
+  return createButton(
+    "submit",
+     "Submit",
+      "",
+      //  "full-width",
+      );
 }
 
 // Divs

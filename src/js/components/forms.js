@@ -89,7 +89,7 @@ const buttonRow = createDivRow("full-width", "gap", "margin-top-bottom",)
   // const submitButton = createButton("submit", "Submit", "", "full-width");
 
   const submitButton = createSubmitButton();
-
+  submitButton.classList.add("full-width");
   // const clearButton = createButton(
   //   "button",
   //   "Clear",
@@ -228,7 +228,7 @@ export function renderSignupForm() {
   // TODO - instead take the user immediately to the login page after signing up!
   // const submitButton = createButton("submit", "Submit", "", "full-width");
   const submitButton = createSubmitButton();
-
+  submitButton.classList.add("full-width");
   // const clearButton = createButton(
   //   "button",
   //   "Clear",
@@ -359,7 +359,7 @@ export function renderProfileForm() {
 
   // const submitButton = createButton("submit", "Submit", "", "full-width");
   const submitButton = createSubmitButton();
-
+  submitButton.classList.add("full-width");
   // const clearButton = createButton(
   //   "button",
   //   "Clear",
@@ -433,7 +433,7 @@ export function renderConfirmProfileDeleteForm() {
     "button",
     "Cancel",
     "close-profile-delete-confirmation", // This data-action triggers case of the same name in events.js
-    "full-width",
+    // "full-width",
   );
 
   // const buttonRow = createElement(
@@ -506,7 +506,8 @@ const messageRow = createDivRow("gap", "justify-content-start");
     "button",
     "Cancel",
     "cancel-create-comment-form", // This data-action triggers case of the same name in events.js
-    "cancel-comment-button",
+    // "cancel-comment-button",
+    // "full-width",
   );
 
   cancelButton.dataset.postId = postId;
@@ -571,7 +572,8 @@ export function renderUpdateCommentForm(commentId, commentMessage) {
     "button",
     "Cancel",
     "cancel-update-comment-form", // This data-action triggers case of the same name in events.js
-    "cancel-update-comment-button",
+    // "cancel-update-comment-button",
+    // "full-width",
   );
 
   cancelButton.dataset.commentId = commentId;

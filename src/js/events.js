@@ -6,6 +6,8 @@ import {
   deleteBlogComment,
 } from "./comments.js";
 import { renderHeader } from "./components/header.js";
+import { getPublishedBlogPosts } from "../js/posts.js";
+import { renderPosts } from "./components/posts-view.js";
 import { state } from "./state.js";
 
 export function registerEventListeners() {
@@ -124,10 +126,18 @@ export function registerEventListeners() {
 
     charCountTargetElement.addEventListener("input", () => {
       const charCount = charCountTargetElement.value.length;
-      console.log("Test of charCount...", charCount);
+      // console.log("Test of charCount...", charCount);
 
       maxCharLimitMessage.textContent = `${charCount}/255 Characters`;
     });
+  }
+
+  async function refreshPosts() {
+    const postData = await getPublishedBlogPosts();
+
+    state.posts = postData.posts;
+
+    renderPosts(state.posts, state.currentUser);
   }
 
   app.addEventListener("click", async (event) => {
@@ -257,12 +267,17 @@ export function registerEventListeners() {
 
           // Clear the state.currentUser
           state.currentUser = null;
-          loginForm.reset();
+
+          // Refresh header
           renderHeader(state.currentUser);
 
-          // TODO - TESTING - should I even use location.reload, or is there a better way?
-          location.reload();
+          // Refresh state.posts and posts
+          await refreshPosts();
 
+          // TODO...HERE
+
+          // Reset the form do no data lingers on a subsequent viewing
+          loginForm.reset();
           console.log("✋Logged out, goodbye!");
         } catch (err) {
           console.error("Logout failed:", err);
@@ -302,14 +317,23 @@ export function registerEventListeners() {
       try {
         const loginData = await login(emailLogin, passwordLogin);
 
+        const postData = await getPublishedBlogPosts();
+
         // Set the state.currentUser
         state.currentUser = loginData.user;
+
+        // Refresh state.posts
+        state.posts = postData.posts;
+
+        // Refresh state.posts and posts
         renderHeader(state.currentUser);
+
+        // Refresh state.posts and posts
+        await refreshPosts();
 
         modalContainer.style.display = "none";
 
-        // TODO - TESTING - should I even use location.reload, or is there a better way?
-        location.reload();
+        // TODO...HERE
 
         console.log("🎈Login successful:", state.currentUser);
       } catch (err) {
@@ -353,16 +377,18 @@ export function registerEventListeners() {
           password: passwordProfileInput.value,
         });
 
-        modalContainer.style.display = "none";
-
         // Update the state.currentUser
         state.currentUser = profileData.user;
 
-        // TODO - TESTING - should I even use location.reload, or is there a better way?
-        location.reload();
-
-        console.log("😀Profile update successful:", state.currentUser);
+        // Refresh header
         renderHeader(state.currentUser);
+
+        // Refresh state.posts and posts
+        await refreshPosts();
+
+        // TODO...HERE
+        modalContainer.style.display = "none";
+        console.log("😀Profile update successful:", state.currentUser);
       } catch (err) {
         console.error("Profile update failed:", err);
         errorMessageProfile.textContent = err.message;
@@ -377,6 +403,8 @@ export function registerEventListeners() {
         // TODO - double check to ensure user  is deleted from db
         state.currentUser = null;
         renderHeader(state.currentUser);
+
+        await refreshPosts();
 
         // Reset modalContainer and confirmProfileDeleteForm to display = none
         modalContainer.style.display = "none";
@@ -416,8 +444,14 @@ export function registerEventListeners() {
           commentDraftMessage,
         );
 
-        // TODO - TESTING - should I even use location.reload, or is there a better way?
-        location.reload();
+        // const profileData = await updateProfile();
+        // // Update the state.currentUser
+        // state.currentUser = profileData.user;
+
+        // Refresh state.posts and posts
+        await refreshPosts();
+
+        // TODO...HERE
 
         console.log("Comment created", commentData);
       } catch (err) {
@@ -447,8 +481,18 @@ export function registerEventListeners() {
 
         console.log("Comment update", commentUpdateData);
 
-        // TODO - TESTING - should I even use location.reload, or is there a better way?
-        location.reload();
+        // const profileData = await updateProfile();
+        // Update the state.currentUser
+        // state.currentUser = profileData.user;
+
+        // Refresh header
+        renderHeader(state.currentUser);
+
+        // Refresh state.posts and posts
+        await refreshPosts();
+
+        // TODO...HERE
+
       } catch (err) {
         console.error("Comment update failed:", err);
         errorMessageComment.textContent = err.message;
@@ -469,8 +513,15 @@ export function registerEventListeners() {
 
         console.log("Comment deleted", deleteCommentData);
 
-        // TODO - TESTING - should I even use location.reload, or is there a better way?
-        location.reload();
+        // const profileData = await updateProfile();
+        // Update the state.currentUser
+        // state.currentUser = profileData.user;
+        // Refresh state.posts and posts
+
+        await refreshPosts();
+
+        // TODO...HERE
+
       } catch (err) {
         console.error("Comment deletion failed:", err);
         errorMessageComment.textContent = err.message;
