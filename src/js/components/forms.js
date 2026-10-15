@@ -53,7 +53,7 @@ export function renderLoginForm() {
   const showPasswordButton = createShowPasswordButton();
 
   const showPasswordButtonImage = createImage(
-    "src/assets/eye-off.svg",
+    "/assets/eye-off.svg",
     "an eye icon that toggles open and closed",
     "show-password-button-image",
   );
@@ -163,7 +163,7 @@ export function renderSignupForm() {
   const showPasswordButton = createShowPasswordButton();
 
   const showPasswordButtonImage = createImage(
-    "src/assets/eye-off.svg",
+    "/assets/eye-off.svg",
     "an eye icon that toggles open and closed",
     "show-password-button-image",
   );
@@ -265,7 +265,7 @@ export function renderProfileForm() {
   const showPasswordButton = createShowPasswordButton();
 
   const showPasswordButtonImage = createImage(
-    "src/assets/eye-off.svg",
+    "/assets/eye-off.svg",
     "an eye icon that toggles open and closed",
     "show-password-button-image",
   );

@@ -65,10 +65,10 @@ export function registerEventListeners() {
   function togglePasswordVisibility(passwordInput, eyeImage) {
     if (passwordInput.type === "password") {
       passwordInput.type = "text";
-      eyeImage.src = "src/assets/eye.svg";
+      eyeImage.src = "/assets/eye.svg";
     } else {
       passwordInput.type = "password";
-      eyeImage.src = "src/assets/eye-off.svg";
+      eyeImage.src = "/assets/eye-off.svg";
     }
   }
 
@@ -169,7 +169,7 @@ export function registerEventListeners() {
         profileForm.style.display = "none";
         confirmProfileDeleteForm.style.display = "none";
         passwordSignup.type = "password";
-        showPasswordButtonImageSignup.src = "src/assets/eye-off.svg";
+        showPasswordButtonImageSignup.src = "/assets/eye-off.svg";
 
         loginForm.reset();
         break;
@@ -181,7 +181,7 @@ export function registerEventListeners() {
         profileForm.style.display = "none";
         confirmProfileDeleteForm.style.display = "none";
         passwordLogin.type = "password";
-        showPasswordButtonImageLogin.src = "src/assets/eye-off.svg";
+        showPasswordButtonImageLogin.src = "/assets/eye-off.svg";
 
         signupForm.reset();
         break;
@@ -195,7 +195,7 @@ export function registerEventListeners() {
         profileForm.style.display = "flex";
         confirmProfileDeleteForm.style.display = "none";
         passwordProfile.type = "password";
-        showPasswordButtonImageProfile.src = "src/assets/eye-off.svg";
+        showPasswordButtonImageProfile.src = "/assets/eye-off.svg";
 
         // Populates the profile form fields
         firstNameProfileInput.value = state.currentUser.firstName;
