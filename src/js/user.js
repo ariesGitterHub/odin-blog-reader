@@ -8,7 +8,6 @@ export function updateProfile(userData) {
   return put("/api/user/profile", userData);
 }
 
-//  TODO - check where this function is being used...
 // NOTE - userId is not needed here since the backend gets the ID from the authenticated JWT
 export function deleteProfile() {
   return del("/api/user/profile");

@@ -8,8 +8,6 @@ import {
 import { createDivRow } from "./reusables.js";
 
 export function renderPosts(posts, currentUser) {
-  console.log("currentUser ==> ", currentUser);
-
   const postsContainer = document.querySelector("#posts");
 
   postsContainer.replaceChildren();
@@ -34,13 +32,6 @@ function renderPost(post, currentUser) {
   postArticle.append(postTitle, postTimestamp, hrLine, postMessage);
 
   if (currentUser) {
-    // const commentButtonRow = createElement(
-    //   "div",
-    //   "",
-    //   "row-container",
-    //   "justify-content-start",
-    //   "margin-post-button-rows",
-    // );
     const commentButtonRow = createDivRow(
       "justify-content-start",
       "margin-post-button-rows",
@@ -56,16 +47,19 @@ function renderPost(post, currentUser) {
     // Identify which post the button belongs to.
     commentButton.dataset.postId = post.id;
 
-    // Comment Draft DOM els should go after comment button, and be singular
+    // Comment Draft DOM elements should go after comment button, and be singular
     const createComment = renderCreateCommentForm(post.id);
 
-    commentButtonRow.append(commentButton)
+    commentButtonRow.append(commentButton);
     postArticle.append(commentButtonRow, createComment);
   }
 
   post.comments.forEach((comment) => {
     const renderExistingComment = renderComment(comment, currentUser);
-    const renderUpdateComment = renderUpdateCommentForm(comment.id, comment.commentMessage);
+    const renderUpdateComment = renderUpdateCommentForm(
+      comment.id,
+      comment.commentMessage,
+    );
     postArticle.append(renderExistingComment, renderUpdateComment);
   });
 
@@ -101,34 +95,26 @@ function renderComment(comment, currentUser) {
   );
 
   // Ownership information can be used here to conditionally render the edit button once the current-user comparison is defined.
+  if (currentUser !== null && currentUser.id === comment.user.id) {
+    const editButtonRow = createDivRow(
+      "justify-content-end",
+      "margin-post-button-rows",
+    );
 
-    if (currentUser !== null && currentUser.id === comment.user.id) {
-      // const editButtonRow = createElement(
-      //   "div",
-      //   "",
-      //   "row-container",
-      //   "justify-content-end",
-      //   "margin-post-button-rows",
-      // );
-      const editButtonRow = createDivRow(
-        "justify-content-end",
-        "margin-post-button-rows",
-      );
+    const editCommentButton = createButton(
+      "button",
+      "Edit",
+      "open-update-comment-form", // This data-action triggers case of the same name in events.js
+      "edit-comment-button",
+    );
 
-      const editCommentButton = createButton(
-        "button",
-        "Edit",
-        "open-update-comment-form", // This data-action triggers case of the same name in events.js
-        "edit-comment-button",
-      );
+    editCommentButton.dataset.commentId = comment.id;
 
-      editCommentButton.dataset.commentId = comment.id;
+    const deleteCommentButton = renderDeleteCommentForm(comment.id);
 
-      const deleteCommentButton = renderDeleteCommentForm(comment.id);
-
-      editButtonRow.append(editCommentButton, deleteCommentButton);
-      commentArticle.append(editButtonRow);
-    }
+    editButtonRow.append(editCommentButton, deleteCommentButton);
+    commentArticle.append(editButtonRow);
+  }
 
   return commentArticle;
 }

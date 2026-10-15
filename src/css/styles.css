@@ -113,8 +113,20 @@ header {
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
+  border: var(--border-basic);
+
   border-radius: var(--spacer-big);
   margin: var(--spacer-big);
+  padding: var(--spacer-big);
+}
+
+.sticky-header {
+  position: sticky;
+  top: 0;
+  /* width: 100%; */
+  /* Below fixes the issue of trying to guess what the width should be in a sticky header */
+  width: auto;
+  backdrop-filter: blur(50px);
 }
 
 .app-logo-image {
@@ -123,9 +135,9 @@ header {
 }
 
 .logged-in {
-  background-color: var(--blue-gray);
+  background-color: var(--blue-dk);
   border: var(--border-basic);
-  border-color: var(--blue);
+  border-color: var(--red);
   border-radius: var(--spacer-big);
   font-family: var(--font-heading);
 }
@@ -344,6 +356,7 @@ label {
 
 input {
   height: 1.25rem;
+  /* Below works for me */
   width: 96%;
   background-color: var(--white);
   border: var(--border-basic);
@@ -435,6 +448,10 @@ textarea {
   margin-bottom: var(--spacer-big);
   text-align: left;
   text-transform: uppercase;
+}
+
+.error-header {
+  margin-bottom: -0.5rem;
 }
 
 /* *** Flex-box related */

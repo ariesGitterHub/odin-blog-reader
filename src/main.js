@@ -16,7 +16,7 @@ async function init() {
 
   const postData = await getPublishedBlogPosts();
   state.posts = postData.posts;
-  // renderPosts(postData.posts, state.currentUser);
+
   renderPosts(state.posts, state.currentUser);
 
   renderModal();

@@ -32,7 +32,10 @@ export function registerEventListeners() {
   const errorMessageLogin = document.querySelector(".error-login");
   const errorMessageSignup = document.querySelector(".error-signup");
   const errorMessageProfile = document.querySelector(".error-profile");
-  const errorMessageComment = document.querySelector(".error-comment"); // TODO - fix this for delete, need a div that can be seen without a form...
+  const errorMessageConfirmProfileDelete = document.querySelector(
+    ".error-confirm-profile-delete",
+  );
+  const errorMessageHeader = document.querySelector(".error-header"); // TODO - fix this for delete, need a div that can be seen without a form...
 
   // Needed for show-password-button
   const passwordLogin = document.querySelector("#password-login");
@@ -126,7 +129,6 @@ export function registerEventListeners() {
 
     charCountTargetElement.addEventListener("input", () => {
       const charCount = charCountTargetElement.value.length;
-      // console.log("Test of charCount...", charCount);
 
       maxCharLimitMessage.textContent = `${charCount}/255 Characters`;
     });
@@ -168,6 +170,7 @@ export function registerEventListeners() {
         confirmProfileDeleteForm.style.display = "none";
         passwordSignup.type = "password";
         showPasswordButtonImageSignup.src = "src/assets/eye-off.svg";
+
         loginForm.reset();
         break;
 
@@ -179,6 +182,7 @@ export function registerEventListeners() {
         confirmProfileDeleteForm.style.display = "none";
         passwordLogin.type = "password";
         showPasswordButtonImageLogin.src = "src/assets/eye-off.svg";
+
         signupForm.reset();
         break;
 
@@ -201,8 +205,12 @@ export function registerEventListeners() {
         break;
 
       case "close-modal":
-        // Close the modal; this can stay simple with only setting the modal to display = none, as the two modal openers above do the job in directing me to the desired form
         modalContainer.style.display = "none";
+        errorMessageLogin.textContent = "";
+        errorMessageSignup.textContent = "";
+        errorMessageProfile.textContent = "";
+        errorMessageConfirmProfileDelete.textContent = "";
+        errorMessageHeader.textContent = ""; // TODO - check this to make sure it works
         break;
 
       case "clear-form":
@@ -210,7 +218,8 @@ export function registerEventListeners() {
         errorMessageLogin.textContent = "";
         errorMessageSignup.textContent = "";
         errorMessageProfile.textContent = "";
-        // errorMessageComment.textContent = ""; // TODO - check this to make sure it works
+        errorMessageConfirmProfileDelete.textContent = "";
+        errorMessageHeader.textContent = ""; // TODO - check this to make sure it works
 
         loginForm.reset();
         signupForm.reset();
@@ -274,13 +283,14 @@ export function registerEventListeners() {
           // Refresh state.posts and posts
           await refreshPosts();
 
-          // TODO...HERE
-
-          // Reset the form do no data lingers on a subsequent viewing
+          // Reset the forms so no data lingers on a subsequent viewing
           loginForm.reset();
-          console.log("✋Logged out, goodbye!");
+          signupForm.reset();
+
+          console.log("✋ Logged out, goodbye!");
         } catch (err) {
           console.error("Logout failed:", err);
+          errorMessageHeader.textContent = err.message;
         }
         break;
     }
@@ -322,9 +332,6 @@ export function registerEventListeners() {
         // Set the state.currentUser
         state.currentUser = loginData.user;
 
-        // Refresh state.posts
-        state.posts = postData.posts;
-
         // Refresh state.posts and posts
         renderHeader(state.currentUser);
 
@@ -333,9 +340,14 @@ export function registerEventListeners() {
 
         modalContainer.style.display = "none";
 
-        // TODO...HERE
+        errorMessageLogin.textContent = "";
 
-        console.log("🎈Login successful:", state.currentUser);
+        // Reset all forms
+        loginForm.reset();
+        signupForm.reset();
+        profileForm.reset();
+
+        console.log("🎈 Login successful:", state.currentUser);
       } catch (err) {
         console.error("Login failed:", err);
         errorMessageLogin.textContent = err.message;
@@ -361,6 +373,15 @@ export function registerEventListeners() {
         loginForm.style.display = "flex";
         signupForm.style.display = "none";
         profileForm.style.display = "none";
+
+        errorMessageSignup.textContent = "";
+
+        // Reset all forms
+        loginForm.reset();
+        signupForm.reset();
+        profileForm.reset();
+
+        console.log("✍ Signup successful:", state.currentUser);
       } catch (err) {
         console.error("Signup failed:", err);
         errorMessageSignup.textContent = err.message;
@@ -386,9 +407,16 @@ export function registerEventListeners() {
         // Refresh state.posts and posts
         await refreshPosts();
 
-        // TODO...HERE
         modalContainer.style.display = "none";
-        console.log("😀Profile update successful:", state.currentUser);
+
+        errorMessageProfile.textContent = "";
+
+        // Reset all forms
+        loginForm.reset();
+        signupForm.reset();
+        profileForm.reset();
+
+        console.log("😀 Profile update successful:", state.currentUser);
       } catch (err) {
         console.error("Profile update failed:", err);
         errorMessageProfile.textContent = err.message;
@@ -400,20 +428,16 @@ export function registerEventListeners() {
         const confirmDeletion = await deleteProfile();
 
         // Reset the state.currentUser
-        // TODO - double check to ensure user  is deleted from db
         state.currentUser = null;
         renderHeader(state.currentUser);
 
+        // Refresh state.posts and posts
         await refreshPosts();
 
         // Reset modalContainer and confirmProfileDeleteForm to display = none
         modalContainer.style.display = "none";
         confirmProfileDeleteForm.style.display = "none";
-
-        errorMessageLogin.textContent = "";
-        errorMessageSignup.textContent = "";
-        errorMessageProfile.textContent = "";
-        // errorMessageComment.textContent = ""; // TODO - check this to make sure it works
+        errorMessageConfirmProfileDelete.textContent = "";
 
         // Reset all forms
         loginForm.reset();
@@ -423,7 +447,7 @@ export function registerEventListeners() {
         console.log("💀 User account deleted");
       } catch (err) {
         console.error("Profile account deletion failed:", err);
-        errorMessageLogin.textContent = err.message;
+        errorMessageConfirmProfileDelete.textContent = err.message;
       }
     }
 
@@ -444,19 +468,13 @@ export function registerEventListeners() {
           commentDraftMessage,
         );
 
-        // const profileData = await updateProfile();
-        // // Update the state.currentUser
-        // state.currentUser = profileData.user;
-
         // Refresh state.posts and posts
         await refreshPosts();
-
-        // TODO...HERE
 
         console.log("Comment created", commentData);
       } catch (err) {
         console.error("Comment creation failed:", err);
-        errorMessageComment.textContent = err.message;
+        errorMessageHeader.textContent = err.message;
       }
     }
 
@@ -479,31 +497,23 @@ export function registerEventListeners() {
           commentUpdateMessage,
         );
 
-        console.log("Comment update", commentUpdateData);
-
-        // const profileData = await updateProfile();
-        // Update the state.currentUser
-        // state.currentUser = profileData.user;
-
         // Refresh header
         renderHeader(state.currentUser);
 
         // Refresh state.posts and posts
         await refreshPosts();
 
-        // TODO...HERE
-
+        console.log("Comment update", commentUpdateData);
       } catch (err) {
         console.error("Comment update failed:", err);
-        errorMessageComment.textContent = err.message;
+        errorMessageHeader.textContent = err.message;
       }
     }
 
     // Delete Comment
-    // NOTE - these are hard deletes with no warning message
+    // NOTE - these are hard deletes by design with no warning message
     if (form.matches(".delete-comment-form")) {
       const commentId = form.dataset.commentId;
-      console.log("form.dataset.commentId === ", commentId);
 
       try {
         const deleteCommentData = await deleteBlogComment(
@@ -511,20 +521,13 @@ export function registerEventListeners() {
           commentId,
         );
 
-        console.log("Comment deleted", deleteCommentData);
-
-        // const profileData = await updateProfile();
-        // Update the state.currentUser
-        // state.currentUser = profileData.user;
         // Refresh state.posts and posts
-
         await refreshPosts();
 
-        // TODO...HERE
-
+        console.log("Comment deleted", deleteCommentData);
       } catch (err) {
         console.error("Comment deletion failed:", err);
-        errorMessageComment.textContent = err.message;
+        errorMessageHeader.textContent = err.message;
       }
     }
   });

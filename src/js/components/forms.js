@@ -18,12 +18,6 @@ import {
 export function renderLoginForm() {
   const loginForm = createElement("form", "", "login-form");
 
-  // const titleRow = createElement(
-  //   "div",
-  //   "",
-  //   "row-container",
-  //   "justify-content-start",
-  // );
   const titleRow = createDivRow("justify-content-start");
 
   const appLogo = createImage("/favicon.svg", "Quill logo", "app-logo-image");
@@ -45,7 +39,6 @@ export function renderLoginForm() {
 
   const passwordLabel = createLabel("password-login", "Password");
 
-  // const passwordRow = createElement("div", "", "row-container");
   const passwordRow = createDivRow();
 
   const passwordInput = createInput(
@@ -56,13 +49,6 @@ export function renderLoginForm() {
     true,
   );
   passwordInput.setAttribute("autocomplete", "current-password");
-
-  // const showPasswordButton = createButton(
-  //   "button",
-  //   "",
-  //   "show-password-toggle", // This data-action triggers case of the same name in events.js
-  //   "show-password-button",
-  // );
 
   const showPasswordButton = createShowPasswordButton();
 
@@ -76,26 +62,12 @@ export function renderLoginForm() {
     "show-password-button-image-login",
   );
 
-  // const buttonRow = createElement(
-  //   "div",
-  //   "",
-  //   "row-container",
-  //   "full-width",
-  //   "gap",
-  //   "margin-top-bottom",
-  // );
-const buttonRow = createDivRow("full-width", "gap", "margin-top-bottom",)
+  const buttonRow = createDivRow("full-width", "gap", "margin-top-bottom");
 
   // const submitButton = createButton("submit", "Submit", "", "full-width");
 
   const submitButton = createSubmitButton();
   submitButton.classList.add("full-width");
-  // const clearButton = createButton(
-  //   "button",
-  //   "Clear",
-  //   "clear-form", // This data-action triggers case of the same name in events.js
-  //   "full-width",
-  // );
 
   const clearButton = createClearButton();
 
@@ -131,12 +103,6 @@ const buttonRow = createDivRow("full-width", "gap", "margin-top-bottom",)
 export function renderSignupForm() {
   const signupForm = createElement("form", "", "signup-form");
 
-  // const titleRow = createElement(
-  //   "div",
-  //   "",
-  //   "row-container",
-  //   "justify-content-start",
-  // );
   const titleRow = createDivRow("justify-content-start");
 
   const appLogo = createImage("/favicon.svg", "Quill logo", "app-logo-image");
@@ -183,7 +149,6 @@ export function renderSignupForm() {
 
   const passwordLabel = createLabel("password-signup", "Password");
 
-  // const passwordRow = createElement("div", "", "row-container");
   const passwordRow = createDivRow();
 
   const passwordInput = createInput(
@@ -194,13 +159,6 @@ export function renderSignupForm() {
     true,
   );
   passwordInput.setAttribute("autocomplete", "new-password");
-
-  // const showPasswordButton = createButton(
-  //   "button",
-  //   "",
-  //   "show-password-toggle", // This data-action triggers case of the same name in events.js
-  //   "show-password-button",
-  // );
 
   const showPasswordButton = createShowPasswordButton();
 
@@ -215,26 +173,10 @@ export function renderSignupForm() {
     "show-password-button-image-signup",
   );
 
-  // const buttonRow = createElement(
-  //   "div",
-  //   "",
-  //   "row-container",
-  //   "full-width",
-  //   "gap",
-  //   "margin-top-bottom",
-  // );
   const buttonRow = createDivRow("full-width", "gap", "margin-top-bottom");
 
-  // TODO - instead take the user immediately to the login page after signing up!
-  // const submitButton = createButton("submit", "Submit", "", "full-width");
   const submitButton = createSubmitButton();
   submitButton.classList.add("full-width");
-  // const clearButton = createButton(
-  //   "button",
-  //   "Clear",
-  //   "clear-form", // This data-action triggers case of the same name in events.js
-  //   "full-width",
-  // );
 
   const clearButton = createClearButton();
 
@@ -274,12 +216,6 @@ export function renderSignupForm() {
 export function renderProfileForm() {
   const profileForm = createElement("form", "", "profile-form");
 
-  // const titleRow = createElement(
-  //   "div",
-  //   "",
-  //   "row-container",
-  //   "justify-content-start",
-  // );
   const titleRow = createDivRow("justify-content-start");
 
   const appLogo = createImage("/favicon.svg", "Quill logo", "app-logo-image");
@@ -315,7 +251,6 @@ export function renderProfileForm() {
 
   const passwordLabel = createLabel("password-profile", "New Password");
 
-  // const passwordRow = createElement("div", "", "row-container");
   const passwordRow = createDivRow();
 
   const passwordInput = createInput(
@@ -326,13 +261,6 @@ export function renderProfileForm() {
   );
 
   passwordInput.setAttribute("autocomplete", "new-password");
-
-  // const showPasswordButton = createButton(
-  //   "button",
-  //   "",
-  //   "show-password-toggle", // This data-action triggers case of the same name in events.js
-  //   "show-password-button",
-  // );
 
   const showPasswordButton = createShowPasswordButton();
 
@@ -347,25 +275,10 @@ export function renderProfileForm() {
     "show-password-button-image-profile",
   );
 
-  // const buttonRow = createElement(
-  //   "div",
-  //   "",
-  //   "row-container",
-  //   "full-width",
-  //   "gap",
-  //   "margin-top",
-  // );
   const buttonRow = createDivRow("full-width", "gap", "margin-top");
 
-  // const submitButton = createButton("submit", "Submit", "", "full-width");
   const submitButton = createSubmitButton();
   submitButton.classList.add("full-width");
-  // const clearButton = createButton(
-  //   "button",
-  //   "Clear",
-  //   "clear-form", // This data-action triggers case of the same name in events.js
-  //   "full-width",
-  // );
 
   const clearButton = createClearButton();
 
@@ -418,6 +331,13 @@ export function renderConfirmProfileDeleteForm() {
     "error-message",
   );
 
+  const errorMessage = createElement(
+    "div",
+    "",
+    "error-confirm-profile-delete",
+    "error-message",
+  );
+
   const hrLineBottom = createElement("hr", "", "hr-line-warning");
 
   // Submits the actual account profile deletion
@@ -433,16 +353,9 @@ export function renderConfirmProfileDeleteForm() {
     "button",
     "Cancel",
     "close-profile-delete-confirmation", // This data-action triggers case of the same name in events.js
-    // "full-width",
+    "full-width",
   );
 
-  // const buttonRow = createElement(
-  //   "div",
-  //   "",
-  //   "row-container",
-  //   "full-width",
-  //   "gap",
-  // );
   const buttonRow = createDivRow("full-width", "gap");
 
   buttonRow.append(confirmProfileDeleteButton, cancelProfileDeleteButton);
@@ -450,6 +363,7 @@ export function renderConfirmProfileDeleteForm() {
   confirmProfileDeleteForm.append(
     hrLineTop,
     deleteProfileMessage,
+    errorMessage,
     hrLineBottom,
     buttonRow,
   );
@@ -463,14 +377,7 @@ export function renderCreateCommentForm(postId) {
 
   const createCommentDiv = createElement("div", "", "create-comment-div");
 
-  // const messageRow = createElement(
-  //   "div",
-  //   "",
-  //   "row-container",
-  //   "gap",
-  //   "justify-content-start",
-  // );
-const messageRow = createDivRow("gap", "justify-content-start");
+  const messageRow = createDivRow("gap", "justify-content-start");
 
   const maxCharLimitMessage = createElement(
     "p",
@@ -484,20 +391,7 @@ const messageRow = createDivRow("gap", "justify-content-start");
   textArea.name = "comment_message";
   textArea.maxLength = 255;
 
-  // const buttonRow = createElement(
-  //   "div",
-  //   "",
-  //   "row-container",
-  //   "justify-content-end",
-  // );
   const buttonRow = createDivRow("justify-content-end");
-
-  // const submitButton = createButton(
-  //   "submit",
-  //   "Submit",
-  //   "",
-  //   "submit-comment-button",
-  // );
 
   const submitButton = createSubmitButton();
   submitButton.dataset.postId = postId;
@@ -506,8 +400,6 @@ const messageRow = createDivRow("gap", "justify-content-start");
     "button",
     "Cancel",
     "cancel-create-comment-form", // This data-action triggers case of the same name in events.js
-    // "cancel-comment-button",
-    // "full-width",
   );
 
   cancelButton.dataset.postId = postId;
@@ -528,13 +420,6 @@ export function renderUpdateCommentForm(commentId, commentMessage) {
 
   const updateCommentDiv = createElement("div", "", "update-comment-div");
 
-  // const messageRow = createElement(
-  //   "div",
-  //   "",
-  //   "row-container",
-  //   "gap",
-  //   "justify-content-start",
-  // );
   const messageRow = createDivRow("gap", "justify-content-start");
 
   const maxCharLimitMessage = createElement(
@@ -550,20 +435,7 @@ export function renderUpdateCommentForm(commentId, commentMessage) {
   textArea.value = commentMessage;
   textArea.maxLength = 255;
 
-  // const buttonRow = createElement(
-  //   "div",
-  //   "",
-  //   "row-container",
-  //   "justify-content-end",
-  // );
   const buttonRow = createDivRow("justify-content-end");
-
-  // const submitButton = createButton(
-  //   "submit",
-  //   "Update",
-  //   "",
-  //   "update-comment-button",
-  // );
 
   const submitButton = createSubmitButton();
   submitButton.dataset.commentId = commentId;
@@ -572,8 +444,6 @@ export function renderUpdateCommentForm(commentId, commentMessage) {
     "button",
     "Cancel",
     "cancel-update-comment-form", // This data-action triggers case of the same name in events.js
-    // "cancel-update-comment-button",
-    // "full-width",
   );
 
   cancelButton.dataset.commentId = commentId;
@@ -591,7 +461,9 @@ export function renderUpdateCommentForm(commentId, commentMessage) {
 export function renderDeleteCommentForm(commentId) {
   const deleteCommentForm = createElement("form", "", "delete-comment-form");
   deleteCommentForm.dataset.commentId = commentId;
-  // TODO - NOTE - can't use createButton function helper from template.js here, as this --> "" , is not working to prevent data-action from filling in the next item into its place
+
+  // NOTE - below, I can't use createButton function helper from template.js here, as this --> "" , is not working to prevent data-action from filling in the next item into its place
+
   // const deleteCommentButton = createButton(
   //   "button",
   //   "Delete",
@@ -600,6 +472,7 @@ export function renderDeleteCommentForm(commentId) {
   //   "delete-comment-button",
   // );
 
+  // Cont'd, instead I am just creating this button the regular way
   const deleteCommentButton = document.createElement("button");
   deleteCommentButton.textContent = "Delete";
   deleteCommentButton.classList.add("delete-comment-button");

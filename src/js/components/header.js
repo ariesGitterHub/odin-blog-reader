@@ -3,8 +3,9 @@ import { createDivRow } from "./reusables.js";
 
 export function renderHeader(currentUser) {
   const headerContainer = document.querySelector("header");
+  headerContainer.classList.add("sticky-header");
 
-  // Clear the previous #header.  TODO - should I use .replaceChildren elsewhere, rather than use a location.reload()
+  // Clear the previous #header.
   headerContainer.replaceChildren();
 
   const topRow = createElement(
@@ -14,12 +15,6 @@ export function renderHeader(currentUser) {
     "justify-content-space-between",
   );
 
-  // const titleRow = createElement(
-  //   "div",
-  //   "",
-  //   "row-container",
-  //   "justify-content-start",
-  // );
   const titleRow = createDivRow("justify-content-start");
   const appLogo = createImage("/favicon.svg", "Quill logo", "app-logo-image");
   const title = createElement("h1", "Bloggie");
@@ -46,6 +41,11 @@ export function renderHeader(currentUser) {
         ),
       ];
 
+  // NOTE - I am using errorMessage and errorMessageParagraph below as catch all error message UI elements due to their noticeable location in the sticky header; this is so that the user will always be able to see it; this also lets me use a single location, making it easier to code :-)
+  const errorMessage = createElement("div", "", "error-message");
+
+  const errorMessageParagraph = createElement("p", "", "error-header");
+
   buttonContainer.append(...authControls);
   titleRow.append(appLogo, title);
   topRow.append(titleRow, buttonContainer);
@@ -56,11 +56,13 @@ export function renderHeader(currentUser) {
   const loginMessage = createElement(
     "p",
     currentUser
-      ? `Welcome back ${currentUser.firstName} ${currentUser.lastName}.`
+      ? `Welcome back ${currentUser.firstName}!`
       : "Please log in to comment.",
   );
 
   bottomRow.append(loginMessage);
 
-  headerContainer.append(topRow, bottomRow);
+  errorMessage.append(errorMessageParagraph);
+
+  headerContainer.append(topRow, bottomRow, errorMessage);
 }

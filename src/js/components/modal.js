@@ -16,12 +16,6 @@ export function renderModal() {
 
   const modalContent = createElement("div", "", "modal-content");
 
-  // const buttonRow = createElement(
-  //   "div",
-  //   "",
-  //   "row-container",
-  //   "justify-content-end",
-  // );
   const buttonRow = createDivRow("justify-content-end");
 
   const closeModalButton = createButton(
