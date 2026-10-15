@@ -36,7 +36,7 @@
   --space-medium: 0.25rem;
   --spacer-small: 0.125rem;
 
-  font: 16px/145% var(--font-sans);
+  font: 14px/145% var(--font-sans);
   letter-spacing: 0.18px;
   color: var(--gray);
   background: var(--blue-dk);
@@ -50,6 +50,10 @@
   /* NOTE - I like this new way I am using media queries and and handling transitions between sizings */
 
   transition: ease all 0.5s;
+
+  @media (min-width: 340px) {
+    font-size: 16px;
+  }
 
   @media (min-width: 512px) {
     font-size: 20px;
