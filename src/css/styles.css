@@ -6,7 +6,7 @@
   --gray: #9c9aa7;
   --white: #e9e9f1;
   --red: #7f3d3d;
-  --red-trans: #7f3d3dea;
+  /* --red-trans: #7f3d3dea; */
   --yellow: #dfd810;
   --blue: #2e303a;
   --blue-trans: #2e303aea;
@@ -162,6 +162,7 @@ button {
   border: var(--border-basic);
   border-color: var(--red);
   border-radius: var(--spacer-big);
+  color: var(--black);
   cursor: pointer;
   font-family: var(--font-mono);
   font-size: var(--font-size-small);
@@ -366,6 +367,7 @@ input {
   border: var(--border-basic);
   border-color: var(--gray);
   border-radius: var(--spacer-big);
+  color: var(--black);
   font-size: var(--font-size-normal);
   margin-bottom: var(--spacer-big);
   padding-left: var(--space-medium);

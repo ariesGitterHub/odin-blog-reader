@@ -35,7 +35,7 @@ export function registerEventListeners() {
   const errorMessageConfirmProfileDelete = document.querySelector(
     ".error-confirm-profile-delete",
   );
-  const errorMessageHeader = document.querySelector(".error-header"); // TODO - fix this for delete, need a div that can be seen without a form...
+  const errorMessageHeader = document.querySelector(".error-header");
 
   // Needed for show-password-button
   const passwordLogin = document.querySelector("#password-login");
@@ -210,7 +210,7 @@ export function registerEventListeners() {
         errorMessageSignup.textContent = "";
         errorMessageProfile.textContent = "";
         errorMessageConfirmProfileDelete.textContent = "";
-        errorMessageHeader.textContent = ""; // TODO - check this to make sure it works
+        errorMessageHeader.textContent = "";
         break;
 
       case "clear-form":
@@ -219,7 +219,7 @@ export function registerEventListeners() {
         errorMessageSignup.textContent = "";
         errorMessageProfile.textContent = "";
         errorMessageConfirmProfileDelete.textContent = "";
-        errorMessageHeader.textContent = ""; // TODO - check this to make sure it works
+        errorMessageHeader.textContent = "";
 
         loginForm.reset();
         signupForm.reset();
