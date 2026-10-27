@@ -83,6 +83,7 @@ export function renderLoginForm() {
     "button",
     "*No account? Click to sign up!",
     "signup-instead", // This data-action triggers case of the same name in events.js
+    "fit-content-height",
     "full-width",
   );
 
@@ -192,6 +193,7 @@ export function renderSignupForm() {
     "button",
     "*Already have an account? Please click here to login.",
     "login-instead", // This data-action triggers case of the same name in events.js
+    "fit-content-height",
     "full-width",
   );
 
