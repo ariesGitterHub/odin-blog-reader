@@ -23,13 +23,29 @@ function renderPost(post, currentUser) {
 
   const postTitle = createElement("h2", post.postTitle);
 
+  const postDetailsRow = createElement(
+    "div",
+    "",
+    "row-container",
+    "justify-contents-start",
+    "post-details-row",
+  );
+
+  const postAuthor = createElement(
+    "p",
+    `By: ${post.user.firstName} ${post.user.lastName}`,
+    "post-author",
+  );
+
   const postTimestamp = renderTimestamp(post.createdAt, post.updatedAt);
 
   const postMessage = createElement("p", post.postMessage, "post-message");
 
   const hrLine = createElement("hr", "", "hr-line-post");
 
-  postArticle.append(postTitle, postTimestamp, hrLine, postMessage);
+  postDetailsRow.append(postAuthor, postTimestamp);
+
+  postArticle.append(postTitle, postDetailsRow, hrLine, postMessage);
 
   if (currentUser) {
     const commentButtonRow = createDivRow(

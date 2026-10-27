@@ -266,6 +266,14 @@ button:hover {
   text-wrap: wrap;
 }
 
+.post-details-row {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 0;
+  margin-top: var(--spacer-big);
+}
+
 .post-article-comment {
   display: block;
   background-color: var(--blue-gray);
