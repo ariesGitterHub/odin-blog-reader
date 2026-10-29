@@ -21,7 +21,7 @@ export function renderModal() {
   const closeModalButton = createButton(
     "button",
     "✖",
-    "close-modal", // This data-action triggers case of the same name in events.js
+    "close-modal",
     "close-modal-button",
   );
 
@@ -39,5 +39,6 @@ export function renderModal() {
     profileForm,
     profileDeleteForm,
   );
+
   modalContainer.append(modalContent);
 }

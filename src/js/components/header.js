@@ -20,9 +20,7 @@ export function renderHeader(currentUser) {
   const appLogo = createImage("/favicon.svg", "Quill logo", "app-logo-image");
   const title = createElement("h1", "Bloggie");
 
-    const buttonContainer = createDivRow(
-      "justify-content-end",
-    );
+  const buttonContainer = createDivRow("justify-content-end");
 
   // Below selects the appropriate authentication controls based on whether currentUser is logged in
   const authControls = currentUser
@@ -31,18 +29,11 @@ export function renderHeader(currentUser) {
         createButton(
           "button",
           "Profile",
-          "open-modal-profile", // This data-action triggers case of the same name in events.js
+          "open-modal-profile", // NOTE - this data-action triggers case of the same name in events.js; I use this set up throughout blog-reader and blog-writer
           "profile-button",
         ),
       ]
-    : [
-        createButton(
-          "button",
-          "Login",
-          "open-modal-login", // This data-action triggers case of the same name in events.js
-          "login-button",
-        ),
-      ];
+    : [createButton("button", "Login", "open-modal-login", "login-button")];
 
   // NOTE - I am using errorMessage and errorMessageParagraph below as catch all error message UI elements due to their noticeable location in the sticky header; this is so that the user will always be able to see it; this also lets me use a single location, making it easier to code :-)
   const errorMessage = createElement("div", "", "error-message");

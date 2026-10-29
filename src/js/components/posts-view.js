@@ -56,14 +56,13 @@ function renderPost(post, currentUser) {
     const commentButton = createButton(
       "button",
       "Comment",
-      "open-create-comment-form", // This data-action triggers case of the same name in events.js
-      "comment-button",
+      "open-create-comment-form",
     );
 
     // Identify which post the button belongs to.
     commentButton.dataset.postId = post.id;
 
-    // Comment Draft DOM elements should go after comment button, and be singular
+    // Create Comment Form DOM elements should go after comment button, and be singular
     const createComment = renderCreateCommentForm(post.id);
 
     commentButtonRow.append(commentButton);
@@ -110,7 +109,7 @@ function renderComment(comment, currentUser) {
     commentMessage,
   );
 
-  // Ownership information can be used here to conditionally render the edit button once the current-user comparison is defined.
+  // NOTE - ownership information can be used here to conditionally render the edit button once the current-user comparison is defined.
   if (currentUser !== null && currentUser.id === comment.user.id) {
     const editButtonRow = createDivRow(
       "justify-content-end",
@@ -120,7 +119,7 @@ function renderComment(comment, currentUser) {
     const editCommentButton = createButton(
       "button",
       "Edit",
-      "open-update-comment-form", // This data-action triggers case of the same name in events.js
+      "open-update-comment-form",
       "edit-comment-button",
     );
 

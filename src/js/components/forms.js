@@ -81,7 +81,7 @@ export function renderLoginForm() {
 
   const oopsNeedSignupButton = createButton(
     "button",
-    "*No account? Click to sign up!",
+    "*No account? Please click here to sign up!",
     "signup-instead", // This data-action triggers case of the same name in events.js
     "fit-content-height",
     "full-width",
