@@ -6,7 +6,6 @@
   --gray: #9c9aa7;
   --white: #e9e9f1;
   --red: #ae5050;
-  /* --red: #7f3d3d; */
   --yellow: #dfd810;
   --blue: #2e303a;
   --blue-trans: #2e303aea;
@@ -20,7 +19,7 @@
 
   --font-size-title-1: 1.5rem;
   --font-size-title-2: 1.25rem;
-  --font-size-title-3: 1.125rem;
+  --font-size-title-3: 0.9rem;
   --font-size-normal: 1rem;
   --font-size-small: 0.8rem;
 
@@ -33,7 +32,7 @@
 
   /*** Spacing */
   --spacer-big: 0.5rem;
-  --space-medium: 0.25rem;
+  --spacer-medium: 0.25rem;
   --spacer-small: 0.125rem;
 
   font: 14px/145% var(--font-sans);
@@ -47,10 +46,10 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  /* NOTE - I like this new way I am using media queries and and handling transitions between sizings */
-
+  /*** Transition when increasing screen size and elements grow via @media below */
   transition: ease all 0.5s;
 
+  /* NOTE - I like this new way I am using media queries and and handling transitions between sizings */
   @media (min-width: 340px) {
     font-size: 16px;
   }
@@ -85,8 +84,10 @@ body {
   margin: 0 auto;
 }
 
-  /* Also, below fixed those few input fields that were pushing outside the parent container's boundaries due to padding */
-*, *:before, *:after {
+/* Also, below fixed those few input fields that were pushing outside the parent container's boundaries due to padding */
+*,
+*:before,
+*:after {
   box-sizing: inherit;
 }
 
@@ -95,11 +96,11 @@ h2,
 h3 {
   color: var(--white);
   font-family: var(--font-heading);
-  /* font-weight: 500; */
 }
 
-h2, h3 {
-  font-weight: 500;  
+h2,
+h3 {
+  font-weight: 500;
 }
 
 h1 {
@@ -113,7 +114,6 @@ h2 {
 
 h3 {
   font-size: var(--font-size-title-3);
-  text-transform: uppercase;
 }
 
 h1,
@@ -121,7 +121,7 @@ h2,
 h3,
 p {
   margin: 0;
-  padding: 0
+  padding: 0;
 }
 
 header {
@@ -131,23 +131,24 @@ header {
   align-items: center;
   justify-content: center;
   border: var(--border-basic);
-
   border-radius: var(--spacer-big);
   margin: var(--spacer-big);
   padding: var(--spacer-big);
 }
 
+header .error-message {
+  margin: 0;
+}
+
 .sticky-header {
   position: sticky;
   top: 0;
-  /* width: 100%; */
   /* Below fixes the issue of trying to guess what the width should be in a sticky header */
   width: auto;
   backdrop-filter: blur(50px);
 }
 
 .app-logo-image {
-  /* height: var(--font-size-title-1); */
   height: 1.25rem;
   width: auto;
   margin: 0;
@@ -157,7 +158,7 @@ header {
   background-color: var(--blue-dk);
   border: var(--border-basic);
   border-color: var(--red);
-  border-radius: var(--spacer-big);
+  border-radius: var(--spacer-medium);
   font-family: var(--font-heading);
 }
 
@@ -185,7 +186,7 @@ button {
   font-family: var(--font-mono);
   font-size: var(--font-size-small);
   letter-spacing: 1px;
-  padding: var(--spacer-small) var(--space-medium);
+  padding: var(--spacer-small) var(--spacer-medium);
   text-transform: uppercase;
 }
 
@@ -243,26 +244,18 @@ button:hover {
 }
 
 /* Containers */
-
 .row-container {
   height: 2rem;
   width: 100%;
-   display: flex;
+  display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: var(--space-medium);
+  gap: var(--spacer-medium);
 }
 
-/*** Specific Containers  */
-/* .basic-container {
-  display: flex;
-  gap: var(--spacer-big);
-  margin-bottom: var(--spacer-big);
-} */
-
-/* Posts and Comments */
-
+/* Sections: Posts( and Comments), Modal */
+/*** Posts( and Comments) */
 #posts {
   display: flex;
   flex-direction: column;
@@ -278,7 +271,7 @@ button:hover {
   background-color: var(--black);
   border: var(--border-basic);
   border-color: var(--red);
-  border-radius: var(--spacer-big);
+  border-radius: var(--spacer-medium);
   padding: 1rem;
   text-align: left;
   text-wrap: wrap;
@@ -297,20 +290,14 @@ button:hover {
   background-color: var(--blue-gray);
   border: var(--border-basic);
   border-color: var(--blue);
-  border-radius: var(--spacer-big);
+  border-radius: var(--spacer-medium);
   margin: var(--spacer-big);
   padding: var(--spacer-big);
 }
 
-/* .time-stamp {
+.post-author,
+.time-stamp {
   font-size: var(--font-size-small);
-  margin: 0.35rem 0;
-  text-transform: uppercase;
-} */
-
-.post-author, .time-stamp {
-  font-size: var(--font-size-small);
-  /* margin: 0.35rem 0; */
   text-transform: uppercase;
 }
 
@@ -340,22 +327,21 @@ button:hover {
   font-size: var(--font-size-normal);
 }
 
-/* Modal */
-
+/*** Modal */
 #modal {
-  /* Hidden by default */
-  width: 100%; /* Full width of screen */
-  height: 100%; /* Full height of screen*/
-  display: none;
   position: fixed; /* Stay in place */
   left: 0;
   top: 0;
+  width: 100%; /* Full width of screen */
+  height: 100%; /* Full height of screen*/
+  display: none; /* Hidden by default */
   background-color: var(--black-trans);
   overflow: auto; /* Enable scroll if needed */
   z-index: 1000;
 }
 
 .modal-content {
+  width: 75%; /* Could be more or less, depending on screen size */
   max-width: 300px;
   background-color: var(--blue-trans);
   border: var(--border-basic);
@@ -364,7 +350,6 @@ button:hover {
   /* Below represents 20% from the top and centered */
   margin: 20% auto;
   padding: 1rem;
-  width: 75%; /* Could be more or less, depending on screen size */
 
   @media (min-width: 512px) {
     max-width: 350px;
@@ -380,7 +365,6 @@ button:hover {
 }
 
 /* Forms */
-
 form {
   display: flex;
   flex-direction: column;
@@ -393,17 +377,15 @@ label {
 
 input {
   height: 1.5rem;
-  /* Below works for me */
-  /* width: 96%; */
   width: 100%;
   background-color: var(--white);
   border: var(--border-basic);
   border-color: var(--gray);
-  border-radius: var(--spacer-big);
+  border-radius: var(--spacer-medium);
   color: var(--black);
   font-size: var(--font-size-normal);
   margin-bottom: var(--spacer-big);
-  padding-left: var(--space-medium);
+  padding-left: var(--spacer-medium);
 }
 
 textarea {
@@ -422,7 +404,6 @@ textarea {
 }
 
 .login-form {
-  display: flex;
   gap: var(--spacer-medium);
 }
 
@@ -436,23 +417,15 @@ textarea {
 .profile-form h1 {
   color: var(--white);
   font-size: var(--font-size-modal-title);
-  margin-top: 0;
+  margin: 0;
 }
 
 .login-form .app-logo-image,
 .signup-form .app-logo-image,
 .profile-form .app-logo-image {
-  /* height: var(--font-size-modal-title); */
-  /* width: auto; */
-  /* margin-top: -1.595rem; */
-
-    height: 1.65rem;
+  height: 1.65rem;
   width: auto;
-  margin-top: 0.15rem
-}
-
-.login-form button .show-password-button {
-  /* margin-top: -0.5rem; */
+  margin-top: 0.15rem;
 }
 
 .confirm-profile-delete-form {
@@ -482,21 +455,15 @@ textarea {
 }
 
 /* Misc */
-
 /*** Error related  */
 .error-message {
   color: var(--yellow);
   font-family: var(--font-heading);
   font-size: var(--font-size-normal);
-  /* margin-bottom: var(--spacer-big); */
   margin: var(--spacer-big) 0;
   text-align: left;
   text-transform: uppercase;
 }
-
-/* .error-header {
-  margin-bottom: -0.5rem;
-} */
 
 /* *** Flex-box related */
 .gap {

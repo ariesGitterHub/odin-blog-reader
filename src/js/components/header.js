@@ -20,10 +20,8 @@ export function renderHeader(currentUser) {
   const appLogo = createImage("/favicon.svg", "Quill logo", "app-logo-image");
   const title = createElement("h1", "Bloggie");
 
-  // const buttonContainer = createElement("div", "", "basic-container");
     const buttonContainer = createDivRow(
       "justify-content-end",
-      // "margin-bottom",
     );
 
   // Below selects the appropriate authentication controls based on whether currentUser is logged in
