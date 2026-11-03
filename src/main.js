@@ -10,6 +10,7 @@ import { renderModal } from "./js/components/modal.js";
 
 async function init() {
   // NOTE - as per state.js, state.currentUser starts as null, and both state.posts and state.users starts as = []
+  
   const userData = await getCurrentUser();
   state.currentUser = userData.user;
 

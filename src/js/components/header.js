@@ -5,7 +5,7 @@ export function renderHeader(currentUser) {
   const headerContainer = document.querySelector("header");
   headerContainer.classList.add("sticky-header");
 
-  // Clear the previous #header.
+  // Clear the previous children
   headerContainer.replaceChildren();
 
   const topRow = createElement(

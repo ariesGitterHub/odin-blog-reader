@@ -4,7 +4,7 @@ import { post, put, del } from "./api.js";
 
 export function createNewBlogComment(postId, commentMessage) {
   return post(`/api/post/${postId}`, {
-    // REMINDER - the backend supplies userId from req.user.userId in the JWT
+    // REMINDER - the backend supplies userId from req.user.userId
     comment_message: commentMessage,
   });
 }
