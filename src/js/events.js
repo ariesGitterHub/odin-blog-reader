@@ -108,7 +108,6 @@ export function registerEventListeners() {
 
   function closeUpdateCommentForm(button) {
     const commentId = button.dataset.commentId;
-    console.log("commentId ===", commentId);
 
     const existingComment = document.getElementById(commentId);
     const updateCommentForm = document.getElementById(
@@ -288,6 +287,7 @@ export function registerEventListeners() {
           signupForm.reset();
 
           console.log("✋ Logged out, goodbye!");
+
         } catch (err) {
           console.error("Logout failed:", err);
           errorMessageHeader.textContent = err.message;
@@ -348,6 +348,7 @@ export function registerEventListeners() {
         profileForm.reset();
 
         console.log("🎈 Login successful:", state.currentUser);
+
       } catch (err) {
         console.error("Login failed:", err);
         errorMessageLogin.textContent = err.message;
@@ -382,6 +383,7 @@ export function registerEventListeners() {
         profileForm.reset();
 
         console.log("✍ Signup successful:", state.currentUser);
+
       } catch (err) {
         console.error("Signup failed:", err);
         errorMessageSignup.textContent = err.message;
@@ -417,6 +419,7 @@ export function registerEventListeners() {
         profileForm.reset();
 
         console.log("😀 Profile update successful:", state.currentUser);
+
       } catch (err) {
         console.error("Profile update failed:", err);
         errorMessageProfile.textContent = err.message;
@@ -445,6 +448,7 @@ export function registerEventListeners() {
         profileForm.reset();
 
         console.log("💀 User account deleted");
+
       } catch (err) {
         console.error("Profile account deletion failed:", err);
         errorMessageConfirmProfileDelete.textContent = err.message;
@@ -471,7 +475,6 @@ export function registerEventListeners() {
         // Refresh state.posts and posts
         await refreshPosts();
 
-        console.log("Comment created", commentData);
       } catch (err) {
         console.error("Comment creation failed:", err);
         errorMessageHeader.textContent = err.message;
@@ -481,7 +484,6 @@ export function registerEventListeners() {
     // Update Comment
     if (form.matches(".update-comment-form")) {
       const commentId = form.dataset.commentId;
-      console.log("form.dataset.commentId === ", commentId);
 
       const commentUpdateTextArea = document.getElementById(
         `textarea-${commentId}`,
@@ -503,7 +505,6 @@ export function registerEventListeners() {
         // Refresh state.posts and posts
         await refreshPosts();
 
-        console.log("Comment update", commentUpdateData);
       } catch (err) {
         console.error("Comment update failed:", err);
         errorMessageHeader.textContent = err.message;
@@ -524,7 +525,6 @@ export function registerEventListeners() {
         // Refresh state.posts and posts
         await refreshPosts();
 
-        console.log("Comment deleted", deleteCommentData);
       } catch (err) {
         console.error("Comment deletion failed:", err);
         errorMessageHeader.textContent = err.message;

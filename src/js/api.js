@@ -8,7 +8,6 @@ export async function get(endpoint) {
 
     if (!response.ok) {
       const errorData = await response.json();
-
       console.log(errorData);
 
       throw new Error(
@@ -32,7 +31,6 @@ export async function get(endpoint) {
 }
 
 export async function post(endpoint, data) {
-  console.log("POST data:", data);
 
   try {
     const response = await fetch(`${API_URL}${endpoint}`, {
@@ -46,7 +44,6 @@ export async function post(endpoint, data) {
 
     if (!response.ok) {
       const errorData = await response.json();
-
       console.log(errorData);
 
       throw new Error(
@@ -77,7 +74,6 @@ export async function put(endpoint, data) {
 
     if (!response.ok) {
       const errorData = await response.json();
-
       console.log(errorData);
 
       throw new Error(
@@ -105,6 +101,7 @@ export async function del(endpoint) {
     if (!response.ok) {
       const errorData = await response.json();
       console.log(errorData);
+      
       throw new Error(
         errorData?.message ||
           errorData.error?.message ||
