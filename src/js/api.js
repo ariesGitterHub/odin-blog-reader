@@ -18,7 +18,6 @@ export async function getCsrfToken() {
   console.log("csrfToken", csrfToken);
 }
 
-
 // NOTE - below is a guard for state-changing helpers to catch situations where the CSRF token wasn't retrieved
 function getCsrfHeaders() {
   if (!csrfToken) {
@@ -96,6 +95,38 @@ export async function put(endpoint, data) {
   try {
     const response = await fetch(`${API_URL}${endpoint}`, {
       method: "PUT",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+        // "X-CSRF-Token": csrfToken, // NEW! CSRF Token
+        ...getCsrfHeaders(), // NEW, add a guard to your state-changing helpers to catch situations where you haven't retrieved a CSRF token
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.log(errorData);
+
+      throw new Error(
+        errorData?.message ||
+          errorData.error?.message ||
+          errorData?.errors?.map((err) => err.message).join(", ") ||
+          `Request failed: ${response.status}`,
+      );
+    }
+
+    return response.json();
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+}
+
+export async function patch(endpoint, data) {
+  try {
+    const response = await fetch(`${API_URL}${endpoint}`, {
+      method: "PATCH",
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
