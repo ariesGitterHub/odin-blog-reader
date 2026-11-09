@@ -8,28 +8,50 @@ import { renderHeader } from "./js/components/header.js";
 import { renderPosts } from "./js/components/posts-view.js";
 import { renderFooter } from "./js/components/footer.js";
 import { renderModal } from "./js/components/modal.js";
+import { createElement } from "./js/templates.js";
 
 async function init() {
-  // NEW, add CSRF Token... await getCsrfToken() executes before users can submit login, signup, comment, or other state-changing requests.
-  await getCsrfToken();
+  const headerContainer = document.querySelector("header");
+  const postContainer = document.querySelector("#posts");
+  const loadingWaitMessage = createElement("p", "Waking up server, connecting to the blog...", "loading-wait-message");
+  const loadingErrorMessage = createElement(
+    "p",
+    "Unable to connect to the blog. Please try again.",
+    "loading-error-message"
+  );
 
-  // NOTE - as per state.js, state.currentUser starts as null, and both state.posts and state.users starts as = []
+  headerContainer.append(loadingWaitMessage);
 
-  const userData = await getCurrentUser();
-  state.currentUser = userData.user;
+  try {
+    // NEW, add CSRF Token... await getCsrfToken() executes before users can submit login, signup, comment, or other state-changing requests.
+    await getCsrfToken();
 
-  renderHeader(state.currentUser);
+    // NOTE - as per state.js, state.currentUser starts as null, and both state.posts and state.users starts as = []
 
-  const postData = await getPublishedBlogPosts();
-  state.posts = postData.posts;
+    const userData = await getCurrentUser();
+    state.currentUser = userData.user;
 
-  renderPosts(state.posts, state.currentUser);
+    renderHeader(state.currentUser);
 
-  renderModal();
+    const postData = await getPublishedBlogPosts();
+    state.posts = postData.posts;
 
-  renderFooter();
+    renderPosts(state.posts, state.currentUser);
 
-  registerEventListeners();
+    renderModal();
+
+    renderFooter();
+
+    registerEventListeners();
+
+    // headerContainer.remove(loadingWaitMessage); // This deletes the header in normal circumstances
+
+  } catch (err) {
+    console.error("Blog initialization failed:", err);
+
+    headerContainer.remove(loadingWaitMessage);
+    postContainer.append(loadingErrorMessage);
+  }
 }
 
 init();

@@ -455,7 +455,22 @@ textarea {
 }
 
 /* Misc */
+.loading-wait-message {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-normal);
+  margin: var(--spacer-big);
+  text-align: left;
+}
+
 /*** Error related  */
+.loading-error-message {
+  color: var(--yellow);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-normal);
+  margin: var(--spacer-big);
+  text-align: left;
+}
+
 .error-message {
   color: var(--yellow);
   font-family: var(--font-heading);
