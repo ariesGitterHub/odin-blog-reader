@@ -20,7 +20,7 @@ export function renderLoginForm() {
 
   const titleRow = createDivRow("justify-content-start");
 
-  const appLogo = createImage("/favicon.svg", "Quill logo", "app-logo-image");
+  const appLogo = createImage("/public/favicon.svg", "Quill logo", "app-logo-image");
 
   const title = createElement("h1", "Login");
 
@@ -106,7 +106,11 @@ export function renderSignupForm() {
 
   const titleRow = createDivRow("justify-content-start");
 
-  const appLogo = createImage("/favicon.svg", "Quill logo", "app-logo-image");
+  const appLogo = createImage(
+    "/public/favicon.svg",
+    "Quill logo",
+    "app-logo-image",
+  );
 
   const title = createElement("h1", "Sign Up");
 
@@ -220,7 +224,11 @@ export function renderProfileForm() {
 
   const titleRow = createDivRow("justify-content-start");
 
-  const appLogo = createImage("/favicon.svg", "Quill logo", "app-logo-image");
+  const appLogo = createImage(
+    "/public/favicon.svg",
+    "Quill logo",
+    "app-logo-image",
+  );
 
   const title = createElement("h1", "Edit Profile");
 
