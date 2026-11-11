@@ -40,8 +40,6 @@ async function init() {
 
     const passwordRulesData = await getPasswordRules();
     state.passwordRules = passwordRulesData
-    console.log("###", state.passwordRules)
-    console.log("minLength", state.passwordRules.minLength)
 
     renderModal();
 
