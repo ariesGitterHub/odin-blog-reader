@@ -1,13 +1,19 @@
 import { login, logout, signup } from "./auth.js";
+
 import { updateProfile, deleteProfile } from "./user.js";
+
 import {
   createNewBlogComment,
   editBlogComment,
   deleteBlogComment,
 } from "./comments.js";
+
 import { renderHeader } from "./components/header.js";
+
 import { getPublishedBlogPosts } from "../js/posts.js";
+
 import { renderPosts } from "./components/posts-view.js";
+
 import { state } from "./state.js";
 
 export function registerEventListeners() {
@@ -369,7 +375,7 @@ export function registerEventListeners() {
           emailSignupInput,
           passwordSignupInput,
         );
-
+        
         // NOTE - below immediately takes the signup person to the login form so they can actually log with the new signup info they created
         loginForm.style.display = "flex";
         signupForm.style.display = "none";

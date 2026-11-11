@@ -1,5 +1,7 @@
 // Import these rendering form functions to where they are needed
 
+import { state } from "../state.js";
+
 import {
   createButton,
   createLabel,
@@ -20,7 +22,11 @@ export function renderLoginForm() {
 
   const titleRow = createDivRow("justify-content-start");
 
-  const appLogo = createImage("/public/favicon.svg", "Quill logo", "app-logo-image");
+  const appLogo = createImage(
+    "/public/favicon.svg",
+    "Quill logo",
+    "app-logo-image",
+  );
 
   const title = createElement("h1", "Login");
 
@@ -64,8 +70,6 @@ export function renderLoginForm() {
 
   const buttonRow = createDivRow("full-width", "gap", "margin-top-bottom");
 
-  // const submitButton = createButton("submit", "Submit", "", "full-width");
-
   const submitButton = createSubmitButton();
   submitButton.classList.add("full-width");
 
@@ -82,7 +86,7 @@ export function renderLoginForm() {
   const oopsNeedSignupButton = createButton(
     "button",
     "*No account? Please click here to sign up!",
-    "signup-instead", // This data-action triggers case of the same name in events.js
+    "signup-instead", // REMINDER - This data-action triggers case of the same name in events.js
     "fit-content-height",
     "full-width",
   );
@@ -178,6 +182,41 @@ export function renderSignupForm() {
     "show-password-button-image-signup",
   );
 
+  const passwordRulesContainer = createElement(
+    "div",
+    "",
+    "password-rules-container",
+  );
+
+  const passwordRulesTitle = createElement(
+    "h3",
+    "🔐 Passwords must contain...",
+  );
+
+  const ul = createElement("ul", "");
+
+  const minLength = createElement("li", `At least ${state.passwordRules.minLength} characters`);
+
+  const minLowercase = createElement(
+    "li",
+    `At least ${state.passwordRules.minLowercase} lowercase character`,
+  );
+
+  const minUppercase = createElement(
+    "li",
+    `At least ${state.passwordRules.minUppercase} uppercase character`,
+  );
+
+  const minNumbers = createElement(
+    "li",
+    `At least ${state.passwordRules.minNumbers} numeric character`,
+  );
+
+  const minSpecialChars = createElement(
+    "li",
+    `At least ${state.passwordRules.minSpecialChars} special character of ${state.passwordRules.specialChars}`,
+  );
+
   const buttonRow = createDivRow("full-width", "gap", "margin-top-bottom");
 
   const submitButton = createSubmitButton();
@@ -196,10 +235,14 @@ export function renderSignupForm() {
   const oopsNeedLoginButton = createButton(
     "button",
     "*Already have an account? Please click here to login.",
-    "login-instead", // This data-action triggers case of the same name in events.js
+    "login-instead",
     "fit-content-height",
     "full-width",
   );
+
+  ul.append(minLength, minLowercase, minUppercase, minNumbers, minSpecialChars);
+
+  passwordRulesContainer.append(passwordRulesTitle, ul);
 
   signupForm.append(
     titleRow,
@@ -212,6 +255,7 @@ export function renderSignupForm() {
     emailInput,
     passwordLabel,
     passwordRow,
+    passwordRulesContainer,
     buttonRow,
     oopsNeedLoginButton,
   );
@@ -295,7 +339,7 @@ export function renderProfileForm() {
   const deleteProfileButton = createButton(
     "button",
     "Delete",
-    "open-profile-delete-confirmation", // This data-action triggers case of the same name in events.js
+    "open-profile-delete-confirmation",
     "full-width",
   );
 
@@ -362,7 +406,7 @@ export function renderConfirmProfileDeleteForm() {
   const cancelProfileDeleteButton = createButton(
     "button",
     "Cancel",
-    "close-profile-delete-confirmation", // This data-action triggers case of the same name in events.js
+    "close-profile-delete-confirmation",
     "full-width",
   );
 
@@ -409,7 +453,7 @@ export function renderCreateCommentForm(postId) {
   const cancelButton = createButton(
     "button",
     "Cancel",
-    "cancel-create-comment-form", // This data-action triggers case of the same name in events.js
+    "cancel-create-comment-form",
   );
 
   cancelButton.dataset.postId = postId;
@@ -453,7 +497,7 @@ export function renderUpdateCommentForm(commentId, commentMessage) {
   const cancelButton = createButton(
     "button",
     "Cancel",
-    "cancel-update-comment-form", // This data-action triggers case of the same name in events.js
+    "cancel-update-comment-form",
   );
 
   cancelButton.dataset.commentId = commentId;

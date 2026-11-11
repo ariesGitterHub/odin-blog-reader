@@ -462,6 +462,19 @@ textarea {
   text-align: left;
 }
 
+.password-rules-container, .password-rules-container h3 {
+  display: block;
+  align-items: start;
+  font-family: var(--font-mono);
+}
+
+.password-rules-container ul {
+  font-size: var(--font-size-small);
+  list-style: none;
+  margin: 0;
+  padding-left: 0.25rem;
+}
+
 /*** Error related  */
 .loading-error-message {
   color: var(--yellow);

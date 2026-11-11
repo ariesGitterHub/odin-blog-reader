@@ -25,3 +25,7 @@ export function signup(firstName, lastName, email, password) {
 export function getCurrentUser() {
   return get("/api/auth/me");
 }
+
+export function getPasswordRules() {
+  return get("/api/auth/password-rules");
+}

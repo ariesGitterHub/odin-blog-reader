@@ -2,7 +2,7 @@
 import { state } from "./js/state.js";
 import { getCsrfToken } from "./js/api.js";
 import { registerEventListeners } from "./js/events.js";
-import { getCurrentUser } from "./js/auth.js";
+import { getCurrentUser, getPasswordRules } from "./js/auth.js";
 import { getPublishedBlogPosts } from "./js/posts.js";
 import { renderHeader } from "./js/components/header.js";
 import { renderPosts } from "./js/components/posts-view.js";
@@ -37,6 +37,11 @@ async function init() {
     state.posts = postData.posts;
 
     renderPosts(state.posts, state.currentUser);
+
+    const passwordRulesData = await getPasswordRules();
+    state.passwordRules = passwordRulesData
+    console.log("###", state.passwordRules)
+    console.log("minLength", state.passwordRules.minLength)
 
     renderModal();
 
